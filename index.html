@@ -2991,40 +2991,9 @@ function save(){
     syncToCloudDeferred();
   }catch(e){
     console.error('save',e);
-    // ── Recuperación ante localStorage lleno ─────────────────────────────────
+    // Aviso claro si el almacenamiento local está lleno
     if(e.name==='QuotaExceededError'||e.code===22||e.code===1014){
-      console.warn('[TradeTrack] QuotaExceededError — intentando liberar base64 del localStorage...');
-      try{
-        // Intentar guardar eliminando imágenes base64 embebidas (conservar URLs externas/Supabase)
-        var pfx2 = getLicensePrefix();
-        var id2  = getActiveId();
-        var tradesLimpios = S.trades.map(function(t){
-          if(!t.images || !t.images.length) return t;
-          var imgsLimpias = t.images.filter(function(img){
-            var s = img.src || img;
-            // Conservar URLs externas (http/https) — solo eliminar data:... base64
-            return typeof s === 'string' && !s.startsWith('data:');
-          });
-          var removidas = t.images.length - imgsLimpias.length;
-          if(removidas > 0){
-            console.warn('[TradeTrack] Trade ' + t.id + ': ' + removidas + ' imagen(es) base64 eliminadas para liberar espacio.');
-          }
-          return Object.assign({}, t, { images: imgsLimpias });
-        });
-        var n2=Math.ceil(tradesLimpios.length/500)||1;
-        localStorage.setItem(pfx2+'n_'+id2, String(n2));
-        for(var k=0;k<n2;k++){
-          localStorage.setItem(pfx2+id2+'_'+k, JSON.stringify(tradesLimpios.slice(k*500,(k+1)*500)));
-        }
-        localStorage.setItem(pfx2+'save_ts', String(Date.now()));
-        // Actualizar S.trades con las versiones limpias para consistencia
-        S.trades = tradesLimpios;
-        syncToCloudDeferred();
-        if(typeof toast==='function') toast('⚠ Almacenamiento lleno: imágenes antiguas liberadas. Las nuevas imágenes van directo a la nube.','var(--gold)',7000);
-      }catch(e2){
-        console.error('save recovery failed',e2);
-        if(typeof toast==='function') toast('⚠ Almacenamiento lleno. Elimina imágenes para continuar guardando.','var(--red)',6000);
-      }
+      if(typeof toast==='function') toast('⚠ Almacenamiento lleno. Las imágenes en base64 ocupan mucho espacio. Elimina imágenes para continuar guardando.','var(--red)',6000);
     }
   }
 }
@@ -3335,7 +3304,7 @@ function getAcctId(){
 var _syncTimer = null;
 function syncToCloudDeferred(){
   if(_syncTimer) clearTimeout(_syncTimer);
-  _syncTimer = setTimeout(function(){ syncToCloud(); }, 300); // ✅ FIX SYNC: reducido de 1500ms a 300ms — datos llegan a la nube mucho más rápido
+  _syncTimer = setTimeout(function(){ syncToCloud(); }, 4000); // ✅ FIX BANDA ANCHA: agrupa varios guardados seguidos en un solo envío a la nube
 }
 
 function syncToCloud(){
@@ -3363,7 +3332,7 @@ function syncToCloud(){
   }
   clearTimeout(_syncTimeout);
   _syncPending = true;
-  _syncTimeout = setTimeout(async function(){ // ✅ FIX SYNC: reducido de 400ms a 50ms — upload casi inmediato tras el debounce de 300ms
+  _syncTimeout = setTimeout(async function(){ // ✅ FIX BANDA ANCHA: 300ms de margen tras el debounce de 4000ms
     try{
       // ✅ Re-verificar licencia dentro del async — puede haber expirado en los 50ms de delay
       var key2 = getSyncKey(); if(!key2){ _syncPending=false; return; }
@@ -3437,7 +3406,7 @@ function syncToCloud(){
       console.warn('syncToCloud error:', e);
       showSyncStatus('⚠ Sin conexión');
     }
-  }, 50); // ✅ FIX SYNC: reducido de 400ms a 50ms
+  }, 300); // ✅ FIX BANDA ANCHA
 }
 
 async function syncFromCloud(){
@@ -8749,93 +8718,62 @@ function _compressImageFile(file, callback) {
       canvas.width = w; canvas.height = h;
       var ctx = canvas.getContext('2d');
       ctx.drawImage(img, 0, 0, w, h);
-      // Exportar como JPEG comprimido (PNG originales también se comprimen)
-      var compressed = canvas.toDataURL('image/jpeg', QUALITY);
-      callback(compressed);
+      // ✅ FIX BANDA ANCHA: exportar como Blob (no base64) para subir directo a Storage
+      canvas.toBlob(function(blob){
+        if(blob) callback(blob);
+        else callback(null);
+      }, 'image/jpeg', QUALITY);
     };
-    img.onerror = function(){ callback(e.target.result); }; // fallback sin comprimir
+    img.onerror = function(){ callback(null); }; // fallback: no se pudo procesar
     img.src = e.target.result;
   };
   reader.onerror = function(){ callback(null); };
   reader.readAsDataURL(file);
 }
 
-// ── Subir imagen a Supabase Storage — evita llenar localStorage con base64 ──
-// Las imágenes se guardan en el bucket "trade-images" (público) de Supabase.
-// Se necesita crear el bucket una sola vez en Supabase > Storage > New bucket:
-//   Nombre: trade-images  |  Public: ON
-// O ejecutar en SQL Editor:
-//   INSERT INTO storage.buckets(id,name,public) VALUES('trade-images','trade-images',true) ON CONFLICT DO NOTHING;
-//   CREATE POLICY "public_trade_images" ON storage.objects FOR ALL USING(bucket_id='trade-images') WITH CHECK(bucket_id='trade-images');
-async function _uploadToSupabaseStorage(file, callback) {
-  // Verificar que Supabase esté disponible
+// ✅ FIX BANDA ANCHA: sube la imagen comprimida al bucket "trade-images" de Supabase Storage
+// y devuelve la URL pública, en vez de guardar la imagen completa en base64 dentro del JSON
+// que se sincroniza en cada guardado.
+function _uploadImageToStorage(blob, filename, callback) {
   var key = (typeof getSyncKey === 'function') ? getSyncKey() : null;
-  if (!key || !SB_URL || !SB_KEY) {
-    // Sin Supabase configurado → fallback: base64 comprimida
-    _compressImageFile(file, function(src) {
-      callback(src ? { src: src, name: file.name, type: 'file' } : null);
-    });
-    return;
-  }
-
-  // Paso 1: comprimir primero
-  _compressImageFile(file, async function(compressedDataUrl) {
-    if (!compressedDataUrl) { callback(null); return; }
-    try {
-      // Paso 2: convertir base64 → Blob binario
-      var parts  = compressedDataUrl.split(',');
-      var bstr   = atob(parts[1]);
-      var u8arr  = new Uint8Array(bstr.length);
-      for (var i = 0; i < bstr.length; i++) u8arr[i] = bstr.charCodeAt(i);
-      var blob   = new Blob([u8arr], { type: 'image/jpeg' });
-
-      // Paso 3: construir path único — licencia/timestamp_nombre
-      var safeKey  = key.replace(/[^a-zA-Z0-9]/g, '').slice(0, 12);
-      var safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_').slice(0, 60);
-      var path     = safeKey + '/' + Date.now() + '_' + safeName;
-
-      // Paso 4: subir a Supabase Storage vía REST
-      var res = await fetch(SB_URL + '/storage/v1/object/trade-images/' + path, {
-        method: 'POST',
-        headers: {
-          'Authorization': 'Bearer ' + SB_KEY,
-          'apikey': SB_KEY,
-          'Content-Type': 'image/jpeg',
-          'x-upsert': 'true'
-        },
-        body: blob
-      });
-
-      if (res.ok || res.status === 200 || res.status === 201) {
-        // ✅ Éxito: guardar solo la URL pública (cero base64 en localStorage)
-        var publicUrl = SB_URL + '/storage/v1/object/public/trade-images/' + path;
-        callback({ src: publicUrl, name: file.name, type: 'url' });
-      } else {
-        // Supabase Storage rechazó → fallback base64 comprimida con aviso
-        var errBody = '';
-        try { errBody = await res.text(); } catch(ex) {}
-        console.warn('[TradeTrack] Supabase Storage error ' + res.status + ':', errBody);
-        if (res.status === 404 && errBody.indexOf('Bucket not found') !== -1) {
-          if (typeof toast === 'function') toast('⚠ Bucket "trade-images" no existe en Supabase. Créalo en Storage > New bucket (público).', 'var(--red)', 7000);
-        }
-        // Fallback: guardar como base64 comprimida de todas formas
-        callback({ src: compressedDataUrl, name: file.name, type: 'file' });
-      }
-    } catch (uploadErr) {
-      console.warn('[TradeTrack] Error subiendo imagen, usando base64 comprimida:', uploadErr);
-      // Fallback: base64 comprimida si hay error de red
-      callback({ src: compressedDataUrl, name: file.name, type: 'file' });
+  var safeName = 'img_' + Date.now() + '_' + Math.random().toString(36).slice(2,8) + '.jpg';
+  var path = (key ? key.replace(/[^a-zA-Z0-9_-]/g,'') : 'anon') + '/' + safeName;
+  fetch(SB_URL + '/storage/v1/object/trade-images/' + path, {
+    method: 'POST',
+    headers: {
+      'apikey': SB_KEY,
+      'Authorization': 'Bearer ' + SB_KEY,
+      'Content-Type': 'image/jpeg'
+    },
+    body: blob
+  }).then(function(res){
+    if(res.ok || res.status===200 || res.status===201){
+      var publicUrl = SB_URL + '/storage/v1/object/public/trade-images/' + path;
+      callback(publicUrl);
+    } else {
+      console.warn('Error subiendo imagen a Storage:', res.status);
+      callback(null);
     }
+  }).catch(function(err){
+    console.warn('Error de red subiendo imagen:', err);
+    callback(null);
   });
 }
 
 window.addImagesFromFiles = function(input) {
   var files = Array.from(input.files);
   files.forEach(function(file) {
-    _uploadToSupabaseStorage(file, function(imgObj) {
-      if (!imgObj) return;
-      window._formImages.push(imgObj);
-      renderFormImagesPreview();
+    _compressImageFile(file, function(blob) {
+      if(!blob) return;
+      if(typeof toast==='function') toast('⬆ Subiendo imagen...', 'var(--purp)', 1500);
+      _uploadImageToStorage(blob, file.name, function(publicUrl){
+        if(publicUrl){
+          window._formImages.push({type:'url', src:publicUrl, name:file.name});
+          renderFormImagesPreview();
+        } else {
+          if(typeof toast==='function') toast('⚠ No se pudo subir la imagen', 'var(--red)', 3000);
+        }
+      });
     });
   });
   input.value = '';
@@ -9787,20 +9725,21 @@ window.rpAddImgFile = function(input) {
   var trade = S.trades.find(function(t){ return t.id === _currentTrade.id; });
   if(!trade) return;
   if(!trade.images) trade.images = [];
-  var imgFiles = files.filter(function(f){ return f.type.startsWith('image/'); });
-  if(!imgFiles.length) return;
-  var pending = imgFiles.length;
-  if(typeof toast==='function') toast('⏳ Subiendo ' + (imgFiles.length > 1 ? imgFiles.length + ' imágenes...' : 'imagen...'), '#4d9fff');
-  imgFiles.forEach(function(file) {
-    _uploadToSupabaseStorage(file, function(imgObj) {
-      if(imgObj) trade.images.push(imgObj);
+  var pending = files.filter(function(f){ return f.type.startsWith('image/'); }).length;
+  if(!pending) return;
+  files.forEach(function(file) {
+    if(!file.type.startsWith('image/')) return;
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      trade.images.push({ src: e.target.result, name: file.name, type: 'file' });
       pending--;
       if(pending <= 0) {
         if(typeof save==='function') save();
         populateRightPanel(trade);
-        if(typeof toast==='function') toast('✓ ' + (imgFiles.length > 1 ? imgFiles.length + ' imágenes guardadas' : 'Imagen guardada'), 'var(--green)');
+        if(typeof toast==='function') toast('✓ '+(files.length>1?files.length+' imágenes guardadas':'Imagen guardada'), 'var(--green)');
       }
-    });
+    };
+    reader.readAsDataURL(file);
   });
   input.value = '';
 };
@@ -9860,11 +9799,12 @@ window.handleImgUpload = function(input) {
   if(!files.length) return;
   files.forEach(function(file) {
     if(!file.type.startsWith('image/')) return;
-    _uploadToSupabaseStorage(file, function(imgObj) {
-      if(!imgObj) return;
-      window._tradeImages.push(imgObj);
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      window._tradeImages.push({ src: e.target.result, name: file.name, type: 'file' });
       renderFormImages();
-    });
+    };
+    reader.readAsDataURL(file);
   });
   input.value = '';
 };
