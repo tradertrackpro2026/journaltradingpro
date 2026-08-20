@@ -9718,28 +9718,31 @@ function populateRightPanel(trade) {
 }
 
 // ── Funciones del panel derecho: agregar/quitar media ──────
+// ✅ FIX BANDA ANCHA: mismo tratamiento que en addImagesFromFiles — comprimir y subir al bucket
 window.rpAddImgFile = function(input) {
   if(!_currentTrade) return;
-  var files = Array.from(input.files);
+  var files = Array.from(input.files).filter(function(f){ return f.type.startsWith('image/'); });
   if(!files.length) return;
   var trade = S.trades.find(function(t){ return t.id === _currentTrade.id; });
   if(!trade) return;
   if(!trade.images) trade.images = [];
-  var pending = files.filter(function(f){ return f.type.startsWith('image/'); }).length;
-  if(!pending) return;
+  var pending = files.length;
+  if(typeof toast==='function') toast('⬆ Subiendo '+(files.length>1?'imágenes...':'imagen...'), 'var(--purp)', 1500);
   files.forEach(function(file) {
-    if(!file.type.startsWith('image/')) return;
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      trade.images.push({ src: e.target.result, name: file.name, type: 'file' });
-      pending--;
-      if(pending <= 0) {
-        if(typeof save==='function') save();
-        populateRightPanel(trade);
-        if(typeof toast==='function') toast('✓ '+(files.length>1?files.length+' imágenes guardadas':'Imagen guardada'), 'var(--green)');
-      }
-    };
-    reader.readAsDataURL(file);
+    _compressImageFile(file, function(blob) {
+      if(!blob){ pending--; return; }
+      _uploadImageToStorage(blob, file.name, function(publicUrl){
+        if(publicUrl){
+          trade.images.push({ src: publicUrl, name: file.name, type: 'url' });
+        }
+        pending--;
+        if(pending <= 0) {
+          if(typeof save==='function') save();
+          populateRightPanel(trade);
+          if(typeof toast==='function') toast('✓ '+(files.length>1?files.length+' imágenes guardadas':'Imagen guardada'), 'var(--green)');
+        }
+      });
+    });
   });
   input.value = '';
 };
@@ -9794,17 +9797,21 @@ window.rpRemoveLink = function(idx) {
   populateRightPanel(trade);
 };
 
+// ✅ FIX BANDA ANCHA: mismo tratamiento — comprimir y subir al bucket
 window.handleImgUpload = function(input) {
-  var files = Array.from(input.files);
+  var files = Array.from(input.files).filter(function(f){ return f.type.startsWith('image/'); });
   if(!files.length) return;
+  if(typeof toast==='function') toast('⬆ Subiendo '+(files.length>1?'imágenes...':'imagen...'), 'var(--purp)', 1500);
   files.forEach(function(file) {
-    if(!file.type.startsWith('image/')) return;
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      window._tradeImages.push({ src: e.target.result, name: file.name, type: 'file' });
-      renderFormImages();
-    };
-    reader.readAsDataURL(file);
+    _compressImageFile(file, function(blob) {
+      if(!blob) return;
+      _uploadImageToStorage(blob, file.name, function(publicUrl){
+        if(publicUrl){
+          window._tradeImages.push({ src: publicUrl, name: file.name, type: 'url' });
+          renderFormImages();
+        }
+      });
+    });
   });
   input.value = '';
 };
