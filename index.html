@@ -2620,7 +2620,7 @@ function isThisDevice(storedDeviceId) {
 function showLicOverlay(msg) {
   var o = document.getElementById('lic-overlay');
   if (o) { o.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-  if (msg) document.getElementById('lic-error').textContent = msg;
+  if (msg) document.getElementById('lic-error').innerHTML = msg;
 }
 
 function hideLicOverlay() {
