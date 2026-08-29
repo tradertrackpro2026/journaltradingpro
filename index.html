@@ -562,7 +562,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
   #mob-nav{display:none!important}
 
   /* ── SIDEBAR IZQUIERDO MÓVIL ── */
-  #mob-sidebar{display:flex}
+  #mob-sidebar{display:flex;top:calc(env(safe-area-inset-top) + 14px)!important;bottom:0;border-radius:0 14px 0 0}
   #mob-sidebar.open{transform:translateX(0)!important}
   #mob-sidebar-overlay{display:block!important}
   #mob-sidebar-overlay.open{opacity:1!important;pointer-events:all}
@@ -830,10 +830,10 @@ tr:hover td{background:rgba(14,18,41,.8)}
 
   /* ── TRADE DETAIL PANEL — panel deslizante desde la derecha en móvil ── */
   #trade-detail-panel{
-    right:-100%;left:auto;top:0;bottom:0;
-    width:92vw;max-width:400px;height:100%;
+    right:-100%;left:auto;top:calc(env(safe-area-inset-top) + 14px);bottom:0;
+    width:92vw;max-width:400px;height:auto;
     border-left:1px solid var(--bdr2);border-top:none;
-    border-radius:0;
+    border-radius:14px 0 0 0;
     transition:right .3s cubic-bezier(.4,0,.2,1);
   }
 
@@ -9270,6 +9270,9 @@ window.openTDP = function(trade, dayList, idx) {
       '</div>'
     ) : '') +
 
+    // Secciones plegables tipo Notion (Temporalidades / Análisis)
+    renderTradeSections(trade) +
+
     // Footer timestamps
     '<div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--bdr);font-size:9px;color:var(--gray2);font-family:\'DM Sans\',sans-serif">' +
       'Creada: '+new Date(parseInt(String(trade.id).substring(0,13))).toLocaleDateString('es',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}) +
@@ -9611,10 +9614,26 @@ function renderTradeSections(trade){
   return html;
 }
 
+// Devuelve el contenedor de secciones que está realmente visible en este momento:
+// el panel deslizante flotante (móvil) si está abierto, o el panel embebido (escritorio).
+function _rpActiveContainer() {
+  var tdp = document.getElementById('trade-detail-panel');
+  if (tdp && tdp.classList.contains('open')) return tdp;
+  return document.getElementById('reg-right-panel');
+}
+
 // Refresca el panel derecho usando el renderer correcto (simple o navegación de día)
 function _rpRefresh(trade) {
   if (window._rpActiveRenderer === 'day' && typeof window._rpShow === 'function') {
     window._rpShow(trade);
+    return;
+  }
+  // Reemplaza solo el bloque de secciones dentro del panel que esté visible ahora
+  // (evita saltos de scroll y evita refrescar el panel equivocado en móvil/escritorio)
+  var container = _rpActiveContainer();
+  var wrap = container ? container.querySelector('.rp-sections-wrap') : null;
+  if (wrap) {
+    wrap.outerHTML = renderTradeSections(trade);
   } else {
     populateRightPanel(trade);
   }
@@ -9628,7 +9647,8 @@ window.rpToggleSection = function(idx) {
   var trade = S.trades.find(function(t){ return t.id === _currentTrade.id; });
   if(!trade || !trade.sections || !trade.sections[idx]) return;
   trade.sections[idx].open = !trade.sections[idx].open;
-  var el = document.querySelector('.rp-toggle[data-sec-idx="'+idx+'"]');
+  var container = _rpActiveContainer();
+  var el = container ? container.querySelector('.rp-toggle[data-sec-idx="'+idx+'"]') : null;
   if(el) el.classList.toggle('open');
 };
 
@@ -9658,7 +9678,8 @@ window.rpAddSection = function() {
   _rpRefresh(trade);
   // Enfocar el título de la sección recién creada para renombrarla al toque
   setTimeout(function(){
-    var els = document.querySelectorAll('.rp-toggle-title');
+    var container = _rpActiveContainer();
+    var els = container ? container.querySelectorAll('.rp-toggle-title') : document.querySelectorAll('.rp-toggle-title');
     var last = els[els.length-1];
     if(last){ last.focus(); last.select(); }
   }, 30);
