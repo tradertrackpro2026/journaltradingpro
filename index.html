@@ -2945,7 +2945,7 @@ function animateNumber(el, from, to, duration, prefix, suffix){
 
 var S={trades:[],settings:{accountSize:10000,assets:[].concat(DEF_ASSETS),challengeActive:false,maxDailyLoss:5,maxTotalLoss:10,profitTarget:10,alertAt:80}};
 var CH={};
-var curR='TP', curD='BUY', editId=null;
+var curR='', curD='', editId=null;
 var calYear=new Date().getFullYear(), calMonth=new Date().getMonth(), selDay=null, logView='cal';
 
 function g(id){return document.getElementById(id);}
@@ -3904,7 +3904,7 @@ function cancelEdit(){
   if(g('f-session'))g('f-session').value='';
   if(g('f-rr'))g('f-rr').value='';if(typeof rrSetValue==='function')rrSetValue('');
   if(g('f-tags')){g('f-tags').value='';_currentTags=[];if(g('tags-display'))g('tags-display').innerHTML='';}
-  setR('TP');setDir('BUY');
+  setR('');setDir('');
   if(g('btn-cancel'))g('btn-cancel').style.display='none';
   var ft=g('form-title-modal');if(ft)ft.innerHTML='<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z"/></svg> Nueva Operación';
   populateStrategySelect('');
@@ -3923,6 +3923,8 @@ function saveTrade(){
   var date=g('f-date').value, pnl=pN(g('f-pnl').value);
   if(!date){toast('Selecciona una fecha','var(--red)');return;}
   if(pnl===null){toast('Ingresa un monto válido','var(--red)');return;}
+  if(!curR){toast('Selecciona el resultado (TP/BE/SL)','var(--red)');return;}
+  if(!curD){toast('Selecciona la dirección (BUY/SELL)','var(--red)');return;}
   // _tradeImages y _formImages son el mismo array en edición (misma referencia)
   // En nueva operación, _tradeImages es el que actualiza el formulario
   var imgs, lnks;
@@ -7337,14 +7339,12 @@ function guardarCuenta(){
   updateAcctBtn();
   renderConfigAccounts();
   refresh();
-  // Resetear a modo nueva cuenta
-  _modoNuevaCuenta = true;
-  _draft = {name:'',currency:'USD',initial:'',desc:'',color:'#8b5cf6',icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V10"/><path d="M19 21V10"/><path d="M3 10l9-6 9 6"/><path d="M9 21v-6h6v6"/></svg>',challengeActive:false,maxDailyLoss:5,maxTotalLoss:10,profitTarget:10};
-  _selectedColor='#8b5cf6'; _selectedIcon='<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V10"/><path d="M19 21V10"/><path d="M3 10l9-6 9 6"/><path d="M9 21v-6h6v6"/></svg>';
-  S.settings = {accountSize:10000,assets:[].concat(DEF_ASSETS),challengeActive:false,maxDailyLoss:5,maxTotalLoss:10,profitTarget:10,alertAt:80};
+  // Se mantiene en modo edición de cuenta existente: NO se resetea _modoNuevaCuenta,
+  // _draft ni S.settings — eso era lo que borraba pares, modo fondeo y porcentajes
+  // ya configurados cada vez que se guardaban cambios sin querer crear otra cuenta.
   renderConfig();
   actualizarBtnGuardar();
-  _updatePreviewDraft();
+  updatePreview();
   if(typeof toast==='function') toast('<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Cuenta guardada correctamente', '#00e676');
   if(typeof syncToCloud==='function') syncToCloud();
 }
@@ -8020,7 +8020,7 @@ function initApp(){
   selDay=today.getDate();
   if(g('f-date')) g('f-date').value=tod();
   g('f-time').value='08:00';
-  setR('TP');setDir('BUY');
+  setR('');setDir('');
   setSTab('exp');
   renderCalSels();
   var am=g('am');if(am){am.innerHTML='<option value="">Todos los meses</option>';MSS.forEach(function(m){var o=document.createElement('option');o.value=m;o.textContent=m;am.appendChild(o);});}
@@ -8503,7 +8503,7 @@ button,[onclick],a,.ni,.cal-nav-btn,.rb,.tog,.acct-color-dot,.reg-nav-arrow,.reg
         <div>
           <label class="nop-label">Resultado</label>
           <div style="display:flex;gap:6px">
-            <button class="rb atp" id="btn-tp" onclick="setRBtn('TP')" style="flex:1;min-height:38px;justify-content:center">
+            <button class="rb" id="btn-tp" onclick="setRBtn('TP')" style="flex:1;min-height:38px;justify-content:center">
               TP
             </button>
             <button class="rb" id="btn-be" onclick="setRBtn('BE')" style="flex:1;min-height:38px;justify-content:center">
@@ -8517,7 +8517,7 @@ button,[onclick],a,.ni,.cal-nav-btn,.rb,.tog,.acct-color-dot,.reg-nav-arrow,.reg
         <div>
           <label class="nop-label">Dirección</label>
           <div style="display:flex;gap:6px">
-            <button class="rb abuy" id="btn-buy" onclick="setDir('BUY')" style="flex:1;min-height:38px;justify-content:center">
+            <button class="rb" id="btn-buy" onclick="setDir('BUY')" style="flex:1;min-height:38px;justify-content:center">
               BUY
             </button>
             <button class="rb" id="btn-sell" onclick="setDir('SELL')" style="flex:1;min-height:38px;justify-content:center">
@@ -10327,19 +10327,21 @@ console.log('[TradeTrack] <svg class="ic" width="14" height="14" viewBox="0 0 24
       e.stopPropagation();
 
       if (typeof window.editId !== 'undefined') window.editId = null;
-      if (typeof window.curR  !== 'undefined') window.curR   = 'TP';
-      if (typeof window.curD  !== 'undefined') window.curD   = 'BUY';
+      if (typeof window.curR  !== 'undefined') window.curR   = '';
+      if (typeof window.curD  !== 'undefined') window.curD   = '';
 
-      // TP/SL buttons
+      // TP/BE/SL buttons — apagados por defecto
       var btnTP = document.getElementById('btn-tp');
+      var btnBE = document.getElementById('btn-be');
       var btnSL = document.getElementById('btn-sl');
-      if (btnTP) btnTP.className = 'rb atp';
+      if (btnTP) btnTP.className = 'rb';
+      if (btnBE) btnBE.className = 'rb';
       if (btnSL) btnSL.className = 'rb';
 
-      // BUY/SELL buttons
+      // BUY/SELL buttons — apagados por defecto
       var btnBUY  = document.getElementById('btn-buy');
       var btnSELL = document.getElementById('btn-sell');
-      if (btnBUY)  btnBUY.className  = 'rb abuy';
+      if (btnBUY)  btnBUY.className  = 'rb';
       if (btnSELL) btnSELL.className = 'rb';
 
       // Fecha: se llena con el día actual; Hora queda vacía
