@@ -86,11 +86,13 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .btn:active{transform:scale(0.97);transition:transform .1s ease}
 .btn-g{background:linear-gradient(135deg,var(--accent2),var(--accent));border-color:var(--accent);color:#fff;font-weight:700;box-shadow:var(--glow-b)}
 .btn-g:hover{box-shadow:0 0 32px rgba(99,102,241,.5);color:#fff}
+.btn-notion{background:var(--text);border-color:var(--text);color:var(--bg);box-shadow:none}
+.btn-notion:hover{background:var(--text2);border-color:var(--text2);box-shadow:none}
 .btn-r{background:linear-gradient(135deg,var(--red2),var(--red));border-color:var(--red);color:#fff;box-shadow:var(--glow-r)}
 .btn-gold{background:linear-gradient(135deg,rgba(247,201,72,.15),rgba(247,201,72,.08));border-color:rgba(247,201,72,.35);color:var(--gold)}
 .btn-gold:hover{background:linear-gradient(135deg,rgba(247,201,72,.25),rgba(247,201,72,.12));box-shadow:var(--glow-gold)}
 .btn-blue{background:linear-gradient(135deg,rgba(67,97,238,.2),rgba(0,207,255,.1));border-color:rgba(67,97,238,.4);color:#818cf8}
-.btn-new-op{background:var(--text);border:1px solid var(--text);color:var(--bg);font-weight:700;padding:9px 18px;border-radius:10px;font-size:12px;letter-spacing:.5px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;font-family:'DM Sans',system-ui,sans-serif}
+.btn-new-op{background:var(--text);border:1px solid var(--text);color:var(--bg);font-weight:700;padding:7px 13px;border-radius:9px;font-size:11px;letter-spacing:.3px;cursor:pointer;display:inline-flex;align-items:center;gap:5px;font-family:'DM Sans',system-ui,sans-serif;white-space:nowrap}
 .btn-new-op:hover{transform:translateY(-2px);opacity:.85;box-shadow:none}
 .btn-new-op:active{transform:translateY(0)}
 /* CONTENT */
@@ -151,13 +153,13 @@ select.fi.fi-empty option{color:var(--text)}
 .cal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
 .cal-nav-btn{background:var(--card2);border:1px solid var(--bdr2);color:var(--text2);border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;transition:all .2s}
 .cal-nav-btn:hover{border-color:var(--accent);color:#818cf8;background:rgba(99,102,241,.1)}
-/* BOTTOM KPI BAR */
-.msum{display:flex;gap:0;background:var(--card);border:1px solid var(--bdr);border-radius:14px;overflow:hidden;margin-bottom:16px}
-.msc{flex:1;padding:14px 16px;text-align:center;position:relative;border-right:1px solid var(--bdr)}
+/* BOTTOM KPI BAR — minimalista tipo Notion */
+.msum{display:flex;gap:0;background:transparent;border:1px solid var(--bdr);border-radius:10px;overflow:hidden;margin-bottom:16px}
+.msc{flex:1;padding:11px 10px;text-align:center;position:relative;border-right:1px solid var(--bdr)}
 .msc:last-child{border-right:none}
-.msl{font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;font-family:'DM Sans',system-ui,sans-serif;font-weight:700}
-.msv{font-size:17px;font-weight:900;font-family:'DM Sans',system-ui,sans-serif;letter-spacing:-0.3px}
-.msc-icon{font-size:16px;margin-bottom:4px;display:block}
+.msl{font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px;margin-bottom:0;font-family:'DM Sans',system-ui,sans-serif;font-weight:600}
+.msv{font-size:14px;font-weight:700;font-family:'DM Sans',system-ui,sans-serif;letter-spacing:-0.2px}
+.msc-icon{font-size:13px;margin-bottom:4px;display:block}
 /* CAL GRID */
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
 .cal-dow{text-align:center;font-size:9px;font-weight:800;color:#4a5280;text-transform:uppercase;letter-spacing:2px;padding:8px 0 10px;font-family:'DM Sans',system-ui,sans-serif}
@@ -482,9 +484,9 @@ tr:hover td{background:rgba(14,18,41,.8)}
   .btn-new-op{order:1;width:100%;justify-content:center;padding:10px;font-size:12px;border-radius:10px}
   .reg-filter-btn{order:3;font-size:10px;padding:6px 10px}
 
-  /* ── REGISTRO — panel derecho oculto en móvil ── */
+  /* ── REGISTRO — panel derecho visible en móvil, apilado debajo ── */
   .tsec.act.reg-split{flex-direction:column}
-  #reg-right-panel{display:none!important}
+  #reg-right-panel{width:100%!important;position:static!important;max-height:none!important;margin-top:12px}
 
   /* ── REGISTRO — KPI bar ── */
   .reg-kpi-bar{grid-template-columns:repeat(3,1fr)}
@@ -765,8 +767,8 @@ tr:hover td{background:rgba(14,18,41,.8)}
     font-size:11px;padding:9px 14px;
   }
 
-  /* ── OCULTAR PANEL DERECHO ── */
-  #reg-right-panel{display:none!important}
+  /* ── PANEL DERECHO visible en móvil, apilado debajo del listado ── */
+  #reg-right-panel{width:100%!important;position:static!important;max-height:none!important;margin-top:12px}
   .tsec.act.reg-split{flex-direction:column}
   #reg-main-col{width:100%}
 
@@ -1010,12 +1012,11 @@ tr:hover td{background:rgba(14,18,41,.8)}
   body{font-size:15px}
   .page-title{font-size:26px}
   .page-sub{font-size:14px}
-  .ni{font-size:14px}
+  .ni{font-size:12.5px}
   .ns{font-size:10px}
   .logo-name{font-size:13px}
   .logo-sub{font-size:9px}
   .btn{font-size:13px;padding:8px 16px}
-  .btn-new-op{font-size:14px}
   .card-hdr{font-size:11px}
   .kval{font-size:26px}
   .klbl{font-size:10px}
@@ -1078,7 +1079,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
 /* ═══════════════════════════════════════════════
    REGISTRO TAB — nuevo diseño tipo imagen
 ═══════════════════════════════════════════════ */
-.reg-toolbar{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.reg-toolbar{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
 .reg-tabs{display:flex;background:var(--card2);border:1px solid var(--bdr);border-radius:11px;padding:3px;gap:2px}
 .reg-tab{border:none;background:transparent;color:var(--gray2);padding:6px 14px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;font-family:'DM Sans',system-ui,sans-serif;display:flex;align-items:center;justify-content:center;gap:6px;letter-spacing:.3px}
 .reg-tab:hover{color:var(--text);background:var(--card3)}
@@ -1098,14 +1099,13 @@ tr:hover td{background:rgba(14,18,41,.8)}
 .reg-today-btn:hover{background:var(--card3);border-color:var(--bdr3)}
 .reg-pair-sel{padding:6px 10px;font-size:11px;background:var(--card2);border:1px solid var(--bdr);border-radius:9px;color:var(--text);cursor:pointer;min-width:140px}
 
-/* KPI BAR */
-.reg-kpi-bar{display:grid;grid-template-columns:repeat(7,1fr);gap:0;background:var(--card);border:1px solid var(--bdr);border-radius:14px;overflow:hidden;margin:14px 0;position:relative}
-.reg-kpi-bar::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 60 Q100 20 200 50 Q300 80 400 40 L400 80 L0 80Z' fill='rgba(99,102,241,0.04)'/%3E%3C/svg%3E") bottom/cover no-repeat;pointer-events:none;border-radius:14px}
-.reg-kpi-item{padding:12px 5px;text-align:center;position:relative;border-right:1px solid rgba(30,37,64,.6)}
+/* KPI BAR — minimalista tipo Notion */
+.reg-kpi-bar{display:grid;grid-template-columns:repeat(7,1fr);gap:0;background:transparent;border:1px solid var(--bdr);border-radius:10px;overflow:hidden;margin:14px 0}
+.reg-kpi-item{padding:11px 5px;text-align:center;position:relative;border-right:1px solid var(--bdr)}
 .reg-kpi-item:last-child{border-right:none}
-.reg-kpi-icon{font-size:16px;margin-bottom:4px;display:block;line-height:1}
-.reg-kpi-val{font-size:15px;font-weight:900;font-family:'DM Sans',system-ui,sans-serif;line-height:1.1;margin-bottom:2px}
-.reg-kpi-lbl{font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:1.5px;font-family:'DM Sans',system-ui,sans-serif}
+.reg-kpi-icon{font-size:12px;margin-bottom:5px;display:block;line-height:1;color:var(--gray2)}
+.reg-kpi-val{font-size:14px;font-weight:700;font-family:'DM Sans',system-ui,sans-serif;line-height:1.1;margin-bottom:3px}
+.reg-kpi-lbl{font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px;font-family:'DM Sans',system-ui,sans-serif}
 
 /* CALENDAR CELL */
 .cal-cell-ops{font-size:10px;color:var(--gray2);margin-top:3px;font-weight:600}
@@ -1157,11 +1157,11 @@ tr:hover td{background:rgba(14,18,41,.8)}
 
 <!-- ── BARRA NAV MÓVIL ── -->
 <nav id="mob-nav">
-  <button class="mni act" id="mni-dash" onclick="showTab('dash',document.getElementById('nav-dash'));mniAct('dash')">
+  <button class="mni" id="mni-dash" style="display:none" onclick="showTab('dash',document.getElementById('nav-dash'));mniAct('dash')">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
     Inicio
   </button>
-  <button class="mni" id="mni-registro" onclick="showTab('registro',document.getElementById('nav-registro'));mniAct('registro')">
+  <button class="mni act" id="mni-registro" onclick="showTab('registro',document.getElementById('nav-registro'));mniAct('registro')">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="2" width="14" height="12" rx="1.5"/><line x1="1" y1="5" x2="15" y2="5"/><line x1="5" y1="5" x2="5" y2="14"/></svg>
     Registro
   </button>
@@ -1210,11 +1210,11 @@ tr:hover td{background:rgba(14,18,41,.8)}
   <!-- Navegación principal -->
   <div style="padding:12px 10px;border-bottom:1px solid var(--bdr);flex-shrink:0">
     <div style="font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:2px;font-family:'DM Sans',system-ui,sans-serif;padding:0 8px;margin-bottom:6px">Navegación</div>
-    <button class="mob-snav act" id="msnav-dash" onclick="showTab('dash',document.getElementById('nav-dash'));mniAct('dash');mobSidebarClose()">
+    <button class="mob-snav" id="msnav-dash" style="display:none" onclick="showTab('dash',document.getElementById('nav-dash'));mniAct('dash');mobSidebarClose()">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
       Dashboard
     </button>
-    <button class="mob-snav" id="msnav-registro" onclick="showTab('registro',document.getElementById('nav-registro'));mniAct('registro');mobSidebarClose()">
+    <button class="mob-snav act" id="msnav-registro" onclick="showTab('registro',document.getElementById('nav-registro'));mniAct('registro');mobSidebarClose()">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><rect x="1" y="2" width="14" height="12" rx="1.5"/><line x1="1" y1="5" x2="15" y2="5"/><line x1="5" y1="5" x2="5" y2="14"/></svg>
       Operaciones
     </button>
@@ -1276,16 +1276,16 @@ tr:hover td{background:rgba(14,18,41,.8)}
 ═══════════════════════════════════════════════════════════ -->
 <!-- CONFIRM MODAL -->
 <div class="mo" id="cmo">
-  <div class="mb" style="border:1px solid rgba(255,23,68,.25);box-shadow:0 0 40px rgba(255,23,68,.08);">
-    <div class="mh" style="border-bottom:1px solid var(--bdr);padding-bottom:12px;margin-bottom:14px;">
+  <div class="mb" style="border:1px solid rgba(255,23,68,.25);box-shadow:0 0 40px rgba(255,23,68,.08);padding:20px 20px 18px;">
+    <div class="mh" style="border-bottom:1px solid var(--bdr);padding-bottom:14px;margin-bottom:16px;">
       <div class="mt2" id="cmot" style="font-size:15px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:8px;"></div>
-      <button class="mcl" onclick="document.getElementById('cmo').classList.remove('show')" style="background:var(--card2);border:1px solid var(--bdr);border-radius:7px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:14px;"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <button class="mcl" onclick="document.getElementById('cmo').classList.remove('show')" style="background:var(--card2);border:1px solid var(--bdr);border-radius:7px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
-    <div id="cmob" style="color:var(--text2);font-size:12px;line-height:1.7;margin-bottom:12px;"></div>
-    <div id="cmoprev" style="background:var(--bg);border-radius:10px;padding:12px 14px;display:none;margin-bottom:14px;font-size:12px;border:1px solid rgba(255,23,68,.2);border-left:3px solid var(--red);"></div>
-    <div style="display:flex;gap:8px;">
-      <button class="btn" style="flex:1;justify-content:center;padding:10px;" onclick="document.getElementById('cmo').classList.remove('show')">Cancelar</button>
-      <button class="btn btn-r" style="flex:1;justify-content:center;padding:10px;font-weight:800;" id="cmobtn"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13"/></svg> Eliminar</button>
+    <div id="cmob" style="color:var(--text2);font-size:12.5px;line-height:1.7;margin-bottom:16px;"></div>
+    <div id="cmoprev" style="background:var(--bg);border-radius:10px;padding:12px 14px;display:none;margin-bottom:16px;font-size:12px;border:1px solid rgba(255,23,68,.2);border-left:3px solid var(--red);"></div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn" style="flex:1;justify-content:center;padding:11px;" onclick="document.getElementById('cmo').classList.remove('show')">Cancelar</button>
+      <button class="btn btn-r" style="flex:1;justify-content:center;padding:11px;font-weight:800;" id="cmobtn"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13"/></svg> Eliminar</button>
     </div>
   </div>
 </div>
@@ -1372,10 +1372,10 @@ tr:hover td{background:rgba(14,18,41,.8)}
   </div>
   <div style="padding:8px;flex:1;display:flex;flex-direction:column;overflow-y:auto">
     <div style="padding-top:2px"></div>
-    <div class="ni act" id="nav-dash" onclick="showTab('dash',this)">
+    <div class="ni" id="nav-dash" style="display:none" onclick="showTab('dash',this)">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="6" height="6" rx="1.2"/><rect x="9" y="1" width="6" height="6" rx="1.2"/><rect x="1" y="9" width="6" height="6" rx="1.2"/><rect x="9" y="9" width="6" height="6" rx="1.2"/></svg>Dashboard
     </div>
-    <div class="ni" id="nav-registro" onclick="showTab('registro',this)">
+    <div class="ni act" id="nav-registro" onclick="showTab('registro',this)">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1.5" y="2" width="13" height="12" rx="1.5"/><line x1="1.5" y1="5.5" x2="14.5" y2="5.5"/><line x1="5" y1="5.5" x2="5" y2="14"/></svg>Operaciones
     </div>
     <div class="ni" id="nav-stats" onclick="showTab('stats',this)">
@@ -1410,7 +1410,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
     <button id="mob-hamburger" onclick="mobSidebarOpen()" style="display:none;background:rgba(255,255,255,.06);border:1px solid var(--bdr);border-radius:9px;color:var(--text2);width:36px;height:36px;cursor:pointer;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s">
       <svg viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="2" width="18" height="14"><line x1="0" y1="1" x2="18" y2="1"/><line x1="0" y1="7" x2="18" y2="7"/><line x1="0" y1="13" x2="18" y2="13"/></svg>
     </button>
-    <div style="display:none"><div class="page-title" id="pg-title">Dashboard</div><div class="page-sub" id="pg-sub">Resumen general de rendimiento</div></div>
+    <div style="display:none"><div class="page-title" id="pg-title">Operaciones</div><div class="page-sub" id="pg-sub"></div></div>
     <div style="display:flex;gap:8px;align-items:center;margin-left:auto">
       <input id="acct-inp" type="number" value="10000" style="display:none">
       <button class="btn" onclick="document.getElementById('smo').classList.add('show');setSTab('exp')">↕ Sync</button>
@@ -1430,32 +1430,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
      §3 — TAB: DASHBOARD
 ═══════════════════════════════════════════════════════════ -->
   <!-- ═══ DASHBOARD ═══ -->
-  <div id="tab-dash" class="tsec act">
-
-    <!-- Barra fondeo (se muestra solo si está activo) -->
-    <div id="dd-wrap" style="display:none;margin-bottom:12px">
-      <div class="card" style="position:relative;overflow:hidden">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-          <span id="dd-label" style="font-weight:700;font-size:11px;letter-spacing:1px;color:var(--gold)"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3a3 3 0 0 1-3 5"/><path d="M7 5H4a3 3 0 0 0 3 5"/></svg> MODO FONDEO</span>
-          <span id="ddpct" style="font-weight:800;font-size:18px"></span>
-        </div>
-        <div style="font-size:10px;color:#555;margin-bottom:8px" id="dd-sublabel"></div>
-        <div style="background:#1a1a1a;border-radius:99px;height:14px;overflow:hidden;position:relative;border:1px solid #2a2a2a">
-          <div id="ddfill" style="height:100%;border-radius:99px;transition:width .6s,background .4s;width:0%;position:relative">
-            <div style="position:absolute;top:0;left:0;right:0;height:50%;background:rgba(255,255,255,.12);border-radius:99px"></div>
-          </div>
-        </div>
-        <div style="display:flex;justify-content:space-between;font-size:9px;margin-top:4px">
-          <span style="color:#444">0%</span>
-          <span id="ddal" style="color:var(--org)"></span>
-          <span id="ddlim"></span>
-        </div>
-        <div style="display:flex;justify-content:space-between;font-size:11px;margin-top:8px;padding-top:8px;border-top:1px solid #1e1e1e">
-          <span style="color:#666" id="dd-left-label"></span>
-          <span id="ddgoal" style="font-weight:700"></span>
-        </div>
-      </div>
-    </div>
+  <div id="tab-dash" class="tsec">
 
     <!-- KPIs principales: fila de 5 -->
     <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:8px" id="dash-kpis"></div>
@@ -1521,7 +1496,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
      Panel derecho permanente (rp-*) incluido aquí.
 ═══════════════════════════════════════════════════════════ -->
   <!-- ═══ REGISTRO ═══ -->
-  <div id="tab-registro" class="tsec reg-split">
+  <div id="tab-registro" class="tsec reg-split act">
   <div id="reg-main-col">
 
     <!-- ── TOOLBAR: tabs + acciones ── -->
@@ -1537,6 +1512,31 @@ tr:hover td{background:rgba(14,18,41,.8)}
           Tabla
         </button>
 
+      </div>
+      <!-- NAV FECHA: junto a los tabs Calendario/Tabla -->
+      <div style="display:flex;align-items:center;gap:6px">
+        <button class="reg-nav-arrow" onclick="calNav(-1)">
+          <svg viewBox="0 0 8 12" fill="none" stroke="currentColor" stroke-width="1.8" width="8" height="12"><polyline points="7,1 1,6 7,11"/></svg>
+        </button>
+        <button class="reg-nav-arrow" onclick="calNav(1)">
+          <svg viewBox="0 0 8 12" fill="none" stroke="currentColor" stroke-width="1.8" width="8" height="12"><polyline points="1,1 7,6 1,11"/></svg>
+        </button>
+        <div style="position:relative">
+          <div class="reg-month-pill" onclick="toggleCalDatePicker()">
+            <span id="cal-label" style="font-family:'DM Sans',system-ui,sans-serif;font-size:13px;font-weight:800;color:var(--text)"></span>
+            <svg id="cal-pill-arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" width="9" height="9" style="opacity:.5;transition:transform .2s"><polyline points="1,1 5,5 9,1"/></svg>
+          </div>
+          <div id="reg-date-selects" style="display:none;position:absolute;top:calc(100% + 6px);left:0;background:var(--card);border:1px solid var(--bdr2);border-radius:10px;padding:10px;z-index:200;gap:8px;box-shadow:0 8px 32px rgba(0,0,0,.5)">
+            <select id="cal-yr-sel" class="fi" style="width:auto;padding:6px 10px;font-size:12px;font-weight:700" onchange="calGoTo()"></select>
+            <select id="cal-mo-sel" class="fi" style="width:auto;padding:6px 10px;font-size:12px;font-weight:700" onchange="calGoTo()"></select>
+          </div>
+        </div>
+        <button class="reg-today-btn" onclick="calToday()">Hoy</button>
+        <button class="btn reg-filter-btn" id="reg-filter-toggle" onclick="toggleRegFilters()" style="display:none">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><path d="M1 3h14M4 8h8M7 13h2"/></svg>
+          Filtros
+          <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" width="9" height="9"><polyline points="1,1 5,5 9,1"/></svg>
+        </button>
       </div>
       <!-- Acciones derecha -->
       <div style="display:flex;align-items:center;gap:6px;margin-left:auto;flex-wrap:wrap">
@@ -1572,32 +1572,8 @@ tr:hover td{background:rgba(14,18,41,.8)}
       <button class="btn" style="padding:5px 10px;font-size:10px" onclick="clearTableFilters()"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Limpiar</button>
     </div>
 
-    <!-- ── NAV FECHA + PAR SELECTOR ── -->
+    <!-- ── PAR SELECTOR (oculto) ── -->
     <div class="reg-nav-bar">
-      <div style="display:flex;align-items:center;gap:6px">
-        <button class="reg-nav-arrow" onclick="calNav(-1)">
-          <svg viewBox="0 0 8 12" fill="none" stroke="currentColor" stroke-width="1.8" width="8" height="12"><polyline points="7,1 1,6 7,11"/></svg>
-        </button>
-        <button class="reg-nav-arrow" onclick="calNav(1)">
-          <svg viewBox="0 0 8 12" fill="none" stroke="currentColor" stroke-width="1.8" width="8" height="12"><polyline points="1,1 7,6 1,11"/></svg>
-        </button>
-        <div style="position:relative">
-          <div class="reg-month-pill" onclick="toggleCalDatePicker()">
-            <span id="cal-label" style="font-family:'DM Sans',system-ui,sans-serif;font-size:13px;font-weight:800;color:var(--text)"></span>
-            <svg id="cal-pill-arrow" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" width="9" height="9" style="opacity:.5;transition:transform .2s"><polyline points="1,1 5,5 9,1"/></svg>
-          </div>
-          <div id="reg-date-selects" style="display:none;position:absolute;top:calc(100% + 6px);left:0;background:var(--card);border:1px solid var(--bdr2);border-radius:10px;padding:10px;z-index:200;gap:8px;box-shadow:0 8px 32px rgba(0,0,0,.5)">
-            <select id="cal-yr-sel" class="fi" style="width:auto;padding:6px 10px;font-size:12px;font-weight:700" onchange="calGoTo()"></select>
-            <select id="cal-mo-sel" class="fi" style="width:auto;padding:6px 10px;font-size:12px;font-weight:700" onchange="calGoTo()"></select>
-          </div>
-        </div>
-        <button class="reg-today-btn" onclick="calToday()">Hoy</button>
-        <button class="btn reg-filter-btn" id="reg-filter-toggle" onclick="toggleRegFilters()" style="display:none">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><path d="M1 3h14M4 8h8M7 13h2"/></svg>
-          Filtros
-          <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" width="9" height="9"><polyline points="1,1 5,5 9,1"/></svg>
-        </button>
-      </div>
       <div style="margin-left:auto;display:none">
         <select id="f-filter-asset-cal" class="fi reg-pair-sel" onchange="renderCal();renderMonthSummary()">
           <option value="">Todos los pares</option>
@@ -1612,6 +1588,28 @@ tr:hover td{background:rgba(14,18,41,.8)}
       <!-- KPI BAR: debajo del calendario -->
       <div class="reg-kpi-bar" id="msum"></div>
 
+      <!-- Barra fondeo (se muestra solo si está activo) -->
+      <div id="dd-wrap" style="display:none;margin:0 0 14px">
+        <div class="card" style="position:relative;overflow:hidden;padding:18px 16px">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span id="dd-label" style="font-weight:700;font-size:12px;letter-spacing:1px;color:var(--gold);white-space:nowrap;display:flex;align-items:center;gap:5px;flex-shrink:0"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3a3 3 0 0 1-3 5"/><path d="M7 5H4a3 3 0 0 0 3 5"/></svg> MODO FONDEO</span>
+            <div style="flex:1;background:#1a1a1a;border-radius:99px;height:8px;overflow:hidden;position:relative;border:1px solid #2a2a2a">
+              <div id="ddfill" style="height:100%;border-radius:99px;transition:width .6s,background .4s;width:0%;position:relative">
+                <div style="position:absolute;top:0;left:0;right:0;height:50%;background:rgba(255,255,255,.12);border-radius:99px"></div>
+              </div>
+            </div>
+            <span id="ddpct" style="font-weight:800;font-size:16px;white-space:nowrap;flex-shrink:0"></span>
+            <span id="ddgoal" style="font-size:11px;color:var(--gray2);font-weight:700;white-space:nowrap;flex-shrink:0"></span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:10.5px;margin-top:12px;color:#666">
+            <span id="dd-sublabel"></span>
+            <span style="display:flex;gap:10px;flex-shrink:0">
+              <span id="ddal" style="color:var(--org)"></span>
+              <span id="ddlim"></span>
+            </span>
+          </div>
+        </div>
+      </div>
 
     </div>
 
@@ -1638,12 +1636,10 @@ tr:hover td{background:rgba(14,18,41,.8)}
     </div>
 
     <!-- DELETE ZONE -->
-    <div style="margin-top:24px;padding-top:18px;border-top:1px solid var(--bdr)">
-      <div style="font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;font-family:'DM Sans',system-ui,sans-serif"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 1 21h22L12 2z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Zona de peligro</div>
-      <div class="card" style="border-color:rgba(255,56,96,.2);background:rgba(255,56,96,.03)">
-        <div style="font-size:12px;font-weight:800;color:var(--red);margin-bottom:5px;font-family:'DM Sans',system-ui,sans-serif">Eliminar registro de esta cuenta</div>
-        <div style="font-size:11px;color:var(--gray2);margin-bottom:12px">Borra permanentemente todas las operaciones de la cuenta activa. No se puede deshacer.</div>
-        <button class="btn btn-r" id="del-all-btn" onclick="delAll()" style="justify-content:center;font-size:11px;padding:8px 18px"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13"/></svg> Borrar todo el registro de esta cuenta</button>
+    <div style="margin-top:20px;padding-top:14px;border-top:1px solid var(--bdr)">
+      <div class="card" style="border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.02);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px">
+        <div style="font-size:11px;font-weight:700;color:var(--text)">Eliminar registro de esta cuenta</div>
+        <button class="btn" id="del-all-btn" onclick="delAll()" style="justify-content:center;font-size:11px;padding:7px 14px;flex-shrink:0;background:#000;border:1px solid #fff;color:#fff;box-shadow:none"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13"/></svg> Borrar todo el registro</button>
       </div>
     </div>
   </div><!-- /reg-main-col -->
@@ -3951,6 +3947,7 @@ function saveTrade(){
     S.trades.push({id:uid,date:date,time:g('f-time').value,asset:g('f-asset').value,result:curR,direction:curD,pnl:pnl,strategy:g('f-strategy').value,notes:g('f-notes').value,tf:g('f-tf').value,session:g('f-session').value,rr:(typeof getRRValue==='function'?getRRValue():(parseFloat(g('f-rr').value)||0)),tags:g('f-tags').value,entry:g('f-entry')?g('f-entry').value:'',exit:g('f-exit')?g('f-exit').value:'',pips:parseFloat(g('f-pips')?g('f-pips').value:'')||0,volume:g('f-volume')?g('f-volume').value:'',commission:parseFloat(g('f-commission')?g('f-commission').value:'')||0,images:imgs,links:lnks,createdAt:new Date().toISOString()});
     g('f-pnl').value='';g('f-notes').value='';g('pnl-prev').textContent='';
     g('f-tf').value='';g('f-session').value='';g('f-rr').value='';if(typeof rrSetValue==='function')rrSetValue('');
+    g('f-strategy').value='';if(g('f-strategy-custom-wrap'))g('f-strategy-custom-wrap').style.display='none';if(g('f-strategy-custom'))g('f-strategy-custom').value='';
     g('f-tags').value='';if(g('tags-display'))g('tags-display').innerHTML='';
     if(g('f-entry'))g('f-entry').value='';if(g('f-exit'))g('f-exit').value='';
     if(g('f-pips'))g('f-pips').value='';if(g('f-volume'))g('f-volume').value='';
@@ -4037,9 +4034,9 @@ function delAll(){
 // ════════════════════════════════════════════════════════════
 // CONFIRM MODAL
 function showConfirm(title,body,fn,prev,confirmLabel){
-  g('cmot').textContent=title;g('cmob').textContent=body;
+  g('cmot').innerHTML=title;g('cmob').textContent=body;
   var p=g('cmoprev');if(prev){p.innerHTML=prev;p.style.display='block';}else p.style.display='none';
-  var btn=g('cmobtn');btn.textContent=confirmLabel||'Confirmar';
+  var btn=g('cmobtn');btn.innerHTML=confirmLabel||'Confirmar';
   btn.onclick=function(){fn();g('cmo').classList.remove('show');};
   g('cmo').classList.add('show');
 }
@@ -4649,7 +4646,7 @@ function showTab(id,el){
     if(id==='dash')renderDash();
     if(id==='stats')renderStats();
     if(id==='analisis')renderA();
-    if(id==='registro'){renderCalSels();renderCal();renderMonthSummary();renderMonthStats();renderDayDetail();}
+    if(id==='registro'){renderDash();renderCalSels();renderCal();renderMonthSummary();renderMonthStats();renderDayDetail();}
     if(id==='config'){
       _modoNuevaCuenta = true;
       _draft = {name:'',currency:'USD',initial:'',desc:'',color:'#8b5cf6',icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V10"/><path d="M19 21V10"/><path d="M3 10l9-6 9 6"/><path d="M9 21v-6h6v6"/></svg>',challengeActive:false,maxDailyLoss:5,maxTotalLoss:10,profitTarget:10};
@@ -5531,38 +5528,38 @@ function renderMonthSummary(){
   var wrStr=(parseFloat(wr)>=0?'+':'')+wr+'%';
   el.innerHTML=
     '<div class="reg-kpi-item">'+
-      '<span class="reg-kpi-icon"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg></span>'+
+      '<span class="reg-kpi-icon"><svg class="ic" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg></span>'+
       '<div class="reg-kpi-val" style="color:var(--text)">'+ft.length+'</div>'+
       '<div class="reg-kpi-lbl">Operaciones</div>'+
     '</div>'+
     '<div class="reg-kpi-item">'+
-      '<span class="reg-kpi-icon"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 10 10 14 14 21 7"/><polyline points="14 7 21 7 21 14"/></svg></span>'+
-      '<div class="reg-kpi-val" style="color:var(--green)">'+tp+' <span style="font-size:11px;font-weight:600">('+tpPct+'%)</span></div>'+
+      '<span class="reg-kpi-icon"><svg class="ic" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 10 10 14 14 21 7"/><polyline points="14 7 21 7 21 14"/></svg></span>'+
+      '<div class="reg-kpi-val" style="color:var(--green)">'+tp+'</div>'+
       '<div class="reg-kpi-lbl">Ganadoras</div>'+
     '</div>'+
     '<div class="reg-kpi-item">'+
-      '<span class="reg-kpi-icon" style="color:var(--gold)">−</span>'+
-      '<div class="reg-kpi-val" style="color:var(--gold)">'+be+' <span style="font-size:11px;font-weight:600">('+bePct+'%)</span></div>'+
+      '<span class="reg-kpi-icon">−</span>'+
+      '<div class="reg-kpi-val" style="color:var(--gold)">'+be+'</div>'+
       '<div class="reg-kpi-lbl">Break Even</div>'+
     '</div>'+
     '<div class="reg-kpi-item">'+
-      '<span class="reg-kpi-icon" style="color:var(--red)">✖</span>'+
-      '<div class="reg-kpi-val" style="color:var(--red)">'+sl+' <span style="font-size:11px;font-weight:600">('+slPct+'%)</span></div>'+
+      '<span class="reg-kpi-icon">✖</span>'+
+      '<div class="reg-kpi-val" style="color:var(--red)">'+sl+'</div>'+
       '<div class="reg-kpi-lbl">Perdedoras</div>'+
     '</div>'+
     '<div class="reg-kpi-item">'+
-      '<span class="reg-kpi-icon"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>'+
+      '<span class="reg-kpi-icon"><svg class="ic" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>'+
       '<div class="reg-kpi-val" style="color:'+(pnl>=0?'var(--green)':'var(--red)')+'">'+pnlStr+'</div>'+
       '<div class="reg-kpi-lbl">Resultado neto</div>'+
     '</div>'+
     '<div class="reg-kpi-item">'+
-      '<span class="reg-kpi-icon" style="color:var(--cyan)">➕</span>'+
-      '<div class="reg-kpi-val" style="color:var(--cyan)">'+wrStr+'</div>'+
+      '<span class="reg-kpi-icon">➕</span>'+
+      '<div class="reg-kpi-val" style="color:var(--text)">'+wrStr+'</div>'+
       '<div class="reg-kpi-lbl">Win Rate</div>'+
     '</div>'+
     '<div class="reg-kpi-item">'+
-      '<span class="reg-kpi-icon" style="color:var(--gold)"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg></span>'+
-      '<div class="reg-kpi-val" style="color:var(--gold)">'+pf+'</div>'+
+      '<span class="reg-kpi-icon"><svg class="ic" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg></span>'+
+      '<div class="reg-kpi-val" style="color:var(--text)">'+pf+'</div>'+
       '<div class="reg-kpi-lbl">Profit Factor</div>'+
     '</div>';
 }
@@ -6788,7 +6785,7 @@ function refresh(){
     var dash=g('tab-dash');
     if(dash&&dash.classList.contains('act')) renderDash();
     checkAlerts();
-    var reg=g('tab-registro');if(reg&&reg.classList.contains('act')){renderCalSels();renderCal();renderMonthSummary();renderMonthStats();renderDayDetail();}
+    var reg=g('tab-registro');if(reg&&reg.classList.contains('act')){renderDash();renderCalSels();renderCal();renderMonthSummary();renderMonthStats();renderDayDetail();}
     var stats=g('tab-stats');if(stats&&stats.classList.contains('act'))renderStats();
     var analisis=g('tab-analisis');if(analisis&&analisis.classList.contains('act'))renderA();
     var fondeo=g('tab-fondeo');if(fondeo&&fondeo.classList.contains('act'))renderFondeo();
@@ -7010,9 +7007,9 @@ function renderSidebarAccounts(){
     var isActive = a.id === activeId;
     var col = a.color || '#8b5cf6';
     var icon = a.icon || '<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V10"/><path d="M19 21V10"/><path d="M3 10l9-6 9 6"/><path d="M9 21v-6h6v6"/></svg>';
-    var bg  = 'var(--card2)';
-    var bdr = 'var(--bdr)';
-    var nameColor = 'var(--text)';
+    var bg  = isActive ? 'var(--ni-act-bg)' : 'var(--card2)';
+    var bdr = isActive ? 'var(--ni-act-border)' : 'var(--bdr)';
+    var nameColor = isActive ? 'var(--ni-act-color)' : 'var(--text)';
     var _c2=null;try{_c2=JSON.parse(localStorage.getItem(getLicensePrefix()+'cfg_'+a.id)||'null');}catch(e){}
     // FIX: cuenta activa → leer S.settings (fuente de verdad en memoria), no localStorage
     var challengeOn = (a.id===activeId) ? !!S.settings.challengeActive : !!(_c2&&_c2.challengeActive);
@@ -8564,10 +8561,10 @@ button,[onclick],a,.ni,.cal-nav-btn,.rb,.tog,.acct-color-dot,.reg-nav-arrow,.reg
           <div style="display:flex;gap:5px">
             <select id="f-rr-sel" class="fi" style="flex:1" onchange="rrSelChange();syncFiEmpty(this)">
               <option value="">— Sin RR —</option>
-              <option value="0.5">1:0.5</option><option value="1">1:1</option><option value="1.5">1:1.5</option>
-              <option value="2">1:2</option><option value="2.5">1:2.5</option><option value="3">1:3</option>
+              <option value="1">1:1</option><option value="2">1:2</option><option value="3">1:3</option>
               <option value="4">1:4</option><option value="5">1:5</option><option value="6">1:6</option>
-              <option value="8">1:8</option><option value="10">1:10</option>
+              <option value="7">1:7</option><option value="8">1:8</option><option value="9">1:9</option>
+              <option value="10">1:10</option>
               <option value="custom">Personalizado</option>
             </select>
             <input type="number" id="f-rr" class="fi" step="0.1" min="0" placeholder="RR" style="flex:1;display:none">
@@ -8600,7 +8597,7 @@ button,[onclick],a,.ni,.cal-nav-btn,.rb,.tog,.acct-color-dot,.reg-nav-arrow,.reg
       <!-- BOTÓN GUARDAR -->
       <div style="display:flex;gap:8px;padding-top:4px">
         <button class="btn btn-r" id="btn-cancel" style="display:none;flex:1;justify-content:center;padding:12px" onclick="cancelEdit();closeNewOpPanel()"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Cancelar</button>
-        <button class="btn btn-g" id="btn-save" style="flex:1;justify-content:center;padding:13px;font-size:12px;font-weight:700;letter-spacing:0.3px" onclick="if(window._spawnRipple)window._spawnRipple(event.clientX,event.clientY);if(window._playClick)window._playClick();saveTrade()">
+        <button class="btn btn-notion" id="btn-save" style="flex:1;justify-content:center;padding:12px;font-size:12px;font-weight:600;letter-spacing:0.3px" onclick="if(window._spawnRipple)window._spawnRipple(event.clientX,event.clientY);if(window._playClick)window._playClick();saveTrade()">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M13 2H5L2 5v9a1 1 0 001 1h10a1 1 0 001-1V3a1 1 0 00-1-1z"/><polyline points="5,2 5,7 11,7"/><polyline points="11,11 8,14 5,11"/></svg>
           Registrar operación
         </button>
@@ -8835,6 +8832,14 @@ window.openNewOpPanel = function(trade) {
       if(fh)  fh.value  = '';
       if(fm)  fm.value  = '';
       if(ft2) ft2.value = '';
+
+      // Estrategia: se deja vacía por defecto (sin selección automática)
+      var fstr = document.getElementById('f-strategy');
+      if(fstr) fstr.value = '';
+      var fstrWrap = document.getElementById('f-strategy-custom-wrap');
+      if(fstrWrap) fstrWrap.style.display = 'none';
+      var fstrCustom = document.getElementById('f-strategy-custom');
+      if(fstrCustom) fstrCustom.value = '';
     }
 
     // 3. Activo: se deja vacío por defecto (sin selección automática)
@@ -8898,52 +8903,49 @@ function populateDayPanel(trades, dateStr) {
 
   var html = '';
 
-  // Cabecera del día
-  html += '<div style="margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--bdr)">';
-  html += '<div style="font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:1.5px;font-family:\'DM Sans\',sans-serif;margin-bottom:5px"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="4" x2="8" y2="9"/><line x1="16" y1="4" x2="16" y2="9"/></svg> '+fechaLbl+'</div>';
-  html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">';
-  html += '<span style="font-size:13px;font-weight:700;color:var(--text)">'+trades.length+' operaci'+(trades.length===1?'ón':'ones')+'</span>';
-  html += '<span style="font-size:20px;font-weight:900;font-family:\'DM Sans\',sans-serif;color:'+(dayPnl>=0?'var(--green)':'var(--red)')+'">'+(dayPnl>=0?'+$':'-$')+Math.abs(dayPnl).toFixed(2)+'</span>';
+  // Cabecera del día — minimalista tipo Notion
+  html += '<div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--bdr)">';
+  html += '<div style="font-size:11px;color:var(--gray2);font-family:\'DM Sans\',sans-serif;margin-bottom:6px;display:flex;align-items:center;gap:6px"><svg class="ic" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="4" x2="8" y2="9"/><line x1="16" y1="4" x2="16" y2="9"/></svg> '+fechaLbl+'</div>';
+  html += '<div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:7px">';
+  html += '<span style="font-size:14px;font-weight:600;color:var(--text)">'+trades.length+' operaci'+(trades.length===1?'ón':'ones')+'</span>';
+  html += '<span style="font-size:18px;font-weight:700;font-family:\'DM Sans\',sans-serif;color:'+(dayPnl>=0?'var(--green)':'var(--red)')+'">'+(dayPnl>=0?'+$':'-$')+Math.abs(dayPnl).toFixed(2)+'</span>';
   html += '</div>';
-  html += '<div style="display:flex;gap:6px;flex-wrap:wrap">';
-  html += '<span style="font-size:10px;background:rgba(0,229,176,.12);color:var(--green);padding:3px 9px;border-radius:6px;font-weight:700;border:1px solid rgba(0,229,176,.2)"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> '+tp+' TP</span>';
-  html += '<span style="font-size:10px;background:rgba(255,56,96,.12);color:var(--red);padding:3px 9px;border-radius:6px;font-weight:700;border:1px solid rgba(255,56,96,.2)"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> '+sl+' SL</span>';
-  html += '<span style="font-size:10px;background:rgba(77,159,255,.12);color:var(--blue);padding:3px 9px;border-radius:6px;font-weight:700;border:1px solid rgba(77,159,255,.2)">'+wr+'% WR</span>';
+  html += '<div style="font-size:11px;color:var(--gray2);font-family:\'DM Sans\',sans-serif">';
+  html += '<span style="color:var(--green)">'+tp+' TP</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span style="color:var(--red)">'+sl+' SL</span>&nbsp;&nbsp;·&nbsp;&nbsp;'+wr+'% WR';
   html += '</div>';
   html += '</div>';
 
-  // Viñetas por operación
-  html += '<div style="font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-family:\'DM Sans\',sans-serif">Toca una operación para ver el detalle</div>';
-  html += '<div style="display:flex;flex-direction:column;gap:7px">';
+  // Lista de operaciones — filas planas con divisores, sin tarjetas
+  html += '<div style="font-size:10px;color:var(--gray2);margin-bottom:6px;font-family:\'DM Sans\',sans-serif">Toca una operación para ver el detalle</div>';
+  html += '<div style="display:flex;flex-direction:column">';
   trades.forEach(function(t, i) {
     var isWin  = t.result === 'TP';
     var imgs   = t.images || [];
     var lnks   = t.links  || [];
     var pnlAbs = Math.abs(t.pnl||0).toFixed(2);
     var pnlClr = isWin ? 'var(--green)' : 'var(--red)';
-    var bdrClr = isWin ? 'rgba(0,229,176,.25)' : 'rgba(255,56,96,.2)';
-    var dotClr = isWin ? 'var(--green)' : 'var(--red)';
+    var isLast = (i === trades.length-1);
 
-    html += '<div onclick="window._rpSelectTrade('+i+')" style="cursor:pointer;background:var(--card2);border:1px solid '+bdrClr+';border-left:3px solid '+dotClr+';border-radius:10px;padding:10px 12px;transition:border-color .2s" onmouseover="this.style.background=\'var(--card3)\'" onmouseout="this.style.background=\'var(--card2)\'">';
+    html += '<div onclick="window._rpSelectTrade('+i+')" style="cursor:pointer;padding:10px 6px;'+(isLast?'':'border-bottom:1px solid var(--bdr);')+'transition:background .15s" onmouseover="this.style.background=\'rgba(255,255,255,.03)\'" onmouseout="this.style.background=\'transparent\'">';
 
     // Fila principal: hora + asset + dirección + PnL
-    html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">';
-    html += '<div style="display:flex;align-items:center;gap:7px">';
-    html += '<span style="font-size:10px;color:var(--gray2);font-family:\'DM Sans\',sans-serif">'+(t.time||'—')+'</span>';
-    html += '<span style="font-size:13px;font-weight:900;font-family:\'DM Sans\',sans-serif;color:var(--text)">'+( t.asset||'—')+'</span>';
-    html += '<span class="'+(t.direction==='BUY'?'bbuy':'bsell')+'" style="font-size:9px;padding:1px 5px">'+( t.direction==='BUY'?'▲L':'▼S')+'</span>';
-    html += '<span class="'+(t.result==='TP'?'btp':(t.result==='BE'?'bbe':'bsl'))+'" style="font-size:9px;padding:1px 5px">'+t.result+'</span>';
+    html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">';
+    html += '<div style="display:flex;align-items:center;gap:7px;min-width:0">';
+    html += '<span style="font-size:10px;color:var(--gray2);font-family:\'DM Sans\',sans-serif;flex-shrink:0">'+(t.time||'—')+'</span>';
+    html += '<span style="font-size:13px;font-weight:600;font-family:\'DM Sans\',sans-serif;color:var(--text)">'+( t.asset||'—')+'</span>';
+    html += '<span style="font-size:10px;color:var(--gray2)">'+( t.direction==='BUY'?'▲ L':'▼ S')+'</span>';
+    html += '<span style="font-size:10px;color:'+pnlClr+';font-weight:600">'+t.result+'</span>';
     html += '</div>';
-    html += '<span style="font-size:14px;font-weight:900;font-family:\'DM Sans\',sans-serif;color:'+pnlClr+'">'+(t.pnl>=0?'+$':'-$')+pnlAbs+'</span>';
+    html += '<span style="font-size:13px;font-weight:700;font-family:\'DM Sans\',sans-serif;color:'+pnlClr+';flex-shrink:0">'+(t.pnl>=0?'+$':'-$')+pnlAbs+'</span>';
     html += '</div>';
 
     // Detalles secundarios: TF, estrategia, RR
     var extras = [];
-    if(t.tf)       extras.push('⏱ '+t.tf);
-    if(t.strategy) extras.push('<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg> '+t.strategy);
+    if(t.tf)       extras.push(t.tf);
+    if(t.strategy) extras.push(t.strategy);
     if(t.rr)       extras.push('RR 1:'+t.rr);
     if(extras.length){
-      html += '<div style="font-size:10px;color:var(--gray2);margin-bottom:5px">'+extras.join(' &middot; ')+'</div>';
+      html += '<div style="font-size:10px;color:var(--gray2);margin-bottom:4px">'+extras.join(' · ')+'</div>';
     }
 
     // Miniaturas de imágenes
@@ -8951,20 +8953,20 @@ function populateDayPanel(trades, dateStr) {
       html += '<div style="display:flex;gap:3px;margin-top:4px;flex-wrap:wrap">';
       imgs.slice(0,4).forEach(function(img){
         var s = img.src || img;
-        html += '<div style="width:38px;height:30px;border-radius:5px;overflow:hidden;border:1px solid var(--bdr);flex-shrink:0">';
+        html += '<div style="width:36px;height:28px;border-radius:4px;overflow:hidden;border:1px solid var(--bdr);flex-shrink:0">';
         html += '<img src="'+s+'" loading="lazy" style="width:100%;height:100%;object-fit:cover" onerror="this.parentElement.style.opacity=\'.3\'">';
         html += '</div>';
       });
-      if(imgs.length>4) html += '<div style="width:38px;height:30px;border-radius:5px;border:1px solid var(--bdr);background:var(--card);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--gray2);flex-shrink:0">+'+( imgs.length-4)+'</div>';
+      if(imgs.length>4) html += '<div style="width:36px;height:28px;border-radius:4px;border:1px solid var(--bdr);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--gray2);flex-shrink:0">+'+( imgs.length-4)+'</div>';
       html += '</div>';
     }
 
-    // Indicador de notas/links
+    // Indicador de notas/links — texto simple, sin chips
     if(t.notes || lnks.length){
-      html += '<div style="display:flex;gap:5px;margin-top:5px">';
-      if(t.notes) html += '<span style="font-size:9px;background:rgba(124,58,237,.1);color:var(--purp);padding:1px 6px;border-radius:4px;border:1px solid rgba(124,58,237,.2)"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg> Nota</span>';
-      if(lnks.length) html += '<span style="font-size:9px;background:rgba(77,159,255,.1);color:var(--blue);padding:1px 6px;border-radius:4px;border:1px solid rgba(77,159,255,.2)"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17H7a5 5 0 0 1 0-10h2"/><path d="M15 7h2a5 5 0 0 1 0 10h-2"/><line x1="8" y1="12" x2="16" y2="12"/></svg> '+lnks.length+' enlace'+(lnks.length>1?'s':'')+'</span>';
-      html += '</div>';
+      var bits = [];
+      if(t.notes) bits.push('Nota');
+      if(lnks.length) bits.push(lnks.length+' enlace'+(lnks.length>1?'s':''));
+      html += '<div style="font-size:9px;color:var(--gray2);margin-top:3px">'+bits.join(' · ')+'</div>';
     }
     html += '</div>';
   });
@@ -9385,16 +9387,16 @@ window.renderMonthSummary = function() {
 
   el.innerHTML=[
     {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg>',label:'Operaciones',val:String(ft.length),color:'var(--text)'},
-    {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>',label:'Ganadoras',val:tp+' ('+wr+'%)',color:'var(--green)'},
-    {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l3-3z" clip-rule="evenodd"/></svg>',label:'Break Even',val:be+' ('+bePct+'%)',color:'var(--gold)'},
-    {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>',label:'Perdedoras',val:sl+' ('+slWr+'%)',color:'var(--red)'},
+    {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>',label:'Ganadoras',val:String(tp),color:'var(--green)'},
+    {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l3-3z" clip-rule="evenodd"/></svg>',label:'Break Even',val:String(be),color:'var(--gold)'},
+    {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>',label:'Perdedoras',val:String(sl),color:'var(--red)'},
     {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>',label:'Resultado neto',val:(pnl>=0?'+$':'-$')+Math.abs(pnl).toFixed(2),color:pnl>=0?'var(--green)':'var(--red)'},
-    {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/></svg>',label:'Win Rate',val:'+'+wr+'%',color:'#60a5fa'},
-    {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>',label:'Profit Factor',val:String(pf),color:'var(--gold)'}
+    {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/></svg>',label:'Win Rate',val:'+'+wr+'%',color:'var(--text)'},
+    {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>',label:'Profit Factor',val:String(pf),color:'var(--text)'}
   ].map(function(item){
     return '<div class="msc">'+
-      '<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">'+
-        '<span style="color:'+item.color+';opacity:.7">'+item.icon+'</span>'+
+      '<div style="display:flex;align-items:center;justify-content:center;gap:5px;margin-bottom:4px">'+
+        '<span style="color:var(--gray2)">'+item.icon+'</span>'+
         '<span class="msl">'+item.label+'</span>'+
       '</div>'+
       '<div class="msv" style="color:'+item.color+'">'+item.val+'</div>'+
@@ -9612,6 +9614,8 @@ function _rpRefresh(trade) {
 }
 
 // Abre/cierra una sección sin re-renderizar todo el panel (evita saltos de scroll)
+// Nota: solo abre/cierra visualmente — NO dispara guardado en la nube, ya que
+// expandir una sección para ver algo que ya estaba guardado no es un cambio real de datos.
 window.rpToggleSection = function(idx) {
   if(!_currentTrade) return;
   var trade = S.trades.find(function(t){ return t.id === _currentTrade.id; });
@@ -9619,7 +9623,6 @@ window.rpToggleSection = function(idx) {
   trade.sections[idx].open = !trade.sections[idx].open;
   var el = document.querySelector('.rp-toggle[data-sec-idx="'+idx+'"]');
   if(el) el.classList.toggle('open');
-  if(typeof save==='function') save();
 };
 
 window.rpRenameSection = function(idx, newTitle) {
