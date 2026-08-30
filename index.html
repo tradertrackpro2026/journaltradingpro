@@ -1110,12 +1110,12 @@ tr:hover td{background:rgba(14,18,41,.8)}
 .reg-pair-sel{padding:6px 10px;font-size:11px;background:var(--card2);border:1px solid var(--bdr);border-radius:9px;color:var(--text);cursor:pointer;min-width:140px}
 
 /* KPI BAR — minimalista tipo Notion */
-.reg-kpi-bar{display:grid;grid-template-columns:repeat(7,1fr);gap:0;background:transparent;border:1px solid var(--bdr);border-radius:10px;overflow:hidden;margin:14px 0}
-.reg-kpi-item{padding:11px 5px;text-align:center;position:relative;border-right:1px solid var(--bdr)}
+.reg-kpi-bar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;background:transparent;border:1px solid var(--bdr);border-radius:10px;overflow:hidden;margin:14px 0}
+.reg-kpi-item{padding:11px 5px;text-align:center;position:relative;border-right:1px solid var(--bdr);min-width:0;overflow:hidden}
 .reg-kpi-item:last-child{border-right:none}
 .reg-kpi-icon{font-size:12px;margin-bottom:5px;display:block;line-height:1;color:var(--gray2)}
-.reg-kpi-val{font-size:14px;font-weight:700;font-family:'DM Sans',system-ui,sans-serif;line-height:1.1;margin-bottom:3px}
-.reg-kpi-lbl{font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px;font-family:'DM Sans',system-ui,sans-serif}
+.reg-kpi-val{font-size:14px;font-weight:700;font-family:'DM Sans',system-ui,sans-serif;line-height:1.1;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.reg-kpi-lbl{font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:.5px;font-family:'DM Sans',system-ui,sans-serif}
 
 /* CALENDAR CELL */
 .cal-cell-ops{font-size:10px;color:var(--gray2);margin-top:3px;font-weight:600}
@@ -4583,12 +4583,19 @@ function totals(){
 function getTimeGroups(trades){
   var map={};
   trades.forEach(function(t){
-    var hr=t.time||'Sin hora';
-    if(!map[hr])map[hr]={time:hr,tp:0,sl:0,pnl:0};
-    if(t.result==='TP')map[hr].tp++;else map[hr].sl++;
-    map[hr].pnl+=(t.pnl||0);
+    // Agrupa por HORA completa (no por el minuto exacto), y es robusto a horas
+    // mal formadas como "08:" o "8:5" — siempre extrae el número de hora inicial.
+    var raw=String(t.time||'').trim();
+    var m=raw.match(/^(\d{1,2})/);
+    var h=m?Math.min(parseInt(m[1],10),23):null;
+    var key=h!==null?('0'+h).slice(-2)+':00':'Sin hora';
+    if(!map[key])map[key]={time:key,tp:0,sl:0,pnl:0,_h:h!==null?h:99};
+    // BE (break even) no cuenta como ganadora ni perdedora — solo TP y SL.
+    if(t.result==='TP')map[key].tp++;
+    else if(t.result==='SL')map[key].sl++;
+    map[key].pnl+=(t.pnl||0);
   });
-  return Object.values(map).sort(function(a,b){return a.time.localeCompare(b.time);});
+  return Object.values(map).sort(function(a,b){return a._h-b._h;});
 }
 
 // NOTES RENDER
@@ -5552,7 +5559,9 @@ function renderMonthSummary(){
   var wrPct=decided?(tp/decided*100).toFixed(1):0;
   var tpp=ft.filter(function(t){return t.result==='TP';}).reduce(function(a,t){return a+(t.pnl||0);},0);
   var slp=ft.filter(function(t){return t.result==='SL';}).reduce(function(a,t){return a+(t.pnl||0);},0);
-  var pf=slp<0?Math.abs(tpp/slp).toFixed(2):'∞';
+  var avgWinReg=tp?tpp/tp:0;
+  var avgLossReg=sl?Math.abs(slp)/sl:0;
+  var rrReg=avgLossReg>0?(avgWinReg/avgLossReg):0;
   var tpPct=decided?(tp/decided*100).toFixed(2):0;
   var slPct=decided?(sl/decided*100).toFixed(2):0;
   var bePct=ft.length?(be/ft.length*100).toFixed(2):0;
@@ -5590,9 +5599,9 @@ function renderMonthSummary(){
       '<div class="reg-kpi-lbl">Win Rate</div>'+
     '</div>'+
     '<div class="reg-kpi-item">'+
-      '<span class="reg-kpi-icon"><svg class="ic" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="12" width="4" height="9" rx="1"/><rect x="10" y="7" width="4" height="14" rx="1"/><rect x="17" y="3" width="4" height="18" rx="1"/></svg></span>'+
-      '<div class="reg-kpi-val" style="color:var(--text)">'+pf+'</div>'+
-      '<div class="reg-kpi-lbl">Profit Factor</div>'+
+      '<span class="reg-kpi-icon"><svg class="ic" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M12 20V4"/><path d="M20 20v-6"/></svg></span>'+
+      '<div class="reg-kpi-val" style="color:var(--text)">'+(rrReg>0?'1:'+Math.round(rrReg):'—')+'</div>'+
+      '<div class="reg-kpi-lbl">R:R</div>'+
     '</div>';
 }
 
@@ -6633,7 +6642,7 @@ window.aExportReport = function(){
   var aLines=Object.keys(byA).sort(function(a,b){return byA[b].pnl-byA[a].pnl;}).map(function(k){return '  '+k+': '+fU(byA[k].pnl)+' (TP:'+byA[k].tp+' SL:'+byA[k].sl+')';}).join('\n');
   // Por estrategia
   var byStr={};
-  ft.forEach(function(t){ var k=t.strategy||'Sin estrategia'; if(!byStr[k])byStr[k]={pnl:0,tp:0,sl:0}; byStr[k].pnl+=(t.pnl||0); if(t.result==='TP')byStr[k].tp++;else byStr[k].sl++; });
+  ft.forEach(function(t){ var k=t.strategy||'Sin estrategia'; if(!byStr[k])byStr[k]={pnl:0,tp:0,sl:0}; byStr[k].pnl+=(t.pnl||0); if(t.result==='TP')byStr[k].tp++;else if(t.result==='SL')byStr[k].sl++; });
   var sLines=Object.keys(byStr).sort(function(a,b){return byStr[b].pnl-byStr[a].pnl;}).map(function(k){return '  '+k+': '+fU(byStr[k].pnl)+' (TP:'+byStr[k].tp+' SL:'+byStr[k].sl+')';}).join('\n');
   // Filtros activos
   var filtros = [afAsset,afResult,afDir,afStrat,afSess].filter(Boolean).join(', ') || 'Ninguno';
@@ -7671,12 +7680,12 @@ function renderAdvancedStatsPanel(trades){
     {l:'Peor operación',v:'$'+st.worst.pnl.toFixed(2),c:'var(--red)'},
     {l:'Promedio por operación',v:'$'+st.avgPnl.toFixed(2),c:st.avgPnl>=0?'var(--green)':'var(--red)'},
     {l:'Drawdown máximo',v:'$'+st.maxDD.toFixed(2),c:'var(--org,#ff6d00)'},
-    {l:'Ganancia media (ops. ganadoras)',v:'$'+st.avgWin.toFixed(2),c:'var(--green)'},
-    {l:'Pérdida media (ops. perdedoras)',v:'-$'+st.avgLoss.toFixed(2),c:'var(--red)'},
+    {l:'Ganancia media',sub:'ops. ganadoras',v:'$'+st.avgWin.toFixed(2),c:'var(--green)'},
+    {l:'Pérdida media',sub:'ops. perdedoras',v:'-$'+st.avgLoss.toFixed(2),c:'var(--red)'},
   ];
   kpis.forEach(function(k){
     html += '<div style="background:var(--card2,#151f2e);border:1px solid var(--bdr);border-radius:9px;padding:11px 13px;">';
-    html += '<div style="font-size:10px;color:var(--gray2,#555);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">'+k.l+'</div>';
+    html += '<div style="font-size:10px;color:var(--gray2,#555);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;">'+k.l+(k.sub?' <span style="text-transform:none;letter-spacing:0;opacity:.7">('+k.sub+')</span>':'')+'</div>';
     html += '<div style="font-size:18px;font-weight:800;color:'+k.c+';">'+k.v+'</div>';
     html += '</div>';
   });
@@ -9393,7 +9402,9 @@ window.renderMonthSummary = function() {
   var bePct=ft.length?(be/ft.length*100).toFixed(1):0;
   var tpp=ft.filter(function(t){return t.result==='TP';}).reduce(function(a,t){return a+(t.pnl||0);},0);
   var slp=ft.filter(function(t){return t.result==='SL';}).reduce(function(a,t){return a+(t.pnl||0);},0);
-  var pf=slp<0?Math.abs(tpp/slp).toFixed(2):'∞';
+  var avgWinMS=tp?tpp/tp:0;
+  var avgLossMS=sl?Math.abs(slp)/sl:0;
+  var rrMS=avgLossMS>0?(avgWinMS/avgLossMS):0;
 
   el.innerHTML=[
     {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg>',label:'Operaciones',val:String(ft.length),color:'var(--text)'},
@@ -9402,7 +9413,7 @@ window.renderMonthSummary = function() {
     {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>',label:'Perdedoras',val:String(sl),color:'var(--red)'},
     {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>',label:'Resultado neto',val:(pnl>=0?'+$':'-$')+Math.abs(pnl).toFixed(2),color:pnl>=0?'var(--green)':'var(--red)'},
     {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/></svg>',label:'Win Rate',val:'+'+wr+'%',color:'var(--text)'},
-    {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>',label:'Profit Factor',val:String(pf),color:'var(--text)'}
+    {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v.09a7.001 7.001 0 015.91 5.91H17a1 1 0 110 2h-.09A7.001 7.001 0 0111 16.91V17a1 1 0 11-2 0v-.09A7.001 7.001 0 013.09 11H3a1 1 0 110-2h.09A7.001 7.001 0 019 3.09V3a1 1 0 011-1zm0 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z" clip-rule="evenodd"/></svg>',label:'R:R',val:rrMS>0?('1:'+Math.round(rrMS)):'—',color:'var(--text)'}
   ].map(function(item){
     return '<div class="msc">'+
       '<div style="display:flex;align-items:center;justify-content:center;gap:5px;margin-bottom:4px">'+
