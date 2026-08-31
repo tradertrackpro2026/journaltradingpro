@@ -271,6 +271,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
 .trade-badge{display:inline-flex;align-items:center;gap:5px;border-radius:7px;padding:4px 10px;font-size:11px;font-weight:700;font-family:'DM Sans',system-ui,sans-serif}
 .trade-badge.win{background:rgba(0,229,176,.15);border:1px solid rgba(0,229,176,.3);color:var(--green)}
 .trade-badge.loss{background:rgba(255,56,96,.15);border:1px solid rgba(255,56,96,.3);color:var(--red)}
+.trade-badge.be{background:rgba(245,165,36,.15);border:1px solid rgba(245,165,36,.3);color:#f5a524}
 .tdp-pnl{font-family:'DM Sans',system-ui,sans-serif;font-size:28px;font-weight:900;letter-spacing:-0.5px}
 .tdp-pnl.pos{color:var(--green);text-shadow:0 0 20px rgba(0,229,176,.4)}
 .tdp-pnl.neg{color:var(--red);text-shadow:0 0 20px rgba(255,56,96,.4)}
@@ -4047,7 +4048,7 @@ function syncSelectsFromHidden(){
   var tp=tv.value.split(':');
   if(tp.length<2)return;
   var h=g('f-hour');if(h)h.value=tp[0];
-  var m=g('f-min');if(m)m.value=String(Math.round(parseInt(tp[1])/5)*5).padStart(2,'0');
+  var m=g('f-min');if(m)m.value=tp[1].padStart(2,'0');
 }
 function editTrade(id){
   var t=S.trades.find(function(x){return x.id===id;});if(!t)return;
@@ -5565,9 +5566,10 @@ function showDayOpsSheet(trades, dateStr){
   var html = '';
   trades.forEach(function(t, i){
     var isWin = t.result==='TP';
-    var bdrClr = isWin ? 'rgba(0,229,176,.3)' : 'rgba(255,56,96,.25)';
-    var dotClr = isWin ? 'var(--green)' : 'var(--red)';
-    var pnlClr = isWin ? 'var(--green)' : 'var(--red)';
+    var isBE  = t.result==='BE';
+    var bdrClr = isWin ? 'rgba(0,229,176,.3)' : (isBE ? 'rgba(247,201,72,.3)' : 'rgba(255,56,96,.25)');
+    var dotClr = isWin ? 'var(--green)' : (isBE ? 'var(--gold)' : 'var(--red)');
+    var pnlClr = isWin ? 'var(--green)' : (isBE ? 'var(--gold)' : 'var(--red)');
     html += '<div data-tid="'+String(t.id)+'" data-ds="'+dateStr+'" data-idx="'+i+'" onclick="closeDayOpsSheet();var el=this;setTimeout(function(){openTDPById(el.dataset.tid,el.dataset.ds,+el.dataset.idx);},80)"'+
       ' style="cursor:pointer;background:var(--card2);border:1px solid '+bdrClr+';border-left:3px solid '+dotClr+';border-radius:10px;padding:11px 13px;margin-bottom:8px;transition:all .15s"'+
       ' onmouseover="this.style.background=\'var(--card3)\'" onmouseout="this.style.background=\'var(--card2)\'">';
@@ -8589,9 +8591,10 @@ button,[onclick],a,.ni,.cal-nav-btn,.rb,.tog,.acct-color-dot,.reg-nav-arrow,.reg
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
         <div>
           <label class="nop-label">Hora</label>
-          <div style="display:flex;gap:5px">
-            <select id="f-hour" class="fi" style="flex:1" onchange="buildTimeFromParts()"><option value=""></option><option value="00">00</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option></select>
-            <select id="f-min" class="fi" style="flex:1" onchange="buildTimeFromParts()"><option value=""></option><option value="00">00</option><option value="05">05</option><option value="10">10</option><option value="15">15</option><option value="20">20</option><option value="25">25</option><option value="30">30</option><option value="35">35</option><option value="40">40</option><option value="45">45</option><option value="50">50</option><option value="55">55</option></select>
+          <div style="display:flex;gap:5px;align-items:center">
+            <select id="f-hour" class="fi" style="flex:1;text-align:center" onchange="buildTimeFromParts()"><option value=""></option><option value="00">00</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option></select>
+            <span style="font-weight:800;color:var(--gray2);flex-shrink:0">:</span>
+            <select id="f-min" class="fi" style="flex:1;text-align:center" onchange="buildTimeFromParts()"><option value=""></option><option value="00">00</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option><option value="32">32</option><option value="33">33</option><option value="34">34</option><option value="35">35</option><option value="36">36</option><option value="37">37</option><option value="38">38</option><option value="39">39</option><option value="40">40</option><option value="41">41</option><option value="42">42</option><option value="43">43</option><option value="44">44</option><option value="45">45</option><option value="46">46</option><option value="47">47</option><option value="48">48</option><option value="49">49</option><option value="50">50</option><option value="51">51</option><option value="52">52</option><option value="53">53</option><option value="54">54</option><option value="55">55</option><option value="56">56</option><option value="57">57</option><option value="58">58</option><option value="59">59</option></select>
           </div>
           <input type="hidden" id="f-time" value="08:00">
         </div>
@@ -9023,10 +9026,11 @@ function populateDayPanel(trades, dateStr) {
   html += '<div style="display:flex;flex-direction:column">';
   trades.forEach(function(t, i) {
     var isWin  = t.result === 'TP';
+    var isBE   = t.result === 'BE';
     var imgs   = t.images || [];
     var lnks   = t.links  || [];
     var pnlAbs = Math.abs(t.pnl||0).toFixed(2);
-    var pnlClr = isWin ? 'var(--green)' : 'var(--red)';
+    var pnlClr = isWin ? 'var(--green)' : (isBE ? 'var(--gold)' : 'var(--red)');
     var isLast = (i === trades.length-1);
 
     html += '<div onclick="window._rpSelectTrade('+i+')" style="cursor:pointer;padding:10px 6px;'+(isLast?'':'border-bottom:1px solid var(--bdr);')+'transition:background .15s" onmouseover="this.style.background=\'rgba(255,255,255,.03)\'" onmouseout="this.style.background=\'transparent\'">';
@@ -9170,7 +9174,7 @@ function renderTradeDetailSheet(){
   var sheet = document.createElement('div');
   sheet.id = 'td-detail-sheet';
   sheet.style.cssText = [
-    'position:fixed;top:0;right:0;bottom:0;',
+    'position:fixed;top:calc(env(safe-area-inset-top) + 14px);right:0;bottom:0;',
     'width:92vw;max-width:400px;',
     'z-index:9600;',
     'background:var(--card);',
@@ -9270,6 +9274,7 @@ window.openTDP = function(trade, dayList, idx) {
   if(_rpEl && window.getComputedStyle(_rpEl).display !== 'none') return;
 
   var isWin = trade.result === 'TP';
+  var isBE  = trade.result === 'BE';
   var pnl = trade.pnl || 0;
   var tags = (trade.tags||'').split(',').filter(function(t){return t.trim();});
   var images = trade.images || [];
@@ -9300,9 +9305,9 @@ window.openTDP = function(trade, dayList, idx) {
           '<div style="font-size:10px;color:'+(trade.direction==='BUY'?'var(--green)':'var(--red)')+'">'+( trade.direction==='BUY'?'▲ Compra':'▼ Venta')+'</div>' +
         '</div>' +
         '<div style="margin-left:auto;text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:4px">' +
-          '<span class="trade-badge '+(isWin?'win':'loss')+'" style="font-size:9px">' +
+          '<span class="trade-badge '+(isWin?'win':(isBE?'be':'loss'))+'" style="font-size:9px">' +
             '<svg viewBox="0 0 12 12" fill="currentColor" width="8" height="8"><circle cx="6" cy="6" r="5"/></svg>' +
-            (isWin?'Ganadora (TP)':'Perdedora (SL)') +
+            (isWin?'Ganadora (TP)':(isBE?'Break Even (BE)':'Perdedora (SL)')) +
           '</span>' +
           '<span class="tdp-pnl '+(pnl>=0?'pos':'neg')+'" style="font-size:15px">'+(pnl>=0?'+$':'-$')+Math.abs(pnl).toFixed(2)+'</span>' +
         '</div>' +
