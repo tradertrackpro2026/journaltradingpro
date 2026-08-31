@@ -1154,6 +1154,72 @@ tr:hover td{background:rgba(14,18,41,.8)}
   .reg-nav-bar{gap:6px}
   .reg-pair-sel{min-width:100px;font-size:10px}
 }
+
+/* ═══════════════════════════════════════════════════════════
+   REDISEÑO — TAB CONFIGURACIÓN DE CUENTA
+   Estilo minimalista, mezcla Notion (tipografía limpia, listas
+   de propiedades, poco color) + Excel (filas con líneas guía,
+   alineación tabular). Solo afecta a #tab-config; no toca ids,
+   handlers ni lógica — únicamente presentación.
+═══════════════════════════════════════════════════════════ */
+#tab-config{--cfgLine:rgba(255,255,255,.07);--cfgLine2:rgba(255,255,255,.04);--cfgMuted:#7c86a8;--cfgMuted2:#4a5280}
+#tab-config .cfg-card{background:var(--card2);border:1px solid var(--bdr);border-radius:10px;padding:0;overflow:hidden;position:relative}
+#tab-config .cfg-card::before{display:none}
+#tab-config .cfg-card + .cfg-card{margin-top:12px}
+#tab-config .cfg-card-hd{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:13px 16px;border-bottom:1px solid var(--cfgLine);background:rgba(255,255,255,.015)}
+#tab-config .cfg-card-hd-t{font-size:12px;font-weight:700;color:var(--text);letter-spacing:.2px;display:flex;align-items:center;gap:7px}
+#tab-config .cfg-card-hd-s{font-size:10.5px;color:var(--cfgMuted);font-weight:400}
+#tab-config .cfg-body{padding:4px 16px 12px}
+
+/* filas tipo "propiedad" (Notion) con línea guía (Excel) */
+#tab-config .cfg-row{display:flex;align-items:center;gap:14px;padding:11px 0;border-bottom:1px solid var(--cfgLine2)}
+#tab-config .cfg-row:last-child{border-bottom:none}
+#tab-config .cfg-row-label{width:132px;flex-shrink:0;font-size:11px;color:var(--cfgMuted);font-weight:600;letter-spacing:.2px;display:flex;align-items:center;gap:6px}
+#tab-config .cfg-row-ctl{flex:1;min-width:0;display:flex;align-items:center;gap:8px}
+#tab-config .cfg-row-suffix{font-size:10.5px;color:var(--cfgMuted2);font-weight:700;white-space:nowrap;background:rgba(255,255,255,.03);border:1px solid var(--cfgLine);padding:7px 9px;border-radius:6px}
+#tab-config .cfg-row-equiv{font-size:10.5px;font-weight:700;white-space:nowrap}
+
+/* inputs tipo celda de hoja de cálculo: planos, sin relleno vistoso */
+#tab-config .cfg-in{width:100%;background:transparent;color:var(--text);border:1px solid transparent;border-radius:6px;padding:7px 8px;font-size:12.5px;outline:none;font-family:'DM Sans',system-ui,sans-serif;transition:background .15s,border-color .15s}
+#tab-config .cfg-in:hover{background:rgba(255,255,255,.03)}
+#tab-config .cfg-in:focus{background:var(--bg);border-color:var(--bdr3)}
+#tab-config textarea.cfg-in{resize:vertical;min-height:56px}
+#tab-config select.cfg-in{cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237c86a8'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:22px}
+
+/* sección superior: título + botón guardar, más discreto */
+#tab-config .cfg-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px;padding-bottom:14px;border-bottom:1px solid var(--cfgLine)}
+#tab-config .cfg-eyebrow{font-size:10px;color:var(--cfgMuted);text-transform:uppercase;letter-spacing:1.5px;font-weight:700}
+#tab-config .cfg-name{font-size:17px;font-weight:800;color:var(--text);margin-top:2px}
+#tab-config .cfg-save-btn{background:var(--text);color:var(--bg);font-weight:700;font-size:11.5px;padding:9px 18px;border-radius:8px;border:none;cursor:pointer;display:flex;align-items:center;gap:7px;box-shadow:none;transition:opacity .15s}
+#tab-config .cfg-save-btn:hover{opacity:.85}
+
+/* chips de pares — más planos */
+#tab-config .cfg-pairs-box{display:flex;flex-wrap:wrap;gap:6px;padding:9px;background:var(--bg);border:1px solid var(--cfgLine);border-radius:8px;min-height:38px}
+#tab-config .cfg-add-row{display:flex;gap:6px;margin-top:9px}
+
+/* paleta de color — puntos más pequeños, look Notion */
+#tab-config .acct-color-dot{width:22px;height:22px}
+
+/* switch modo fondeo dentro de fila plana, no card oscuro */
+#tab-config .cfg-switch-row{display:flex;align-items:center;justify-content:space-between;padding:2px 0}
+
+/* tabla estilo Excel para reglas de fondeo */
+#tab-config .cfg-rules-table{width:100%;border-collapse:collapse}
+#tab-config .cfg-rules-table td{padding:9px 0;border-bottom:1px solid var(--cfgLine2);vertical-align:middle}
+#tab-config .cfg-rules-table tr:last-child td{border-bottom:none}
+#tab-config .cfg-rules-table td.cfg-rl-label{width:150px;font-size:11px;color:var(--cfgMuted);font-weight:600;padding-right:10px}
+#tab-config .cfg-rules-table td.cfg-rl-ctl{display:flex;align-items:center;gap:8px}
+#tab-config .cfg-subhead{font-size:9.5px;font-weight:800;color:var(--cfgMuted2);text-transform:uppercase;letter-spacing:1.5px;margin:14px 0 6px;padding-top:2px}
+
+/* vista previa — tarjeta más sobria, menos glow morado */
+#tab-config #acct-preview-col .card{background:var(--card2)!important;border:1px solid var(--bdr)}
+#tab-config #prev-card-bg{border-radius:8px!important}
+
+@media(max-width:720px){
+  #tab-config .cfg-row{flex-direction:column;align-items:flex-start;gap:6px}
+  #tab-config .cfg-row-label{width:auto}
+  #tab-config .cfg-row-ctl{width:100%}
+}
 </style>
 
 <!-- ═══════════════════════════════════════════════════════════
@@ -2051,13 +2117,13 @@ tr:hover td{background:rgba(14,18,41,.8)}
   <!-- ═══ CUENTAS (CONFIG) — módulo unificado ═══ -->
   <div id="tab-config" class="tsec">
     <!-- Barra superior: título + botones -->
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+    <div class="cfg-topbar">
       <div>
-        <div style="font-size:11px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px;" id="acct-editing-label">Configurando cuenta activa</div>
-        <div style="font-size:16px;font-weight:800;color:var(--text);" id="acct-editing-name">—</div>
+        <div class="cfg-eyebrow" id="acct-editing-label">Configurando cuenta activa</div>
+        <div class="cfg-name" id="acct-editing-name">—</div>
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <button id="btn-guardar-cuenta" onclick="guardarCuenta()" style="background:linear-gradient(135deg,#00c853,#00e676);color:#000;font-weight:800;font-size:12px;padding:10px 24px;border-radius:10px;border:none;cursor:pointer;display:flex;align-items:center;gap:7px;box-shadow:0 4px 14px rgba(0,230,118,.3);">
+        <button id="btn-guardar-cuenta" class="cfg-save-btn" onclick="guardarCuenta()">
           <svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Guardar nueva cuenta
         </button>
       </div>
@@ -2069,47 +2135,54 @@ tr:hover td{background:rgba(14,18,41,.8)}
 
       <!-- COLUMNA 1: Info general + Zona horaria -->
       <div style="flex:1;min-width:260px;display:flex;flex-direction:column;gap:12px;">
-        <div class="card">
-          <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:4px;">Información general</div>
-          <div style="font-size:11px;color:var(--gray2);margin-bottom:14px;">Define los datos básicos de tu cuenta de trading.</div>
-          <div class="fg">
-            <label class="fl">Nombre de la cuenta</label>
-            <input type="text" id="acfg-name" class="fi" placeholder="Ej: FTMO Challenge" oninput="saveAcctConfig()">
+        <div class="cfg-card">
+          <div class="cfg-card-hd">
+            <span class="cfg-card-hd-t">Información general</span>
+            <span class="cfg-card-hd-s">Datos básicos de la cuenta</span>
           </div>
-          <div class="fg2">
-            <div class="fg">
-              <label class="fl">Moneda base</label>
-              <select id="acfg-currency" class="fi" onchange="saveAcctConfig()">
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="GBP">GBP</option>
-                <option value="JPY">JPY</option>
-              </select>
+          <div class="cfg-body">
+            <div class="cfg-row">
+              <div class="cfg-row-label">Nombre</div>
+              <div class="cfg-row-ctl"><input type="text" id="acfg-name" class="cfg-in" placeholder="Ej: FTMO Challenge" oninput="saveAcctConfig()"></div>
             </div>
-            <div class="fg">
-              <label class="fl">Capital inicial</label>
-              <div style="display:flex;gap:6px;">
-                <input type="number" id="acfg-initial" class="fi" placeholder="25000" style="flex:1" oninput="saveAcctConfig();updateRuleEquivalents()">
-                <span style="background:var(--card2);border:1px solid var(--bdr);border-radius:8px;padding:8px 10px;font-size:11px;color:var(--gray2);white-space:nowrap;">USD</span>
+            <div class="cfg-row">
+              <div class="cfg-row-label">Moneda base</div>
+              <div class="cfg-row-ctl">
+                <select id="acfg-currency" class="cfg-in" onchange="saveAcctConfig()">
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                  <option value="GBP">GBP</option>
+                  <option value="JPY">JPY</option>
+                </select>
               </div>
             </div>
-          </div>
-          <div class="fg">
-            <label class="fl">Descripción (opcional)</label>
-            <textarea id="acfg-desc" class="fi" rows="3" placeholder="Ej: Challenge de FTMO - Fase 1" style="resize:vertical;" oninput="saveAcctConfig()"></textarea>
+            <div class="cfg-row">
+              <div class="cfg-row-label">Capital inicial</div>
+              <div class="cfg-row-ctl">
+                <input type="number" id="acfg-initial" class="cfg-in" style="flex:1;width:auto" placeholder="25000" oninput="saveAcctConfig();updateRuleEquivalents()">
+                <span class="cfg-row-suffix">USD</span>
+              </div>
+            </div>
+            <div class="cfg-row">
+              <div class="cfg-row-label">Descripción</div>
+              <div class="cfg-row-ctl"><textarea id="acfg-desc" class="cfg-in" rows="2" placeholder="Ej: Challenge de FTMO - Fase 1" oninput="saveAcctConfig()"></textarea></div>
+            </div>
           </div>
         </div>
 
         <!-- Pares que operas (en columna 1 debajo) -->
-        <div class="card">
-          <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:4px;">Pares que operas</div>
-          <div style="font-size:11px;color:var(--gray2);margin-bottom:12px;">Selecciona los pares de divisas que deseas operar en esta cuenta.</div>
-          <div id="pairs-tags" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;min-height:36px;padding:8px;background:var(--bg);border:1px solid var(--bdr);border-radius:8px;"></div>
-          <div style="display:flex;gap:7px;margin-bottom:10px;">
-            <input type="text" id="nai" class="fi" placeholder="Ej: BTCUSD" style="flex:1;text-transform:uppercase;" onkeydown="if(event.key==='Enter')addAsset()">
-            <button class="btn btn-g" onclick="addAsset()">+ Agregar</button>
+        <div class="cfg-card">
+          <div class="cfg-card-hd">
+            <span class="cfg-card-hd-t">Pares que operas</span>
+            <span class="cfg-card-hd-s">Divisas / activos de esta cuenta</span>
           </div>
-
+          <div class="cfg-body" style="padding-top:12px">
+            <div id="pairs-tags" class="cfg-pairs-box"></div>
+            <div class="cfg-add-row">
+              <input type="text" id="nai" class="cfg-in" style="flex:1;text-transform:uppercase;background:var(--bg);border:1px solid var(--cfgLine)" placeholder="Ej: BTCUSD" onkeydown="if(event.key==='Enter')addAsset()">
+              <button class="btn btn-g" onclick="addAsset()">+ Agregar</button>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -2117,63 +2190,75 @@ tr:hover td{background:rgba(14,18,41,.8)}
       <!-- COLUMNA 2: Modo fondeo + Reglas -->
       <div style="flex:1;min-width:260px;display:flex;flex-direction:column;gap:12px;">
         <!-- Color e ícono -->
-        <div class="card">
-          <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:4px;">Color e ícono</div>
-          <div style="font-size:11px;color:var(--gray2);margin-bottom:12px;">Personaliza la apariencia de tu cuenta.</div>
-          <!-- Colores -->
-          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;" id="acct-colors">
-            <div class="acct-color-dot" data-color="#22c55e" onclick="setAcctColor('#22c55e')" style="width:28px;height:28px;border-radius:50%;background:#22c55e;cursor:pointer;border:2px solid transparent;transition:all .2s;"></div>
-            <div class="acct-color-dot" data-color="#8b5cf6" onclick="setAcctColor('#8b5cf6')" style="width:28px;height:28px;border-radius:50%;background:#8b5cf6;cursor:pointer;border:3px solid #fff;transition:all .2s;"></div>
-            <div class="acct-color-dot" data-color="#3b82f6" onclick="setAcctColor('#3b82f6')" style="width:28px;height:28px;border-radius:50%;background:#3b82f6;cursor:pointer;border:2px solid transparent;transition:all .2s;"></div>
-            <div class="acct-color-dot" data-color="#f59e0b" onclick="setAcctColor('#f59e0b')" style="width:28px;height:28px;border-radius:50%;background:#f59e0b;cursor:pointer;border:2px solid transparent;transition:all .2s;"></div>
-            <div class="acct-color-dot" data-color="#ef4444" onclick="setAcctColor('#ef4444')" style="width:28px;height:28px;border-radius:50%;background:#ef4444;cursor:pointer;border:2px solid transparent;transition:all .2s;"></div>
-            <div class="acct-color-dot" data-color="#06b6d4" onclick="setAcctColor('#06b6d4')" style="width:28px;height:28px;border-radius:50%;background:#06b6d4;cursor:pointer;border:2px solid transparent;transition:all .2s;"></div>
-            <div class="acct-color-dot" data-color="#6b7280" onclick="setAcctColor('#6b7280')" style="width:28px;height:28px;border-radius:50%;background:#6b7280;cursor:pointer;border:2px solid transparent;transition:all .2s;"></div>
+        <div class="cfg-card">
+          <div class="cfg-card-hd">
+            <span class="cfg-card-hd-t">Color e ícono</span>
+            <span class="cfg-card-hd-s">Apariencia de la cuenta</span>
           </div>
-          <!-- Íconos -->
+          <div class="cfg-body" style="padding-top:12px;padding-bottom:14px">
+            <div style="display:flex;gap:9px;flex-wrap:wrap;" id="acct-colors">
+              <div class="acct-color-dot" data-color="#22c55e" onclick="setAcctColor('#22c55e')" style="width:22px;height:22px;border-radius:50%;background:#22c55e;cursor:pointer;border:2px solid transparent;transition:all .2s;"></div>
+              <div class="acct-color-dot" data-color="#8b5cf6" onclick="setAcctColor('#8b5cf6')" style="width:22px;height:22px;border-radius:50%;background:#8b5cf6;cursor:pointer;border:3px solid #fff;transition:all .2s;"></div>
+              <div class="acct-color-dot" data-color="#3b82f6" onclick="setAcctColor('#3b82f6')" style="width:22px;height:22px;border-radius:50%;background:#3b82f6;cursor:pointer;border:2px solid transparent;transition:all .2s;"></div>
+              <div class="acct-color-dot" data-color="#f59e0b" onclick="setAcctColor('#f59e0b')" style="width:22px;height:22px;border-radius:50%;background:#f59e0b;cursor:pointer;border:2px solid transparent;transition:all .2s;"></div>
+              <div class="acct-color-dot" data-color="#ef4444" onclick="setAcctColor('#ef4444')" style="width:22px;height:22px;border-radius:50%;background:#ef4444;cursor:pointer;border:2px solid transparent;transition:all .2s;"></div>
+              <div class="acct-color-dot" data-color="#06b6d4" onclick="setAcctColor('#06b6d4')" style="width:22px;height:22px;border-radius:50%;background:#06b6d4;cursor:pointer;border:2px solid transparent;transition:all .2s;"></div>
+              <div class="acct-color-dot" data-color="#6b7280" onclick="setAcctColor('#6b7280')" style="width:22px;height:22px;border-radius:50%;background:#6b7280;cursor:pointer;border:2px solid transparent;transition:all .2s;"></div>
+            </div>
+            <!-- Íconos -->
 
+          </div>
         </div>
 
         <!-- Modo fondeo -->
-        <div class="card">
-          <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:4px;">Modo fondeo</div>
-          <div style="font-size:11px;color:var(--gray2);margin-bottom:14px;">Activa el modo fondeo si esta cuenta pertenece a una empresa de fondeo.</div>
-          <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg);border-radius:9px;border:1px solid var(--bdr);">
-            <span style="flex:1;font-size:13px;color:var(--text2);">Modo Fondeo Activo</span>
-            <button class="tog" id="ctog" onclick="togChallenge()"><div class="tthumb"></div></button>
+        <div class="cfg-card">
+          <div class="cfg-card-hd">
+            <span class="cfg-card-hd-t">Modo fondeo</span>
+            <span class="cfg-card-hd-s">Para cuentas de prop firm</span>
+          </div>
+          <div class="cfg-body" style="padding-top:12px">
+            <div class="cfg-switch-row">
+              <span style="font-size:12px;color:var(--text2);">Modo Fondeo Activo</span>
+              <button class="tog" id="ctog" onclick="togChallenge()"><div class="tthumb"></div></button>
+            </div>
           </div>
         </div>
 
         <!-- Reglas de fondeo -->
-        <div class="card">
-          <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:4px;">Límite de pérdida</div>
-          <div style="font-size:11px;color:var(--gray2);margin-bottom:10px;">Porcentaje máximo de pérdida permitido.</div>
-          <div class="fg">
-            <div style="display:flex;gap:8px;align-items:center;">
-              <input type="number" id="cft" class="fi" style="flex:1;" placeholder="10" oninput="saveF();updatePreview()">
-              <span style="font-size:11px;color:var(--gray2);background:var(--card2);border:1px solid var(--bdr);padding:8px 10px;border-radius:8px;white-space:nowrap;">%</span>
-              <span id="rule-loss-equiv" style="font-size:11px;font-weight:700;color:var(--red);white-space:nowrap;"></span>
-            </div>
+        <div class="cfg-card">
+          <div class="cfg-card-hd">
+            <span class="cfg-card-hd-t">Reglas de la cuenta</span>
+            <span class="cfg-card-hd-s">Límites y objetivos</span>
           </div>
-          <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:4px;margin-top:14px;">Objetivo de ganancia</div>
-          <div style="font-size:11px;color:var(--gray2);margin-bottom:10px;">Objetivo de ganancia requerido.</div>
-          <div class="fg">
-            <div style="display:flex;gap:8px;align-items:center;">
-              <input type="number" id="cfg" class="fi" style="flex:1;" placeholder="8" oninput="saveF();updatePreview()">
-              <span style="font-size:11px;color:var(--gray2);background:var(--card2);border:1px solid var(--bdr);padding:8px 10px;border-radius:8px;white-space:nowrap;">%</span>
-              <span id="rule-profit-equiv" style="font-size:11px;font-weight:700;color:var(--green);white-space:nowrap;"></span>
-            </div>
-          </div>
-          <div style="font-size:11px;font-weight:700;color:var(--gray2);text-transform:uppercase;letter-spacing:1px;margin:14px 0 10px;">Reglas adicionales <span style="font-weight:400;font-size:10px;">(opcional)</span></div>
-          <div class="fg2">
-            <div class="fg">
-              <label class="fl">Pérdida diaria máxima</label>
-              <div style="display:flex;gap:6px;align-items:center;">
-                <input type="number" id="cfd" class="fi" style="flex:1;" placeholder="5" oninput="saveF();updatePreview()">
-                <span style="font-size:11px;color:var(--gray2);background:var(--card2);border:1px solid var(--bdr);padding:8px 10px;border-radius:8px;">%</span>
-              </div>
-            </div>
-
+          <div class="cfg-body" style="padding-top:6px">
+            <table class="cfg-rules-table">
+              <tr>
+                <td class="cfg-rl-label">Límite de pérdida</td>
+                <td class="cfg-rl-ctl">
+                  <input type="number" id="cft" class="cfg-in" style="width:64px;flex:none;background:var(--bg);border:1px solid var(--cfgLine)" placeholder="10" oninput="saveF();updatePreview()">
+                  <span class="cfg-row-suffix">%</span>
+                  <span id="rule-loss-equiv" class="cfg-row-equiv" style="color:var(--red);"></span>
+                </td>
+              </tr>
+              <tr>
+                <td class="cfg-rl-label">Objetivo de ganancia</td>
+                <td class="cfg-rl-ctl">
+                  <input type="number" id="cfg" class="cfg-in" style="width:64px;flex:none;background:var(--bg);border:1px solid var(--cfgLine)" placeholder="8" oninput="saveF();updatePreview()">
+                  <span class="cfg-row-suffix">%</span>
+                  <span id="rule-profit-equiv" class="cfg-row-equiv" style="color:var(--green);"></span>
+                </td>
+              </tr>
+            </table>
+            <div class="cfg-subhead">Reglas adicionales <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--cfgMuted2)">(opcional)</span></div>
+            <table class="cfg-rules-table">
+              <tr>
+                <td class="cfg-rl-label">Pérdida diaria máxima</td>
+                <td class="cfg-rl-ctl">
+                  <input type="number" id="cfd" class="cfg-in" style="width:64px;flex:none;background:var(--bg);border:1px solid var(--cfgLine)" placeholder="5" oninput="saveF();updatePreview()">
+                  <span class="cfg-row-suffix">%</span>
+                </td>
+              </tr>
+            </table>
           </div>
         </div>
 
@@ -2373,25 +2458,27 @@ tr:hover td{background:rgba(14,18,41,.8)}
     </div>
 
     <!-- ── BACKUP COMPLETO ── -->
-    <div style="margin-top:16px">
-      <div class="card">
-        <div class="card-hdr" style="color:var(--gold);border-color:rgba(251,191,36,.2)">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          Backup Completo
+    <div style="margin-top:12px">
+      <div class="cfg-card">
+        <div class="cfg-card-hd">
+          <span class="cfg-card-hd-t"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Backup completo</span>
+          <span class="cfg-card-hd-s">Exportar / importar todos los datos</span>
         </div>
-        <div style="font-size:11px;color:var(--gray2);margin-bottom:14px;line-height:1.6">
-          Exporta <b style="color:var(--text)">todas tus cuentas</b> y operaciones en un solo archivo JSON para respaldo o migración. Las imágenes adjuntas no se incluyen para mantener el archivo liviano.
-        </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn" onclick="exportBackup()" style="flex:1;justify-content:center;gap:6px;background:rgba(251,191,36,.12);border-color:rgba(251,191,36,.3);color:var(--gold);font-weight:700">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-            Exportar backup (.json)
-          </button>
-          <label class="btn" style="flex:1;justify-content:center;gap:6px;cursor:pointer;background:rgba(0,229,176,.1);border-color:rgba(0,229,176,.3);color:var(--green);font-weight:700">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Importar backup (.json)
-            <input type="file" accept=".json" style="display:none" onchange="importBackup(this)">
-          </label>
+        <div class="cfg-body" style="padding-top:12px">
+          <div style="font-size:11px;color:var(--gray2);margin-bottom:12px;line-height:1.6">
+            Exporta <b style="color:var(--text)">todas tus cuentas</b> y operaciones en un solo archivo JSON para respaldo o migración. Las imágenes adjuntas no se incluyen para mantener el archivo liviano.
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn" onclick="exportBackup()" style="flex:1;justify-content:center;gap:6px;background:transparent;border-color:var(--cfgLine);color:var(--gold);font-weight:700">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Exportar backup (.json)
+            </button>
+            <label class="btn" style="flex:1;justify-content:center;gap:6px;cursor:pointer;background:transparent;border-color:var(--cfgLine);color:var(--green);font-weight:700">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Importar backup (.json)
+              <input type="file" accept=".json" style="display:none" onchange="importBackup(this)">
+            </label>
+          </div>
         </div>
       </div>
     </div>
@@ -9404,7 +9491,11 @@ window.renderMonthSummary = function() {
   var slp=ft.filter(function(t){return t.result==='SL';}).reduce(function(a,t){return a+(t.pnl||0);},0);
   var avgWinMS=tp?tpp/tp:0;
   var avgLossMS=sl?Math.abs(slp)/sl:0;
-  var rrMS=avgLossMS>0?(avgWinMS/avgLossMS):0;
+  var rrSumMS=ft.reduce(function(a,t){
+    if(t.result==='TP') return a+(parseFloat(t.rr)||0);
+    if(t.result==='SL') return a-1;
+    return a; // BE suma 0
+  },0);
 
   el.innerHTML=[
     {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg>',label:'Operaciones',val:String(ft.length),color:'var(--text)'},
@@ -9413,7 +9504,7 @@ window.renderMonthSummary = function() {
     {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>',label:'Perdedoras',val:String(sl),color:'var(--red)'},
     {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>',label:'Resultado neto',val:(pnl>=0?'+$':'-$')+Math.abs(pnl).toFixed(2),color:pnl>=0?'var(--green)':'var(--red)'},
     {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/></svg>',label:'Win Rate',val:'+'+wr+'%',color:'var(--text)'},
-    {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v.09a7.001 7.001 0 015.91 5.91H17a1 1 0 110 2h-.09A7.001 7.001 0 0111 16.91V17a1 1 0 11-2 0v-.09A7.001 7.001 0 013.09 11H3a1 1 0 110-2h.09A7.001 7.001 0 019 3.09V3a1 1 0 011-1zm0 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z" clip-rule="evenodd"/></svg>',label:'R:R',val:rrMS>0?('1:'+Math.round(rrMS)):'—',color:'var(--text)'}
+    {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v.09a7.001 7.001 0 015.91 5.91H17a1 1 0 110 2h-.09A7.001 7.001 0 0111 16.91V17a1 1 0 11-2 0v-.09A7.001 7.001 0 013.09 11H3a1 1 0 110-2h.09A7.001 7.001 0 019 3.09V3a1 1 0 011-1zm0 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z" clip-rule="evenodd"/></svg>',label:'RR TOTAL DEL MES',val:(rrSumMS>=0?'+':'')+Math.round(rrSumMS)+'R',color:rrSumMS>=0?'var(--green)':'var(--red)'}
   ].map(function(item){
     return '<div class="msc">'+
       '<div style="display:flex;align-items:center;justify-content:center;gap:5px;margin-bottom:4px">'+
