@@ -5135,7 +5135,8 @@ function renderDash(){
     var sub=g('dd-sublabel');if(sub)sub.textContent=isWinning?'Progresando hacia el objetivo de '+(s.profitTarget||10)+'%':'Pérdida acumulada — Límite: '+(s.maxTotalLoss||10)+'%';
     var f=g('ddfill');if(f){f.style.width=Math.min(barPct,100)+'%';f.style.background=barCol;}
     var dp=g('ddpct');if(dp){dp.textContent=(isWinning?'+':'-')+Math.abs(profPct).toFixed(2)+'%';dp.style.color=isWinning?'#00e676':'#ff5252';}
-    var dal=g('ddal');if(dal)dal.innerHTML=isWinning?'':('<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 1 21h22L12 2z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Alerta: '+(s.maxTotalLoss*s.alertAt/100).toFixed(1)+'%');
+    var remainingToLimit=(s.maxTotalLoss||10)-Math.abs(profPct);
+    var dal=g('ddal');if(dal)dal.innerHTML=(!isWinning&&remainingToLimit<=0.6)?('<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 1 21h22L12 2z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Cerca del límite'):'';
     var dlm=g('ddlim');if(dlm){dlm.innerHTML=isWinning?'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg> Meta: '+(s.profitTarget||10)+'%':'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7" fill="currentColor" stroke="none"/></svg> Límite: '+(s.maxTotalLoss||10)+'%';dlm.style.color=isWinning?'#00e676':'#ff1744';}
     var ll=g('dd-left-label');if(ll)ll.textContent=isWinning?'Ganancia: +'+profPct.toFixed(2)+'%':'Pérdida: -'+Math.abs(profPct).toFixed(2)+'%';
     var dg=g('ddgoal');if(dg){dg.innerHTML=profPct.toFixed(2)+'% / '+(isWinning?(s.profitTarget||10):( s.maxTotalLoss||10))+'%'+(isWinning&&profPct>=(s.profitTarget||10)?' <svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z"/></svg> ¡META!':!isWinning&&Math.abs(profPct)>=(s.maxTotalLoss||10)?' <svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-3-2-4-2-7 0 3-2 4-4 2 0 2-1 3-1 5a2 2 0 0 0-2 0c0-1 0-3 1-5-3 1-5 3-5 5a6 6 0 0 0 6 7z"/></svg> QUEMADA':'');dg.style.color=isWinning?'#00e676':'#ff5252';}
@@ -5317,7 +5318,7 @@ function dashRenderInsights(trades){
   var aArr=Object.keys(byA).filter(function(a){return byA[a].total>=2;});
   if(aArr.length>=1){
     var bestA=aArr.reduce(function(b,a){return byA[a].pnl>byA[b].pnl?a:b;},aArr[0]);
-    recs.push({p:4,icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',c:'var(--cyan)',t:bestA+' es tu activo más rentable — especialízate'});
+    if(byA[bestA].pnl>0)recs.push({p:4,icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',c:'var(--cyan)',t:bestA+' es tu activo más rentable — especialízate'});
     if(aArr.length>=2){var worstA=aArr.reduce(function(b,a){return byA[a].pnl<byA[b].pnl?a:b;},aArr[0]);if(byA[worstA].pnl<0)recs.push({p:2,icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7" fill="currentColor" stroke="none"/></svg>',c:'var(--red)',t:worstA+' te genera pérdidas — revisa tus entradas'});}
   }
 
@@ -7875,8 +7876,10 @@ function renderInsights(trades){
     var worstDay=dayArr.reduce(function(b,d){return byDay[d].pnl<byDay[b].pnl?d:b;},dayArr[0]);
     var bdWR=(byDay[bestDay].wins/byDay[bestDay].total*100).toFixed(0);
     var wdWR=(byDay[worstDay].wins/byDay[worstDay].total*100).toFixed(0);
+    if(byDay[bestDay].pnl>0){
     recs.push({priority:4,icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="4" x2="8" y2="9"/><line x1="16" y1="4" x2="16" y2="9"/></svg>',color:'var(--green)',title:'Tu día más rentable: '+bestDay,
       text:highlight(bestDay,'var(--green)')+' es tu mejor día con '+highlight(bdWR+'%','var(--green)')+' de win rate y '+highlight('$'+byDay[bestDay].pnl.toFixed(2),pnlColor(byDay[bestDay].pnl))+' acumulado. Prioriza operar en este día cuando tengas señales de alta calidad.'});
+    }
     if(byDay[worstDay].pnl<0){
       recs.push({priority:3,icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="5.5" y1="5.5" x2="18.5" y2="18.5"/></svg>',color:'var(--red)',title:'Evita operar los '+worstDay,
         text:highlight(worstDay,'var(--red)')+' tiene solo '+highlight(wdWR+'%','var(--red)')+' de acierto y '+highlight('$'+byDay[worstDay].pnl.toFixed(2),'var(--red)')+' de pérdida. Considera no operar este día o reducir el tamaño de posición significativamente.'});
@@ -7896,8 +7899,10 @@ function renderInsights(trades){
   if(hourArr.length>=2){
     var bestHour=hourArr.reduce(function(b,h){return byHour[h].pnl>byHour[b].pnl?h:b;},hourArr[0]);
     var worstHour=hourArr.reduce(function(b,h){return byHour[h].pnl<byHour[b].pnl?h:b;},hourArr[0]);
+    if(byHour[bestHour].pnl>0){
     recs.push({priority:4,icon:'⏰',color:'var(--blue)',title:'Mejor ventana horaria: '+bestHour+':00',
       text:'Las '+ highlight(bestHour+':00','var(--blue)')+' es tu hora más efectiva con '+ highlight((byHour[bestHour].wins/byHour[bestHour].total*100).toFixed(0)+'%','var(--green)')+' de acierto. Concentra tu máxima atención y tamaño de posición en este horario.'});
+    }
     if(byHour[worstHour].pnl<0){
       recs.push({priority:3,icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 10h3M15 12l3-1-3-1"/><path d="M8 16c1.5 1 5.5 1 7 0"/></svg>',color:'var(--org)',title:'Hora problemática: '+worstHour+':00',
         text:'A las '+highlight(worstHour+':00','var(--red)')+' acumulas '+highlight('$'+byHour[worstHour].pnl.toFixed(2),'var(--red)')+'. Evalúa si en ese horario el mercado tiene condiciones distintas o si tu concentración baja.'});
@@ -7915,8 +7920,10 @@ function renderInsights(trades){
   var assetArr=Object.keys(byAsset).filter(function(a){return byAsset[a].total>=2;});
   if(assetArr.length>=1){
     var bestAsset=assetArr.reduce(function(b,a){return byAsset[a].pnl>byAsset[b].pnl?a:b;},assetArr[0]);
+    if(byAsset[bestAsset].pnl>0){
     recs.push({priority:4,icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',color:'var(--cyan)',title:'Activo estrella: '+bestAsset,
       text:highlight(bestAsset,'var(--cyan)')+' es tu instrumento más rentable con '+highlight('$'+byAsset[bestAsset].pnl.toFixed(2),'var(--green)')+' y '+highlight((byAsset[bestAsset].wins/byAsset[bestAsset].total*100).toFixed(0)+'%','var(--green)')+' de acierto. Especialízate aún más en este activo.'});
+    }
     var worstAsset=assetArr.reduce(function(b,a){return byAsset[a].pnl<byAsset[b].pnl?a:b;},assetArr[0]);
     if(assetArr.length>=2 && byAsset[worstAsset].pnl<0){
       recs.push({priority:3,icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7" fill="currentColor" stroke="none"/></svg>',color:'var(--red)',title:'Activo problemático: '+worstAsset,
@@ -7934,8 +7941,10 @@ function renderInsights(trades){
   var sessArr=Object.keys(bySess).filter(function(s){return bySess[s].total>=2;});
   if(sessArr.length>=1){
     var bestSess=sessArr.reduce(function(b,s){return bySess[s].pnl>bySess[b].pnl?s:b;},sessArr[0]);
+    if(bySess[bestSess].pnl>0){
     recs.push({priority:4,icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18z"/></svg>',color:'var(--gold)',title:'Sesión más efectiva: '+bestSess,
       text:'En la sesión '+highlight(bestSess,'var(--gold)')+' tienes '+highlight((bySess[bestSess].wins/bySess[bestSess].total*100).toFixed(0)+'%','var(--green)')+' de acierto y '+highlight('$'+bySess[bestSess].pnl.toFixed(2),pnlColor(bySess[bestSess].pnl))+'. Alinea tu plan diario para maximizar presencia en esta ventana.'});
+    }
     if(sessArr.length>=2){
       var worstSess=sessArr.reduce(function(b,s){return bySess[s].pnl<bySess[b].pnl?s:b;},sessArr[0]);
       if(bySess[worstSess].pnl<0){
@@ -7955,8 +7964,10 @@ function renderInsights(trades){
   var stratArr=Object.keys(byStrat).filter(function(s){return byStrat[s].total>=2;});
   if(stratArr.length>=1){
     var bestStrat=stratArr.reduce(function(b,s){return byStrat[s].pnl>byStrat[b].pnl?s:b;},stratArr[0]);
+    if(byStrat[bestStrat].pnl>0){
     recs.push({priority:4,icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2z"/></svg>',color:'var(--purp)',title:'Estrategia ganadora: '+bestStrat,
       text:highlight(bestStrat,'var(--purp)')+' genera '+highlight('$'+byStrat[bestStrat].pnl.toFixed(2),'var(--green)')+' con '+highlight((byStrat[bestStrat].wins/byStrat[bestStrat].total*100).toFixed(0)+'%','var(--green)')+' de efectividad. Documenta exactamente las condiciones en que este setup aparece.'});
+    }
     if(stratArr.length>=2){
       var worstStrat=stratArr.reduce(function(b,s){return byStrat[s].pnl<byStrat[b].pnl?s:b;},stratArr[0]);
       if(byStrat[worstStrat].pnl<0){
