@@ -175,10 +175,10 @@ select.fi.fi-empty option{color:var(--text)}
 .cal-cell.all-sl{background:linear-gradient(135deg,rgba(255,56,96,.4),rgba(255,56,96,.14))!important;border-color:rgba(255,56,96,.85)!important;box-shadow:0 0 16px rgba(255,56,96,.25)}
 .cal-cell.mix-win{background:linear-gradient(135deg,rgba(0,229,176,.2),rgba(0,229,176,.06))!important;border-color:rgba(0,229,176,.5)!important}
 .cal-cell.mix-loss{background:linear-gradient(135deg,rgba(255,56,96,.2),rgba(255,56,96,.06))!important;border-color:rgba(255,56,96,.5)!important}
-.cdn{font-size:11px;font-weight:800;color:var(--text);margin-bottom:4px;font-family:'DM Sans',system-ui,sans-serif;letter-spacing:.3px}
+.cdn{font-size:9px;font-weight:800;color:var(--text);margin-bottom:4px;font-family:'DM Sans',system-ui,sans-serif;letter-spacing:.3px}
 .cal-cell.today .cdn{color:#818cf8}
 .cal-cell.sel .cdn{color:var(--gold)}
-.cpnl{font-size:11px;font-weight:700;border-radius:6px;padding:3px 7px;display:inline-block;margin-bottom:4px;font-family:'DM Sans',system-ui,sans-serif;letter-spacing:-0.3px}
+.cpnl{font-size:11px;font-weight:700;border-radius:6px;padding:3px 7px;display:block;width:fit-content;margin:0 auto 4px;font-family:'DM Sans',system-ui,sans-serif;letter-spacing:-0.3px}
 .cpnl.pos{background:rgba(3,64,49,.85);color:#5ef0c4}
 .cpnl.neg{background:rgba(74,4,16,.85);color:#ff9bb0}
 .cpnl.be{background:rgba(69,49,4,.85);color:#ffd873}
@@ -277,9 +277,9 @@ tr:hover td{background:rgba(14,18,41,.8)}
 .tdp-pnl.neg{color:var(--red);text-shadow:0 0 20px rgba(255,56,96,.4)}
 .tdp-info-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0;padding:14px;background:var(--card);border-radius:12px;border:1px solid var(--bdr)}
 .tdp-info-item{text-align:center}
-.tdp-info-label{font-size:9px;color:#4a5280;text-transform:uppercase;letter-spacing:2px;margin-bottom:5px;font-family:'DM Sans',system-ui,sans-serif;font-weight:700}
+.tdp-info-label{font-size:9px;color:var(--rp-lbl,#4a5280);text-transform:uppercase;letter-spacing:2px;margin-bottom:5px;font-family:'DM Sans',system-ui,sans-serif;font-weight:700}
 .tdp-info-val{font-size:13px;font-weight:600;color:var(--text);font-family:'DM Sans',system-ui,sans-serif}
-.tdp-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(30,37,64,.4)}
+.tdp-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--rp-row-bd,rgba(30,37,64,.4))}
 .tdp-row:last-child{border-bottom:none}
 .tdp-row-icon{width:28px;height:28px;border-radius:7px;background:var(--card2);border:1px solid var(--bdr);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
 .tdp-row-label{font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:1px;font-family:'DM Sans',system-ui,sans-serif}
@@ -334,7 +334,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
   padding-bottom:20px;
 }
 .rp-card{background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:14px;position:relative;overflow:hidden}
-.rp-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(99,102,241,.04),transparent 60%);pointer-events:none}
+.rp-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--rp-tint,rgba(99,102,241,.04)),transparent 60%);pointer-events:none}
 .rp-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 16px;text-align:center;color:var(--gray2);flex:1}
 .rp-badge{display:inline-flex;align-items:center;gap:5px;border-radius:7px;padding:4px 10px;font-size:11px;font-weight:700;font-family:'DM Sans',system-ui,sans-serif}
 .rp-badge.win{background:rgba(0,229,176,.15);border:1px solid rgba(0,229,176,.3);color:var(--green)}
@@ -362,8 +362,8 @@ tr:hover td{background:rgba(14,18,41,.8)}
 .rp-img-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:8px}
 .rp-img-thumb{aspect-ratio:1;border-radius:7px;overflow:hidden;border:1px solid var(--bdr);cursor:zoom-in;background:var(--bg2)}
 .rp-img-thumb img{width:100%;height:100%;object-fit:cover}
-.rp-link{display:flex;align-items:center;gap:6px;background:var(--blueglow);border:1px solid rgba(67,97,238,.25);border-radius:6px;padding:5px 9px;margin-top:4px;font-size:10px;color:#818cf8;text-decoration:none;transition:all .2s;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.rp-link:hover{background:rgba(99,102,241,.2);border-color:rgba(99,102,241,.4)}
+.rp-link{display:flex;align-items:center;gap:6px;background:var(--blueglow);border:1px solid var(--rp-ind-bd,rgba(67,97,238,.25));border-radius:6px;padding:5px 9px;margin-top:4px;font-size:10px;color:var(--rp-ind-fg,#818cf8);text-decoration:none;transition:all .2s;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.rp-link:hover{background:var(--rp-ind-bg,rgba(99,102,241,.2));border-color:var(--rp-ind-bd,rgba(99,102,241,.4))}
 @media(max-width:1100px){#reg-right-panel{width:280px}}
 @media(max-width:860px){.tsec.act.reg-split{flex-direction:column}#reg-right-panel{width:100%;position:static;height:auto}}
 /* El rp-card en el panel derecho no debe cortar el contenido — el panel padre ya maneja el scroll */
@@ -382,16 +382,16 @@ tr:hover td{background:rgba(14,18,41,.8)}
 
 /* ── Panel derecho: secciones plegables tipo Notion ── */
 .rp-sections-wrap{margin-top:14px;padding-top:12px;border-top:1px solid var(--bdr)}
-.rp-sections-title{font-size:11px;color:var(--gray2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;font-family:'DM Sans',system-ui,sans-serif;display:flex;align-items:center;justify-content:space-between}
+.rp-sections-title{font-size:10px;color:var(--gray2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;font-family:'DM Sans',system-ui,sans-serif;display:flex;align-items:center;justify-content:space-between}
 .rp-toggle{border:1px solid var(--bdr);border-radius:12px;margin-bottom:10px;overflow:hidden;background:var(--card2)}
-.rp-toggle-head{display:flex;align-items:center;gap:9px;padding:13px 15px;cursor:pointer;transition:background .15s;user-select:none;touch-action:manipulation}
+.rp-toggle-head{display:flex;align-items:center;gap:9px;padding:4px 10px;cursor:pointer;transition:background .15s;user-select:none;touch-action:manipulation}
 @media(hover:hover){.rp-toggle-head:hover{background:rgba(255,255,255,.03)}}
 .rp-toggle-chevron{width:16px;height:16px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--gray2);transition:transform .2s ease}
 .rp-toggle.open .rp-toggle-chevron{transform:rotate(90deg)}
-.rp-toggle-title{flex:1;min-width:0;font-size:15px;font-weight:700;letter-spacing:.4px;color:var(--text);background:transparent;border:none;outline:none;padding:2px 4px;border-radius:5px;font-family:'DM Sans',system-ui,sans-serif;text-transform:uppercase;touch-action:manipulation}
+.rp-toggle-title{flex:1;min-width:0;font-size:10px;font-weight:700;letter-spacing:.4px;color:var(--text);background:transparent;border:none;outline:none;padding:2px 4px;border-radius:5px;font-family:'DM Sans',system-ui,sans-serif;text-transform:uppercase;touch-action:manipulation}
 @media(hover:hover){.rp-toggle-title:hover{background:rgba(255,255,255,.05)}}
 .rp-toggle-title:focus{background:rgba(255,255,255,.05)}
-.rp-toggle-count{font-size:11px;color:var(--gray2);background:rgba(255,255,255,.05);border-radius:8px;padding:1px 6px;flex-shrink:0}
+.rp-toggle-count{font-size:10px;color:var(--gray2);background:rgba(255,255,255,.05);border-radius:8px;padding:1px 6px;flex-shrink:0}
 .rp-toggle-del{background:none;border:none;color:var(--gray2);cursor:pointer;font-size:14px;padding:2px 5px;opacity:0;transition:opacity .15s;flex-shrink:0;touch-action:manipulation}
 @media(hover:hover){.rp-toggle-head:hover .rp-toggle-del{opacity:.6}}
 @media not all and (hover:hover){.rp-toggle-del{opacity:.6}}
@@ -400,14 +400,22 @@ tr:hover td{background:rgba(14,18,41,.8)}
 @media(hover:hover){.rp-toggle-icon-btn:hover{opacity:1;color:var(--purp)}}
 .rp-toggle-body{max-height:0;overflow:hidden;transition:max-height .25s ease}
 .rp-toggle.open .rp-toggle-body{max-height:900px}
-.rp-toggle-body-inner{padding:2px 10px 10px}
+.rp-toggle-body-inner{padding:0 10px}
 .rp-add-toggle-btn{width:100%;background:transparent;border:1.5px dashed var(--bdr2);border-radius:9px;color:var(--gray2);font-size:13px;font-weight:600;padding:9px;cursor:pointer;transition:all .2s;font-family:'DM Sans',system-ui,sans-serif;display:flex;align-items:center;justify-content:center;gap:5px;touch-action:manipulation}
 .rp-add-toggle-btn:hover{border-color:var(--purp);color:var(--purp);background:rgba(124,58,237,.06)}
-.rp-sec-img-wrap{position:relative;border-radius:9px;overflow:hidden;border:1px solid var(--bdr);margin-bottom:10px;background:#fff}
+/* Recuadro único: las temporalidades quedan como filas divididas por una línea */
+.rp-unified{border:1px solid var(--bdr);border-radius:12px;overflow:hidden;background:var(--card2)}
+.rp-unified .rp-toggle{border:none;border-bottom:1px solid var(--bdr);border-radius:0;margin-bottom:0;background:transparent}
+.rp-unified .rp-add-toggle-btn{border:none;border-radius:0;padding:7px}
+/* Cada temporalidad siempre visible (sin desplegar) */
+.rp-unified .rp-toggle-body{max-height:none;overflow:visible;transition:none}
+.rp-unified .rp-toggle-head{cursor:default}
+@media(hover:hover){.rp-unified .rp-toggle-head:hover{background:transparent}}
+.rp-sec-img-wrap{position:relative;border-radius:9px;overflow:hidden;border:1px solid var(--bdr);margin-bottom:6px;background:#fff}
 .rp-sec-img-wrap img{display:block;width:100%;height:auto;cursor:zoom-in}
 .rp-sec-img-del{position:absolute;top:7px;right:7px;background:rgba(0,0,0,.65);border:none;color:#fff;border-radius:6px;width:24px;height:24px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s}
 .rp-sec-img-wrap:hover .rp-sec-img-del{opacity:1}
-.rp-sec-comment{width:100%;background:transparent;border:none;border-bottom:1px solid transparent;border-radius:0;padding:4px 2px;color:var(--text2);font-size:12px;font-family:'DM Sans',system-ui,sans-serif;line-height:1.55;resize:none;outline:none;margin-bottom:8px;transition:border-color .15s}
+.rp-sec-comment{width:100%;background:transparent;border:none;border-bottom:1px solid transparent;border-radius:0;padding:4px 2px;color:var(--text2);font-size:11px;font-family:'DM Sans',system-ui,sans-serif;line-height:1.5;resize:none;outline:none;margin-bottom:6px;transition:border-color .15s}
 .rp-sec-comment:hover{border-bottom-color:var(--bdr)}
 .rp-sec-comment:focus{border-bottom-color:var(--purp)}
 .rp-sec-comment::placeholder{color:var(--gray2)}
@@ -605,7 +613,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
     box-sizing:border-box;
   }
   .cal-cell .cdn{
-    font-size:clamp(7px,2.2vw,11px);
+    font-size:clamp(6px,1.8vw,9px);
     font-weight:700;line-height:1.1;margin-bottom:1px;
   }
   .cal-cell .cpnl{
@@ -1044,7 +1052,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
   .msc-icon{font-size:20px}
   .sl2{font-size:13px}
   .sv{font-size:14px}
-  .cdn{font-size:13px}
+  .cdn{font-size:10px}
   .ccnt{font-size:11px}
   .note-text{font-size:12px}
   .ops-view-btn{font-size:13px}
@@ -1074,9 +1082,32 @@ tr:hover td{background:rgba(14,18,41,.8)}
 #lightbox img{max-width:90vw;max-height:90vh;border-radius:12px;border:1px solid var(--bdr2);box-shadow:0 0 80px rgba(0,0,0,.8)}
 #lightbox-close{position:fixed;top:calc(16px + env(safe-area-inset-top, 20px));right:max(24px, env(safe-area-inset-right, 24px));background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:8px;width:36px;height:36px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
 #lightbox-close:hover{background:rgba(255,56,96,.3);border-color:var(--red)}
+/* Navegación entre imágenes */
+#lightbox-prev,#lightbox-next{position:fixed;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;cursor:pointer;display:none;align-items:center;justify-content:center;transition:all .2s;padding:0;touch-action:manipulation}
+#lightbox-prev{left:max(16px,env(safe-area-inset-left,16px))}
+#lightbox-next{right:max(16px,env(safe-area-inset-right,16px))}
+#lightbox-prev:hover,#lightbox-next:hover{background:rgba(99,102,241,.4);border-color:var(--accent)}
+#lightbox-count{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);color:#fff;font-size:12px;font-weight:700;font-family:'DM Sans',system-ui,sans-serif;background:rgba(0,0,0,.55);padding:3px 12px;border-radius:12px;display:none}
+#lightbox.multi #lightbox-prev,#lightbox.multi #lightbox-next{display:flex}
+#lightbox.multi #lightbox-count{display:block}
+/* Zoom */
+#lightbox{overflow:hidden}
+#lightbox-img{transition:transform .12s ease;touch-action:none;user-select:none;-webkit-user-drag:none;cursor:zoom-in}
+#lightbox-img.dragging{transition:none;cursor:grabbing!important}
+#lightbox-zoom{position:fixed;top:calc(16px + env(safe-area-inset-top,20px));left:50%;transform:translateX(-50%);display:flex;gap:6px}
+#lightbox-zoom button{height:36px;min-width:36px;padding:0 10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:8px;font-size:16px;font-weight:700;font-family:'DM Sans',system-ui,sans-serif;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;touch-action:manipulation}
+#lightbox-zoom button:hover{background:rgba(99,102,241,.4);border-color:var(--accent)}
+#lightbox-zoom #lightbox-zoom-pct{font-size:12px;min-width:56px}
 /* LINK ITEMS */
 .link-item{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;margin-top:6px;transition:all .2s}
 .link-item:hover{border-color:var(--accent)}
+/* Links de las temporalidades: sin cuadro alrededor */
+.rp-sec-links .link-item{background:transparent;border:none;border-radius:0;padding:0;margin-top:0;height:22px;box-sizing:border-box}
+.rp-sec-links .link-item + .link-item{margin-top:2px}
+.rp-sec-links .link-item:hover{border:none}
+.rp-sec-links{padding:2px 0 6px;margin:0}
+/* Alto uniforme: toda temporalidad mide lo mismo que una con un link; crece solo si hay más contenido */
+.rp-unified .rp-toggle-body-inner{min-height:30px;box-sizing:border-box}
 .link-item a{flex:1;font-size:11px;color:var(--blue);text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .link-item a:hover{color:var(--cyan)}
 .link-item-del{background:none;border:none;color:var(--gray2);cursor:pointer;font-size:12px;padding:2px 4px;border-radius:4px;transition:color .2s}
@@ -1119,7 +1150,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
 .reg-kpi-lbl{font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:.5px;font-family:'DM Sans',system-ui,sans-serif}
 
 /* CALENDAR CELL */
-.cal-cell-ops{font-size:10px;color:var(--gray2);margin-top:3px;font-weight:600}
+.cal-cell-ops{font-size:10px;color:var(--gray2);margin-top:3px;font-weight:600;text-align:center}
 
 /* DAY DETAIL HEADER */
 .day-detail-hdr{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
@@ -1459,6 +1490,63 @@ tr:hover td{background:rgba(14,18,41,.8)}
      Modal genérico de confirmación reutilizado en toda la app.
 ═══════════════════════════════════════════════════════════ -->
 <!-- CONFIRM MODAL -->
+<div class="mo" id="imp-src-mo">
+  <div class="mb" style="padding:20px 20px 18px;">
+    <div class="mh" style="border-bottom:1px solid var(--bdr);padding-bottom:14px;margin-bottom:16px;">
+      <div class="mt2" style="font-size:15px;font-weight:800;color:var(--text);">Importar operaciones</div>
+      <button class="mcl" onclick="document.getElementById('imp-src-mo').classList.remove('show')" style="background:var(--card2);border:1px solid var(--bdr);border-radius:7px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">✕</button>
+    </div>
+    <div id="imp-step1">
+      <div style="color:var(--text2);font-size:12.5px;line-height:1.7;margin-bottom:14px;">¿De dónde es el archivo? Cada plataforma tiene su propio horario y se convierte a hora de Nueva York.</div>
+      <div style="display:flex;gap:10px;">
+        <button class="btn" style="flex:1;flex-direction:column;justify-content:center;padding:14px 8px;gap:4px;" onclick="pickImportSource('mt5')"><b style="font-size:14px">MT5</b><span style="font-size:10px;color:var(--gray2)">Excel (.xlsx)</span></button>
+        <button class="btn" style="flex:1;flex-direction:column;justify-content:center;padding:14px 8px;gap:4px;" onclick="pickImportSource('tv')"><b style="font-size:14px">Tradovate</b><span style="font-size:10px;color:var(--gray2)">CSV</span></button>
+      </div>
+    </div>
+    <div id="imp-step2" style="display:none">
+      <div style="color:var(--text2);font-size:12.5px;line-height:1.7;margin-bottom:10px;">¿Cómo quieres guardar las horas?</div>
+      <label style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--bdr);border-radius:8px;margin-bottom:8px;cursor:pointer;">
+        <input type="radio" name="imp-mode" value="ny" checked onchange="updateImpStep2()" style="margin-top:3px">
+        <span><b style="font-size:12.5px;color:var(--text)">Hora de Nueva York</b><br><span style="font-size:11px;color:var(--gray2)">Convierte las horas del archivo a Nueva York (verano e invierno automático).</span></span>
+      </label>
+      <label style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--bdr);border-radius:8px;margin-bottom:12px;cursor:pointer;">
+        <input type="radio" name="imp-mode" value="file" onchange="updateImpStep2()" style="margin-top:3px">
+        <span><b style="font-size:12.5px;color:var(--text)">Hora del archivo</b><br><span style="font-size:11px;color:var(--gray2)">Guarda día y hora exactamente como vienen en el archivo, sin convertir.</span></span>
+      </label>
+      <div id="imp-mt5-wrap" style="display:none;margin-bottom:14px;">
+        <div style="color:var(--text2);font-size:12px;line-height:1.6;margin-bottom:6px;">¿Qué horario usa el servidor de tu broker en MT5?</div>
+        <select id="imp-mt5-srv" style="width:100%;background:var(--bg);border:1px solid var(--bdr);border-radius:8px;color:var(--text);padding:10px;font-size:12.5px;">
+          <option value="ny7">Cierre en Nueva York (ej. IC Markets): 7 h adelante de NY</option>
+          <option value="tz:UTC">UTC (GMT+0)</option>
+          <option value="tz:Europe/London">Londres (GMT/BST con cambio de horario)</option>
+          <option value="tz:Europe/Athens">Europa del Este (GMT+2/+3 con cambio de horario)</option>
+          <option value="fix:2">GMT+2 fijo (sin cambio de horario)</option>
+          <option value="fix:3">GMT+3 fijo (sin cambio de horario)</option>
+        </select>
+        <div style="font-size:10.5px;color:var(--gray2);margin-top:6px;line-height:1.5;">Si no estás seguro, compara la hora de una operación en MT5 con tu hora real, o pregunta a tu broker.</div>
+      </div>
+      <div id="imp-grp-wrap" style="display:none;margin-bottom:12px;">
+        <div style="color:var(--text2);font-size:12.5px;line-height:1.7;margin-bottom:8px;">¿Cómo agrupar las operaciones?</div>
+        <label style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--bdr);border-radius:8px;margin-bottom:8px;cursor:pointer;">
+          <input type="radio" name="imp-grp" value="pos" checked style="margin-top:3px">
+          <span><b style="font-size:12.5px;color:var(--text)">Como Tradovate</b><br><span style="font-size:11px;color:var(--gray2)">Cada operación va al día en que Tradovate cierra su posición, un registro por fila. Cuadra con el conteo de Tradovate.</span></span>
+        </label>
+        <label style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--bdr);border-radius:8px;cursor:pointer;">
+          <input type="radio" name="imp-grp" value="entry" style="margin-top:3px">
+          <span><b style="font-size:12.5px;color:var(--text)">Por hora de entrada</b><br><span style="font-size:11px;color:var(--gray2)">Cada operación va al día en que entraste (hora NY) y los cierres parciales se unen en una sola.</span></span>
+        </label>
+      </div>
+      <div id="imp-tz-wrap" style="display:none;margin-bottom:14px;">
+        <div style="color:var(--text2);font-size:12px;line-height:1.6;margin-bottom:6px;">¿En qué zona horaria está configurado tu Tradovate?</div>
+        <select id="imp-tz" style="width:100%;background:var(--bg);border:1px solid var(--bdr);border-radius:8px;color:var(--text);padding:10px;font-size:12.5px;"></select>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <button class="btn" style="flex:1;justify-content:center;padding:11px;" onclick="importSourceBack()">Atrás</button>
+        <button class="btn btn-r" style="flex:1;justify-content:center;padding:11px;font-weight:800;" onclick="confirmImportTz()">Continuar</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="mo" id="cmo">
   <div class="mb" style="border:1px solid rgba(255,23,68,.25);box-shadow:0 0 40px rgba(255,23,68,.08);padding:20px 20px 18px;">
     <div class="mh" style="border-bottom:1px solid var(--bdr);padding-bottom:14px;margin-bottom:16px;">
@@ -1579,6 +1667,14 @@ tr:hover td{background:rgba(14,18,41,.8)}
         </button>
       </div>
       <div id="sb-acct-list" style="display:flex;flex-direction:column;gap:2px;max-height:220px;overflow-y:auto;overflow-x:hidden;padding:0 2px;overscroll-behavior:contain;"></div>
+      <!-- Conectar cuenta MT5 (próximamente) -->
+      <button id="sb-mt5-connect" onclick="toast('Conectar cuenta MT5: próximamente','var(--blue)')" title="Conectar cuenta MT5 (próximamente)" style="display:flex;flex-direction:column;align-items:flex-start;gap:5px;width:100%;margin-top:6px;background:transparent;border:1px dashed var(--bdr2);color:var(--text2);border-radius:7px;padding:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',system-ui,sans-serif;text-align:left;box-sizing:border-box">
+        <span style="display:flex;align-items:center;gap:7px;width:100%">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="13" height="13" style="flex-shrink:0"><path d="M10 13a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07L11.5 4.4"/><path d="M14 11a5 5 0 0 0-7.07 0L4.1 13.83a5 5 0 0 0 7.07 7.07l1.33-1.33"/></svg>
+          <span style="white-space:nowrap">Conectar cuenta MT5</span>
+        </span>
+        <span style="margin-left:20px;font-size:8px;font-weight:800;letter-spacing:.8px;color:var(--gold,#f5a524);border:1px solid rgba(245,165,36,.45);border-radius:4px;padding:2px 5px">PRÓXIMAMENTE</span>
+      </button>
     </div>
     <!-- Bottom user area -->
     <div style="margin-top:auto;padding:10px 0 4px;border-top:1px solid var(--bdr)">
@@ -1730,11 +1826,11 @@ tr:hover td{background:rgba(14,18,41,.8)}
           CSV
         </button>
         <!-- Importar CSV -->
-        <label class="btn btn-csv-hide" title="Importar operaciones desde CSV" style="font-size:10px;gap:4px;padding:6px 10px;cursor:pointer">
+        <button class="btn btn-csv-hide" onclick="openImportSource()" title="Importar operaciones desde MT5 (Excel) o Tradovate (CSV)" style="font-size:10px;gap:4px;padding:6px 10px;cursor:pointer">
           <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" width="11" height="11"><path d="M7 9V1M4 4l3-3 3 3"/><path d="M1 10v1a2 2 0 002 2h8a2 2 0 002-2v-1"/></svg>
           Importar
-          <input type="file" accept=".csv" style="display:none" onchange="importCSV(this)">
-        </label>
+        </button>
+        <input type="file" id="imp-file" accept=".csv,.xlsx" style="display:none" onchange="importCSV(this)">
         <!-- Reporte para Claude -->
         <button class="btn btn-csv-hide" onclick="exportClaudeTxtOps()" title="Descargar reporte .txt para Claude" style="font-size:10px;gap:4px;padding:6px 10px">
           <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" width="11" height="11"><path d="M2 2h10a1 1 0 011 1v7a1 1 0 01-1 1H5l-3 2V3a1 1 0 011-1z"/></svg>
@@ -2494,7 +2590,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
 
 <!-- ═══════════════════════════════════════════════════════════
      §8b — PANTALLA DE ACTIVACIÓN DE LICENCIA
-     Overlay de login con código de acceso (Firebase).
+     Overlay de acceso con correo y contraseña (Firebase Authentication).
      Se muestra antes de cargar la app.
 ═══════════════════════════════════════════════════════════ -->
 <!-- ═══════════════════════════════════════════════════════════ -->
@@ -2512,7 +2608,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
     @keyframes licShimmer{0%{background-position:-200% center}100%{background-position:200% center}}
     #lic-box{animation:licFadeUp .5s ease forwards}
     #lic-card{border-color:rgba(0,220,100,.55)}
-    #lic-input:focus{border-color:rgba(0,230,118,.7)!important;box-shadow:0 0 0 3px rgba(0,230,118,.12),inset 0 1px 0 rgba(0,230,118,.08)!important;outline:none!important}
+    #lic-input-old:focus{border-color:rgba(0,230,118,.7)!important;box-shadow:0 0 0 3px rgba(0,230,118,.12),inset 0 1px 0 rgba(0,230,118,.08)!important;outline:none!important}
     #lic-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,230,118,.5)!important}
     #lic-btn:active{transform:translateY(0)}
     @media(max-width:500px){
@@ -2560,32 +2656,46 @@ tr:hover td{background:rgba(14,18,41,.8)}
       <div style="width:44px;height:1.5px;background:linear-gradient(90deg,transparent,#00e676,transparent);margin:8px auto 18px;"></div>
 
       <!-- Subtítulo -->
-      <p style="color:#8a9bb0;font-size:13px;line-height:1.65;margin:0 0 22px;">Ingresa tu código de acceso para<br>activar tu licencia personal.</p>
+      <p id="lic-sub" style="color:#8a9bb0;font-size:13px;line-height:1.65;margin:0 0 20px;">Inicia sesión con tu correo y contraseña.</p>
 
-      <!-- Input con ícono lock -->
-      <div style="position:relative;margin-bottom:12px;">
-        <div style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:rgba(0,220,100,.6);display:flex;align-items:center;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        </div>
-        <input id="lic-input" type="text" placeholder="X X X X - X X X X X - X X X X" maxlength="30"
-          style="width:100%;background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.12);color:#f0f0f0;padding:15px 18px 15px 44px;border-radius:12px;font-size:14px;text-align:center;letter-spacing:3px;outline:none;text-transform:uppercase;box-sizing:border-box;transition:border-color .2s,box-shadow .2s;font-weight:700;"
-          onkeydown="if(event.key==='Enter')activateLicense()">
+      <style>
+        .lic-in{width:100%;background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.12);color:#f0f0f0;padding:14px 16px;border-radius:12px;font-size:14px;outline:none;box-sizing:border-box;margin-bottom:10px;transition:border-color .2s,box-shadow .2s;font-family:inherit}
+        .lic-in:focus{border-color:rgba(0,230,118,.7);box-shadow:0 0 0 3px rgba(0,230,118,.12)}
+        #lic-code{text-transform:uppercase;letter-spacing:2px;text-align:center}
+        .lic-lnk{background:none;border:none;color:#00cc66;font-size:11.5px;cursor:pointer;padding:4px 6px;font-family:inherit;text-decoration:underline;text-underline-offset:3px}
+        .lic-lnk:hover{color:#00e676}
+        #lic-links{display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:2px}
+        #lic-wa{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;box-sizing:border-box;background:linear-gradient(135deg,#00b341,#00e876);color:#000;font-weight:900;padding:14px;border-radius:12px;font-size:13px;letter-spacing:1px;text-decoration:none;margin:14px 0 6px}
+      </style>
+
+      <!-- Formulario (login / registro / vincular código / recuperar) -->
+      <div id="lic-form">
+        <input id="lic-code" class="lic-in" type="text" placeholder="Tu código de acceso actual" maxlength="30" autocomplete="off" style="display:none" onkeydown="if(event.key==='Enter')licSubmit()">
+        <input id="lic-email" class="lic-in" type="email" placeholder="Correo electrónico" autocomplete="username" onkeydown="if(event.key==='Enter')licSubmit()">
+        <input id="lic-pass" class="lic-in" type="password" placeholder="Contraseña" autocomplete="current-password" onkeydown="if(event.key==='Enter')licSubmit()">
+        <input id="lic-pass2" class="lic-in" type="password" placeholder="Repite la contraseña" autocomplete="new-password" style="display:none" onkeydown="if(event.key==='Enter')licSubmit()">
+
+        <button id="lic-btn" onclick="licSubmit()"
+          style="width:100%;background:linear-gradient(135deg,#00b341,#00e876);color:#000;font-weight:900;padding:16px;border-radius:12px;border:none;font-size:14px;cursor:pointer;letter-spacing:2px;margin:4px 0 12px;transition:transform .15s,box-shadow .15s;box-shadow:0 4px 24px rgba(0,230,118,.35);display:flex;align-items:center;justify-content:center;gap:8px;">INGRESAR</button>
+        <div id="lic-links"></div>
       </div>
 
-      <!-- Botón ACTIVAR con fingerprint -->
-      <button id="lic-btn" onclick="activateLicense()"
-        style="width:100%;background:linear-gradient(135deg,#00b341,#00e876);color:#000;font-weight:900;padding:16px;border-radius:12px;border:none;font-size:14px;cursor:pointer;letter-spacing:2px;margin-bottom:14px;transition:transform .15s,box-shadow .15s;box-shadow:0 4px 24px rgba(0,230,118,.35);display:flex;align-items:center;justify-content:center;gap:10px;font-family:'DM Sans','Segoe UI',sans-serif;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6c-3.31 0-6 2.69-6 6 0 1.66.67 3.16 1.76 4.25"/><path d="M17 17.29A5.97 5.97 0 0 0 18 12c0-3.31-2.69-6-6-6"/></svg>
-        ACTIVAR LICENCIA
-      </button>
+      <!-- Cuenta pendiente de habilitar -->
+      <div id="lic-pending" style="display:none">
+        <div style="font-size:34px;margin:0 0 6px">⏳</div>
+        <div style="color:#f5f5f5;font-weight:800;font-size:15px;margin-bottom:8px">Tu cuenta está pendiente</div>
+        <p id="lic-pending-txt" style="color:#8a9bb0;font-size:13px;line-height:1.65;margin:0 0 4px"></p>
+        <a id="lic-wa" href="#" target="_blank" rel="noopener" style="display:none">ESCRIBIR POR WHATSAPP</a>
+        <div style="margin-top:8px"><button class="lic-lnk" onclick="licSetMode('login')">Ya me habilitaron — volver a ingresar</button></div>
+      </div>
 
       <!-- Loading / Error -->
       <div id="lic-loading" style="display:none;color:#e8a020;font-size:12px;margin-bottom:8px;">⏳ Verificando con el servidor...</div>
-      <div id="lic-error" style="color:#ff4d6a;font-size:12px;min-height:18px;line-height:1.5;"></div>
+      <div id="lic-error" style="color:#ff4d6a;font-size:12px;min-height:18px;line-height:1.5;margin-top:6px;"></div>
 
       <!-- Footer -->
       <div style="margin-top:18px;padding-top:14px;border-top:1px solid rgba(0,220,100,.12);">
-        <p style="color:#4a6060;font-size:10px;line-height:1.7;margin:0 0 10px;">Si tienes problemas con tu código,<br>contacta a tu proveedor.</p>
+        <p style="color:#4a6060;font-size:10px;line-height:1.7;margin:0 0 10px;">Si tienes problemas para ingresar,<br>contacta a tu proveedor.</p>
         <div style="display:flex;align-items:center;justify-content:center;gap:8px;">
           <div style="height:1px;width:24px;background:rgba(0,220,100,.35);"></div>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#00cc66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -2602,7 +2712,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
 <script>
 
 // ════════════════════════════════════════════════════════════
-//  §10 — SISTEMA DE LICENCIAS (Firebase)
+//  §10 — ACCESO CON CORREO Y CONTRASEÑA (Firebase)
 //  Verificación del código de acceso, fingerprint del dispositivo,
 //  activación, polling cada 30s, freeze de app si se revoca.
 // ════════════════════════════════════════════════════════════
@@ -2717,7 +2827,7 @@ function freezeApp(reason) {
     + '<div style="font-size:18px;font-weight:900;color:#f5f5f5;font-family:&quot;DM Sans&quot;,system-ui,sans-serif;letter-spacing:-0.5px;">Sesión Bloqueada</div>'
     + '<div style="font-size:13px;color:#8a9bb0;max-width:320px;text-align:center;line-height:1.7;">' + (reason || 'Tu acceso fue modificado por el administrador.') + '</div>'
     + '<div style="width:40px;height:2px;background:linear-gradient(90deg,#ff3860,#ff6b6b);border-radius:99px;margin:4px 0"></div>'
-    + '<div style="font-size:11px;color:#3a4a5a;text-align:center;line-height:1.7;">Vuelve a ingresar tu código de acceso<br>para continuar.</div>'
+    + '<div style="font-size:11px;color:#3a4a5a;text-align:center;line-height:1.7;">Vuelve a iniciar sesión con tu correo<br>y contraseña para continuar.</div>'
     + '<button onclick="unfreezeApp()" style="background:linear-gradient(135deg,#00b341,#00e676);color:#000;font-weight:900;padding:14px 32px;border-radius:12px;border:none;font-size:13px;cursor:pointer;letter-spacing:1px;box-shadow:0 4px 20px rgba(0,230,118,.3);">INGRESAR CÓDIGO</button>';
   document.body.appendChild(ov);
   // Deshabilitar todos los inputs y botones del journal
@@ -2743,14 +2853,15 @@ function unfreezeApp() {
   // Limpiar error anterior si hubiese
   var errEl = document.getElementById('lic-error');
   if (errEl) errEl.textContent = '';
-  var inp = document.getElementById('lic-input');
-  if (inp) { inp.value = ''; inp.focus(); }
+  licSetMode('login');
+  var inp = document.getElementById('lic-email');
+  if (inp) { inp.focus(); }
 }
 
 async function checkLicenseOnLoad() {
   var stored = null;
   try { stored = JSON.parse(localStorage.getItem('ttlic') || 'null'); } catch(e) {}
-  if (!stored || !stored.key) { showLicOverlay(); return; }
+  if (!stored || !stored.key) { licShow('login'); return; }
 
   try {
     var res = await fetch(FB_BASE + '/' + stored.key + '?key=' + FB_KEY);
@@ -2769,58 +2880,31 @@ async function checkLicenseOnLoad() {
 
     // Verificar si fue revocada
     if (f.active && f.active.booleanValue === false) {
+      if (f.pending && f.pending.booleanValue === true) { localStorage.removeItem('ttlic'); licShowPending(_fv(f,'email')); return; }
       localStorage.setItem('ttlic_revoked_key', stored.key);
       localStorage.removeItem('ttlic');
       showLicOverlay('<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Tu licencia fue revocada. Contacta a quien te vendió el producto.');
       return;
     }
 
-    var deviceId = getDeviceId(); // fingerprint puro
-    var maxActivations = parseInt((f.maxActivations && f.maxActivations.integerValue) || '2');
-
-    // Leer lista de dispositivos autorizados
-    var authorizedDevices = [];
-    if (f.devices && f.devices.arrayValue && f.devices.arrayValue.values) {
-      authorizedDevices = f.devices.arrayValue.values.map(function(v){ return v.stringValue || ''; }).filter(Boolean);
-    } else if (f.lastDevice && f.lastDevice.stringValue) {
-      authorizedDevices = [f.lastDevice.stringValue];
-    }
-
-    // <svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> FIX v3: Verificar con matching amplio (fingerprint puro O formato viejo FP_XXXX)
-    var isAuthorized = authorizedDevices.some(function(d) { return isThisDevice(d); });
-
-    if (!isAuthorized) {
-      // <svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> REGLA PRINCIPAL: si el dispositivo NO está autorizado (sea porque:
-      //    - la lista está vacía tras un reset
-      //    - fue eliminado individualmente
-      //    - la licencia fue reseteada/revocada y re-activada
-      //    - es un dispositivo completamente nuevo)
-      // → SIEMPRE forzar ingreso de código. NUNCA auto-registrar desde aquí.
-      // El registro solo ocurre en activateLicense() cuando el usuario ingresa el código explícitamente.
-      localStorage.removeItem('ttlic');
-      var msg = authorizedDevices.length >= maxActivations
-        ? '<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 1 21h22L12 2z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Esta licencia ya está activada en el máximo de dispositivos (' + maxActivations + ').\nContacta soporte para liberar un cupo.'
-        : '<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.5 9a9 9 0 0 0-15-4.5L1 10M3 14a9 9 0 0 0 15 4.5L23 14"/></svg> Esta licencia fue reseteada o es un dispositivo nuevo.\nIngresa tu código para continuar.';
-      showLicOverlay(msg);
+    // Dispositivos ilimitados: ya no se valida la lista de dispositivos.
+    // La sesión debe pertenecer a una cuenta con correo vinculada a esta licencia.
+    var docEmail = _fv(f,'email'), docUid = _fv(f,'uid');
+    if (!docEmail) {
+      // Cliente actual que todavía no vinculó su código a un correo
+      _licPrefillCode = stored.key;
+      licShow('link', 'Actualizamos el acceso. Escribe tu correo y crea una contraseña (solo una vez).');
       return;
     }
-
-    // Dispositivo autorizado: migrar silenciosamente al fingerprint limpio si usaba formato viejo
-    var oldEntry = authorizedDevices.find(function(d) { return isThisDevice(d) && d !== deviceId; });
-    if (oldEntry) {
-      var migrated = authorizedDevices.filter(function(d){ return !isThisDevice(d); });
-      migrated.push(deviceId);
-      var migratedVals = migrated.map(function(d){ return {stringValue: d}; });
-      var migrateUrl = FB_BASE + '/' + stored.key + '?key=' + FB_KEY
-        + '&updateMask.fieldPaths=devices&updateMask.fieldPaths=lastDevice';
-      fetch(migrateUrl, {
-        method: 'PATCH',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({fields: {
-          devices: {arrayValue: {values: migratedVals}},
-          lastDevice: {stringValue: deviceId}
-        }})
-      }).catch(function(){});
+    if (!stored.uid || stored.uid !== docUid) {
+      localStorage.removeItem('ttlic');
+      licShow('login', 'Inicia sesión con tu correo y contraseña.');
+      return;
+    }
+    if (f.resetAt && f.resetAt.timestampValue && Date.parse(f.resetAt.timestampValue) > (stored.loginAt || stored.activatedAt || 0)) {
+      localStorage.removeItem('ttlic');
+      licShow('login', 'Tu sesión fue cerrada por el administrador. Vuelve a iniciar sesión.');
+      return;
     }
 
     stored.lastCheck = Date.now();
@@ -2841,101 +2925,186 @@ async function checkLicenseOnLoad() {
   hideLicOverlay();
   initApp();
 }
-async function activateLicense() {
-  var code = (document.getElementById('lic-input').value || '').trim().toUpperCase();
-  var errEl = document.getElementById('lic-error');
-  var loadEl = document.getElementById('lic-loading');
-  var btn = document.getElementById('lic-btn');
 
-  errEl.textContent = '';
-  if (!code) { errEl.innerHTML = '<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 1 21h22L12 2z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Ingresa tu código de licencia.'; return; }
+// ═══════════════════════════════════════════════════════════
+//  ACCESO CON CORREO Y CONTRASEÑA (Firebase Authentication)
+//  · Cuenta = correo (único) + contraseña. La contraseña la guarda Firebase, nunca este código.
+//  · Dispositivos ilimitados.
+//  · Clientes actuales: vinculan su código UNA vez a un correo (la clave interna de sus datos no cambia).
+//  · Clientes nuevos: se registran y quedan PENDIENTES hasta que el administrador los habilite.
+// ═══════════════════════════════════════════════════════════
+var ADMIN_PHONE   = '593988438504';            // ← Tu número con código de país, solo dígitos. Ej: '593991234567'
+var DEFAULT_SERVER = 'sb_basic_1'; // ← Servidor de datos para clientes nuevos
+var FB_AUTH = 'https://identitytoolkit.googleapis.com/v1/accounts:';
+var FB_DOCS = 'https://firestore.googleapis.com/v1/projects/' + FB_PROJECT + '/databases/(default)/documents';
+var _licMode = 'login';
+var _licPrefillCode = '';
 
-  btn.disabled = true; btn.style.opacity = '0.6';
-  loadEl.style.display = 'block';
+function _licEl(id){ return document.getElementById(id); }
+function _licErr(html){ var e=_licEl('lic-error'); if(e) e.innerHTML = html || ''; }
+function _licBusy(on){
+  var l=_licEl('lic-loading'), b=_licEl('lic-btn');
+  if(l) l.style.display = on ? 'block' : 'none';
+  if(b){ b.disabled = !!on; b.style.opacity = on ? '0.6' : '1'; }
+}
+function _licEmail(){ return (_licEl('lic-email').value || '').trim().toLowerCase(); }
 
-  try {
-    var res = await fetch(FB_BASE + '/' + code + '?key=' + FB_KEY);
+function licSetMode(mode, msg){
+  _licMode = mode;
+  var form=_licEl('lic-form'), pend=_licEl('lic-pending');
+  if(!form) return;
+  var isPending = (mode === 'pending');
+  form.style.display = isPending ? 'none' : '';
+  pend.style.display = isPending ? '' : 'none';
+  _licErr(msg || '');
+  if(isPending) return;
+  var cfg = {
+    login:    {sub:'Inicia sesión con tu correo y contraseña.',                                        btn:'INGRESAR',         code:0, pass:1, pass2:0},
+    register: {sub:'Crea tu cuenta con tu correo y una contraseña.<br>Luego se habilitará tu ingreso.', btn:'CREAR CUENTA',    code:0, pass:1, pass2:1},
+    link:     {sub:'Ingresa el código que te dieron, tu correo y crea una contraseña.<br>Solo se hace una vez.', btn:'VINCULAR MI CUENTA', code:1, pass:1, pass2:1},
+    reset:    {sub:'Escribe tu correo y te enviamos un enlace para crear una nueva contraseña.',      btn:'ENVIAR ENLACE',    code:0, pass:0, pass2:0}
+  }[mode] || {};
+  _licEl('lic-sub').innerHTML = cfg.sub;
+  _licEl('lic-btn').textContent = cfg.btn;
+  _licEl('lic-code').style.display  = cfg.code  ? '' : 'none';
+  _licEl('lic-pass').style.display  = cfg.pass  ? '' : 'none';
+  _licEl('lic-pass2').style.display = cfg.pass2 ? '' : 'none';
+  _licEl('lic-pass').autocomplete = (mode === 'login') ? 'current-password' : 'new-password';
+  if(mode === 'link' && _licPrefillCode) _licEl('lic-code').value = _licPrefillCode;
+  var L = function(txt, m){ return '<button class="lic-lnk" onclick="licSetMode(\''+m+'\')">'+txt+'</button>'; };
+  var links = {
+    login:    L('¿Olvidaste tu contraseña?','reset') + L('Crear cuenta nueva','register') + L('Soy cliente actual: vincular mi código','link'),
+    register: L('Ya tengo cuenta — iniciar sesión','login') + L('Soy cliente actual (tengo un código)','link'),
+    link:     L('Ya vinculé mi cuenta — iniciar sesión','login') + L('Crear cuenta nueva','register'),
+    reset:    L('Volver a iniciar sesión','login')
+  }[mode] || '';
+  _licEl('lic-links').innerHTML = links;
+}
 
-    if (res.status === 404) {
-      errEl.innerHTML = '<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Código no encontrado. Verifica que lo escribiste bien.';
-      loadEl.style.display = 'none'; btn.disabled = false; btn.style.opacity = '1'; return;
+// Muestra la pantalla de acceso en el modo indicado
+function licShow(mode, msg){
+  showLicOverlay();
+  licSetMode(mode || 'login', msg);
+}
+
+function licShowPending(email){
+  var txt = 'Tu cuenta' + (email ? ' (<b>' + email + '</b>)' : '') + ' fue creada, pero todavía no está habilitada.<br>';
+  txt += ADMIN_PHONE ? 'Para habilitar tu ingreso, comunícate con el administrador por WhatsApp:<br><b>+' + ADMIN_PHONE + '</b>'
+                     : 'Para habilitar tu ingreso, comunícate con el administrador.';
+  showLicOverlay();
+  licSetMode('pending');
+  _licEl('lic-pending-txt').innerHTML = txt;
+  var wa = _licEl('lic-wa');
+  if(ADMIN_PHONE){
+    wa.href = 'https://wa.me/' + ADMIN_PHONE + '?text=' + encodeURIComponent('Hola, me registré en TradeJournal con el correo ' + (email || '') + ' y quiero que habiliten mi ingreso.');
+    wa.style.display = 'inline-flex';
+  } else { wa.style.display = 'none'; }
+}
+
+// ── Firebase Authentication (REST) ──────────────────────────
+async function _authCall(method, body){
+  var r = await fetch(FB_AUTH + method + '?key=' + FB_KEY, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)});
+  var j = {}; try { j = await r.json(); } catch(e) {}
+  if(!r.ok){
+    var m = (j.error && j.error.message) || 'ERROR';
+    var err = new Error(m); err.code = String(m).split(' ')[0]; throw err;
+  }
+  return j;
+}
+function _authMsg(code){
+  var map = {
+    EMAIL_EXISTS:'Ese correo ya está registrado. Inicia sesión.',
+    INVALID_EMAIL:'El correo no es válido.',
+    WEAK_PASSWORD:'La contraseña es muy débil. Usa al menos 6 caracteres.',
+    EMAIL_NOT_FOUND:'Correo o contraseña incorrectos.',
+    INVALID_PASSWORD:'Correo o contraseña incorrectos.',
+    INVALID_LOGIN_CREDENTIALS:'Correo o contraseña incorrectos.',
+    USER_DISABLED:'Esta cuenta fue deshabilitada. Contacta a tu proveedor.',
+    TOO_MANY_ATTEMPTS_TRY_LATER:'Demasiados intentos. Espera unos minutos e intenta de nuevo.',
+    OPERATION_NOT_ALLOWED:'El ingreso con correo aún no está activado en el servidor. Contacta a tu proveedor.',
+    MISSING_PASSWORD:'Escribe tu contraseña.'
+  };
+  return map[code] || ('No se pudo completar la operación (' + code + ').');
+}
+
+// ── Firestore (REST) ────────────────────────────────────────
+function _fv(f, k){ return (f && f[k] && (f[k].stringValue !== undefined ? f[k].stringValue : '')) || ''; }
+async function _fsGet(id){
+  var r = await fetch(FB_BASE + '/' + encodeURIComponent(id) + '?key=' + FB_KEY);
+  if(r.status === 404) return null;
+  if(!r.ok) throw new Error('FS_' + r.status);
+  return r.json();
+}
+async function _fsFindByUid(uid){
+  var r = await fetch(FB_DOCS + ':runQuery?key=' + FB_KEY, {method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({structuredQuery:{from:[{collectionId:FB_COL}], where:{fieldFilter:{field:{fieldPath:'uid'}, op:'EQUAL', value:{stringValue:uid}}}, limit:1}})});
+  if(!r.ok) throw new Error('FS_' + r.status);
+  var rows = await r.json();
+  for(var i=0;i<rows.length;i++){
+    if(rows[i].document){ var d = rows[i].document; d.id = d.name.split('/').pop(); return d; }
+  }
+  return null;
+}
+
+// ── Aviso único tras el ingreso: "Ya puedes importar tus operaciones" ──────────
+// Se muestra una sola vez por cuenta: se recuerda en este dispositivo y en la ficha de la cuenta (otro equipo no lo repite).
+function _impNoticeKey(uid){ return 'tt_import_notice_' + (uid || 'x'); }
+function maybeShowImportNotice(uid, docId, fields){
+  try{
+    var key = _impNoticeKey(uid);
+    if(localStorage.getItem(key)) return;
+    if(fields && fields.importNoticeSeen && fields.importNoticeSeen.booleanValue === true){
+      localStorage.setItem(key, '1');
+      return;
     }
-    if (!res.ok) {
-      errEl.innerHTML = '<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 1 21h22L12 2z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Error al conectar. Verifica tu internet e intenta de nuevo.';
-      loadEl.style.display = 'none'; btn.disabled = false; btn.style.opacity = '1'; return;
-    }
+  }catch(e){}
+  setTimeout(function(){ _renderImportNotice(uid, docId); }, 900);
+}
+function _closeImportNotice(uid, docId, goImport){
+  var o = document.getElementById('imp-notice'); if(o) o.remove();
+  try{ localStorage.setItem(_impNoticeKey(uid), '1'); }catch(e){}
+  // Marcar como visto en la ficha de la cuenta (si falla, queda el registro local)
+  try{
+    fetch(FB_BASE + '/' + encodeURIComponent(docId) + '?key=' + FB_KEY + '&updateMask.fieldPaths=importNoticeSeen',
+      {method:'PATCH', headers:{'Content-Type':'application/json'}, body: JSON.stringify({fields:{importNoticeSeen:{booleanValue:true}}})}).catch(function(){});
+  }catch(e){}
+  if(goImport && typeof openImportSource === 'function') openImportSource();
+}
+function _renderImportNotice(uid, docId){
+  if(document.getElementById('imp-notice')) return;
+  var o = document.createElement('div');
+  o.id = 'imp-notice';
+  o.style.cssText = "position:fixed;inset:0;z-index:999990;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.72);backdrop-filter:blur(4px);font-family:'Segoe UI',system-ui,sans-serif";
+  o.innerHTML =
+    '<div style="max-width:380px;width:100%;background:#0d1117;border:1px solid rgba(0,230,118,.25);border-radius:16px;padding:28px 24px 22px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6)">'
+  +   '<div style="width:52px;height:52px;margin:0 auto 14px;border-radius:50%;background:rgba(0,230,118,.1);display:flex;align-items:center;justify-content:center;color:#00e676">'
+  +     '<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" width="24" height="24"><path d="M7 9V1M4 4l3-3 3 3"/><path d="M1 10v1a2 2 0 002 2h8a2 2 0 002-2v-1"/></svg>'
+  +   '</div>'
+  +   '<div style="color:#f5f5f5;font-weight:800;font-size:17px;margin-bottom:10px">Ya puedes importar tus operaciones</div>'
+  +   '<p style="color:#8a9bb0;font-size:13px;line-height:1.7;margin:0 0 20px">Carga el historial de tu cuenta <b style="color:#e6edf3">MT5</b> (Excel) o <b style="color:#e6edf3">Tradovate</b> (CSV) con el botón <b style="color:#e6edf3">Importar</b> y tus operaciones se agregarán automáticamente a tu journal.</p>'
+  +   '<button id="imp-notice-go" style="width:100%;background:linear-gradient(135deg,#00b341,#00e876);color:#000;font-weight:900;padding:14px;border-radius:12px;border:none;font-size:13px;cursor:pointer;letter-spacing:1.5px;margin-bottom:8px">IMPORTAR AHORA</button>'
+  +   '<button id="imp-notice-ok" style="width:100%;background:none;border:none;color:#8a9bb0;font-size:12.5px;cursor:pointer;padding:8px">Más tarde</button>'
+  + '</div>';
+  document.body.appendChild(o);
+  document.getElementById('imp-notice-go').onclick = function(){ _closeImportNotice(uid, docId, true); };
+  document.getElementById('imp-notice-ok').onclick = function(){ _closeImportNotice(uid, docId, false); };
+}
 
-    var data = await res.json();
-    var f = data.fields || {};
-
-    if (f.active && f.active.booleanValue === false) {
-      errEl.innerHTML = '<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Este código está desactivado. Contacta a tu revendedor.';
-      loadEl.style.display = 'none'; btn.disabled = false; btn.style.opacity = '1'; return;
-    }
-
-    // <svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> MULTI-SUPABASE: leer servidor asignado y aplicarlo antes de hacer sync
-    var servidorAsignado = (f.servidor && f.servidor.stringValue) || 'sb_basic_1';
-    setSupabaseServer(servidorAsignado);
-
-    var deviceId = getDeviceId(); // fingerprint puro y estable
-    var maxActivations = parseInt((f.maxActivations && f.maxActivations.integerValue) || '2');
-
-    // Leer lista de dispositivos autorizados
-    var authorizedDevices = [];
-    if (f.devices && f.devices.arrayValue && f.devices.arrayValue.values) {
-      authorizedDevices = f.devices.arrayValue.values.map(function(v){ return v.stringValue || ''; }).filter(Boolean);
-    } else if (f.lastDevice && f.lastDevice.stringValue) {
-      authorizedDevices = [f.lastDevice.stringValue];
-    }
-
-    // <svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> FIX v2: Matching amplio — reconoce este dispositivo aunque el ID viejo era FP_XXXX
-    var isAuthorized = authorizedDevices.some(function(d) { return isThisDevice(d); });
-
-    if (!isAuthorized) {
-      if (authorizedDevices.length >= maxActivations) {
-        errEl.innerHTML = '<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 1 21h22L12 2z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Este código ya está activado en ' + maxActivations + ' dispositivo(s). Contacta soporte para agregar este dispositivo.';
-        loadEl.style.display = 'none'; btn.disabled = false; btn.style.opacity = '1'; return;
-      }
-      // <svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Agregar este dispositivo con fingerprint limpio (sin duplicados del mismo FP)
-      var devicesLimpios = authorizedDevices.filter(function(d) { return !isThisDevice(d); });
-      devicesLimpios.push(deviceId);
-      authorizedDevices = devicesLimpios;
-    } else {
-      // <svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Ya autorizado — normalizar entrada a fingerprint limpio (migración silenciosa)
-      var normalizado = authorizedDevices.filter(function(d) { return !isThisDevice(d); });
-      normalizado.push(deviceId);
-      authorizedDevices = normalizado;
-    }
-
-    // Registrar en Firebase (con deduplicación garantizada)
-    var devValues = authorizedDevices.map(function(d){ return {stringValue: d}; });
-    var patchUrl = FB_BASE + '/' + code + '?key=' + FB_KEY
-      + '&updateMask.fieldPaths=activatedAt'
-      + '&updateMask.fieldPaths=lastDevice'
-      + '&updateMask.fieldPaths=activations'
-      + '&updateMask.fieldPaths=devices';
-
-    await fetch(patchUrl, {
-      method: 'PATCH',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        fields: {
-          activatedAt: {timestampValue: new Date().toISOString()},
-          lastDevice: {stringValue: deviceId},
-          activations: {integerValue: String(authorizedDevices.length)},
-          devices: {arrayValue: {values: devValues}}
-        }
-      })
-    });
-
-    localStorage.setItem('ttlic', JSON.stringify({
-      key: code,
-      reseller: (f.reseller && f.reseller.stringValue) || '',
-      servidor: servidorAsignado, // <svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> guardado para uso offline
-      activatedAt: Date.now(),
-      lastCheck: Date.now()
-    }));
-
+// ── Finalizar ingreso: guarda sesión y arranca la app ───────
+async function licFinish(id, doc, uid, email){
+  var f = doc.fields || {};
+  var servidor = _fv(f,'servidor') || DEFAULT_SERVER;
+  setSupabaseServer(servidor);
+  localStorage.setItem('ttlic', JSON.stringify({
+    key: id,
+    email: email,
+    uid: uid,
+    reseller: _fv(f,'reseller'),
+    servidor: servidor,       // guardado para uso offline
+    activatedAt: Date.now(),
+    loginAt: Date.now(),
+    lastCheck: Date.now()
+  }));
     // Descongelar si estaba congelado
     _appFrozen = false;
     var fov = document.getElementById('freeze-overlay');
@@ -2985,13 +3154,108 @@ async function activateLicense() {
       // Primera vez: inicializar app completa (incluye sync)
       initApp();
     }
-
-  } catch(e) {
-    errEl.innerHTML = '<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 1 21h22L12 2z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Sin conexión a internet. Necesitas internet para activar.';
-  }
-
-  loadEl.style.display = 'none'; btn.disabled = false; btn.style.opacity = '1';
+    // Aviso de una sola vez: ya se pueden importar operaciones
+    maybeShowImportNotice(uid, id, f);
 }
+
+// ── Acciones ────────────────────────────────────────────────
+async function licSubmit(){
+  var mode = _licMode;
+  _licErr('');
+  var email = _licEmail(), pass = _licEl('lic-pass').value || '', pass2 = _licEl('lic-pass2').value || '';
+  var code = (_licEl('lic-code').value || '').trim().toUpperCase();
+  if(!email){ _licErr('Escribe tu correo.'); return; }
+  if(mode !== 'reset' && !pass){ _licErr('Escribe tu contraseña.'); return; }
+  if((mode === 'register' || mode === 'link')){
+    if(pass.length < 6){ _licErr('La contraseña debe tener al menos 6 caracteres.'); return; }
+    if(pass !== pass2){ _licErr('Las contraseñas no coinciden.'); return; }
+  }
+  if(mode === 'link' && !code){ _licErr('Escribe el código de acceso que te dieron.'); return; }
+  _licBusy(true);
+  try{
+    if(mode === 'login')         await _licLogin(email, pass);
+    else if(mode === 'register') await _licRegister(email, pass);
+    else if(mode === 'link')     await _licLink(code, email, pass);
+    else if(mode === 'reset')    await _licReset(email);
+  }catch(e){
+    console.log('[TradeTrack] acceso:', e);
+    _licErr(e && e.code ? _authMsg(e.code) : 'No se pudo conectar con el servidor. Revisa tu conexión e intenta de nuevo.');
+  }
+  _licBusy(false);
+}
+
+async function _licLogin(email, pass){
+  var u = await _authCall('signInWithPassword', {email:email, password:pass, returnSecureToken:true});
+  var doc = await _fsFindByUid(u.localId);
+  if(!doc){
+    // Registro a medias (cuenta creada pero sin ficha): se crea como pendiente
+    doc = await _licCreatePending(u.localId, email);
+  }
+  var f = doc.fields || {};
+  if(f.active && f.active.booleanValue === false){
+    if(f.pending && f.pending.booleanValue === true){ licShowPending(email); return; }
+    _licErr('Tu acceso fue desactivado. Contacta a tu proveedor.');
+    return;
+  }
+  await licFinish(doc.id, doc, u.localId, email);
+}
+
+async function _licCreatePending(uid, email){
+  var id = 'U-' + uid;
+  var body = {fields:{
+    email:{stringValue:email}, uid:{stringValue:uid},
+    active:{booleanValue:false}, pending:{booleanValue:true},
+    servidor:{stringValue:DEFAULT_SERVER}, reseller:{stringValue:''},
+    createdAt:{timestampValue:new Date().toISOString()}, source:{stringValue:'registro'}
+  }};
+  var r = await fetch(FB_BASE + '?documentId=' + encodeURIComponent(id) + '&key=' + FB_KEY, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)});
+  if(!r.ok && r.status !== 409) throw new Error('FS_' + r.status);
+  var d = await _fsGet(id);
+  d.id = id; return d;
+}
+
+async function _licRegister(email, pass){
+  var u = await _authCall('signUp', {email:email, password:pass, returnSecureToken:true});
+  await _licCreatePending(u.localId, email);
+  licShowPending(email);
+}
+
+async function _licLink(code, email, pass){
+  var doc = await _fsGet(code);
+  if(!doc){ _licErr('Código no encontrado. Verifica que lo escribiste bien.'); return; }
+  var f = doc.fields || {};
+  if(_fv(f,'email')){ _licErr('Este código ya fue vinculado a una cuenta. Inicia sesión con tu correo y contraseña.'); return; }
+  if(f.active && f.active.booleanValue === false){ _licErr('Este código está desactivado. Contacta a tu revendedor.'); return; }
+  // Crear la cuenta de acceso (o recuperar una creada a medias en un intento anterior)
+  var u;
+  try{
+    u = await _authCall('signUp', {email:email, password:pass, returnSecureToken:true});
+  }catch(e){
+    if(e.code !== 'EMAIL_EXISTS') throw e;
+    try{ u = await _authCall('signInWithPassword', {email:email, password:pass, returnSecureToken:true}); }
+    catch(e2){ _licErr('Ese correo ya está registrado. Usa otro correo o inicia sesión.'); return; }
+    if(await _fsFindByUid(u.localId)){ _licErr('Ese correo ya está registrado en otra cuenta. Usa otro correo.'); return; }
+  }
+  // Vincular correo al código (falla si alguien lo modificó mientras tanto)
+  var url = FB_BASE + '/' + encodeURIComponent(code) + '?key=' + FB_KEY
+          + '&updateMask.fieldPaths=email&updateMask.fieldPaths=uid&updateMask.fieldPaths=linkedAt'
+          + (doc.updateTime ? '&currentDocument.updateTime=' + encodeURIComponent(doc.updateTime) : '');
+  var r = await fetch(url, {method:'PATCH', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({fields:{email:{stringValue:email}, uid:{stringValue:u.localId}, linkedAt:{timestampValue:new Date().toISOString()}}})});
+  if(!r.ok){ _licErr('No se pudo vincular el código. Intenta de nuevo.'); return; }
+  var fresh = await _fsGet(code);
+  await licFinish(code, fresh, u.localId, email);
+}
+
+async function _licReset(email){
+  try{ await _authCall('sendOobCode', {requestType:'PASSWORD_RESET', email:email}); }
+  catch(e){ if(e.code !== 'EMAIL_NOT_FOUND') throw e; }
+  licSetMode('login', '<span style="color:#00e676">Si el correo está registrado, te enviamos un enlace para crear una nueva contraseña.</span>');
+}
+
+// Compatibilidad con llamadas antiguas
+async function activateLicense(){ return licSubmit(); }
+try { licSetMode('login'); } catch(e) {}
 var MSS=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
 var MONTHS=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 var DAYS=['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
@@ -3190,6 +3454,10 @@ var THEMES = {
     '--glow-b':'0 0 22px rgba(148,163,184,.28)','--glow-gold':'0 0 24px rgba(226,232,240,.28)',
     '--accent':'#64748b','--accent2':'#475569','--accentb':'#334155',
     '--ni-act-bg':'var(--card3)','--ni-act-border':'var(--bdr3)','--ni-act-color':'var(--text)',
+    // Panel derecho: sin tinte azul-violeta
+    '--rp-tint':'transparent','--rp-av-a':'#64748b','--rp-av-b':'#334155','--rp-badge-bg':'rgba(148,163,184,.16)',
+    '--rp-ind-bg':'rgba(148,163,184,.10)','--rp-ind-bd':'rgba(148,163,184,.28)','--rp-ind-fg':'#cbd5e1',
+    '--rp-lbl':'#64748b','--rp-row-bd':'rgba(148,163,184,.12)',
   },
 
 };
@@ -3199,6 +3467,7 @@ var _currentTheme = 'dark';
 function applyTheme(id){
   var theme = THEMES[id] || THEMES['dark'];
   var root = document.documentElement;
+  ['--rp-tint','--rp-av-a','--rp-av-b','--rp-badge-bg','--rp-ind-bg','--rp-ind-bd','--rp-ind-fg','--rp-lbl','--rp-row-bd'].forEach(function(k){ root.style.removeProperty(k); });
   Object.keys(theme).forEach(function(k){
     if(k.startsWith('--')) root.style.setProperty(k, theme[k]);
   });
@@ -3847,7 +4116,7 @@ function startLicensePolling(){
     try { stored = JSON.parse(localStorage.getItem('ttlic') || 'null'); } catch(e) {}
     if(!stored || !stored.key){
       _stopPolling();
-      freezeApp('Tu sesión expiró. Vuelve a ingresar tu código de acceso.');
+      freezeApp('Tu sesión expiró. Vuelve a iniciar sesión.');
       return;
     }
     try{
@@ -3873,24 +4142,14 @@ function startLicensePolling(){
         return;
       }
 
-      // ❷ Verificar que ESTE dispositivo sigue en la lista
-      var authorizedDevices = [];
-      if(f.devices && f.devices.arrayValue && f.devices.arrayValue.values){
-        authorizedDevices = f.devices.arrayValue.values.map(function(v){return v.stringValue||'';}).filter(Boolean);
-      } else if(f.lastDevice && f.lastDevice.stringValue){
-        authorizedDevices = [f.lastDevice.stringValue];
-      }
-
-      // <svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> FIX v2: Matching amplio (fingerprint puro O formato viejo)
-      var stillAuthorized = authorizedDevices.length === 0 || authorizedDevices.some(function(d){ return isThisDevice(d); });
-
-      if(!stillAuthorized){
-        // Dispositivo ya no está en la lista → fue reseteado
+      // ❷ Sesión válida: la cuenta debe seguir vinculada a este correo y no haber sido "reseteada"
+      var _pUid = _fv(f,'uid');
+      var _pReset = (f.resetAt && f.resetAt.timestampValue) ? Date.parse(f.resetAt.timestampValue) : 0;
+      if((_pUid && stored.uid && _pUid !== stored.uid) || (_pReset && _pReset > (stored.loginAt || stored.activatedAt || 0))){
         _stopPolling();
-        // <svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Guardar clave para recuperación de datos al re-activar
         if(stored.key) localStorage.setItem('ttlic_revoked_key', stored.key);
         localStorage.removeItem('ttlic');
-        freezeApp('<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 1 21h22L12 2z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Esta licencia fue reseteada por el administrador.\nVuelve a ingresar tu código para registrar este dispositivo.');
+        freezeApp('Tu sesión fue cerrada por el administrador.\nVuelve a iniciar sesión con tu correo y contraseña.');
         return;
       }
 
@@ -4643,6 +4902,28 @@ function togChallenge(){
 }
 
 // SORTED
+// Orden de las operaciones dentro de un mismo día.
+// Todas las operaciones (manuales, Tradovate y MT5) se ordenan por su hora normal de Nueva York dentro del día.
+function tradeDayOrder(t){
+  var m = String(t.time||'').match(/^(\d{1,2}):(\d{2})/);
+  if(!m) return -2000;
+  var mins = (+m[1])*60 + (+m[2]);
+  return mins;
+}
+// Hora de la operación; si entró un día distinto al que se muestra (posición cerrada al día siguiente), agrega el día real de entrada
+function tradeTimeLbl(t){
+  var tm = t.time || '—';
+  if(t.edate && t.edate !== t.date){
+    var d = new Date(t.edate + 'T12:00:00');
+    tm += '<span style="display:block;font-size:8px;line-height:1.1;opacity:.75">' + ['dom','lun','mar','mié','jue','vie','sáb'][d.getDay()] + ' ' + d.getDate() + '</span>';
+  }
+  return tm;
+}
+function cmpTradeTime(a,b){
+  var ea = a.edate || a.date, eb = b.edate || b.date;
+  if(ea !== eb) return ea < eb ? -1 : 1;   // entradas de la noche anterior van primero
+  return tradeDayOrder(a) - tradeDayOrder(b) || String(a.time||'').localeCompare(String(b.time||''));
+}
 function getSorted(){
   var yr=g('fy')&&g('fy').value?g('fy').value:'';
   var mo=g('fm')&&g('fm').value?g('fm').value:'';
@@ -4658,7 +4939,7 @@ function getSorted(){
     if(tfV&&(t.tf||'')!==tfV)return false;
     if(resV&&t.result!==resV)return false;
     return true;
-  }).sort(function(a,b){var r=a.date.localeCompare(b.date);return r!==0?r:(a.time||'').localeCompare(b.time||'');});
+  }).sort(function(a,b){var r=a.date.localeCompare(b.date);return r!==0?r:cmpTradeTime(a,b);});
 }
 function totals(){
   var t=S.trades,a=acct();
@@ -5135,8 +5416,7 @@ function renderDash(){
     var sub=g('dd-sublabel');if(sub)sub.textContent=isWinning?'Progresando hacia el objetivo de '+(s.profitTarget||10)+'%':'Pérdida acumulada — Límite: '+(s.maxTotalLoss||10)+'%';
     var f=g('ddfill');if(f){f.style.width=Math.min(barPct,100)+'%';f.style.background=barCol;}
     var dp=g('ddpct');if(dp){dp.textContent=(isWinning?'+':'-')+Math.abs(profPct).toFixed(2)+'%';dp.style.color=isWinning?'#00e676':'#ff5252';}
-    var remainingToLimit=(s.maxTotalLoss||10)-Math.abs(profPct);
-    var dal=g('ddal');if(dal)dal.innerHTML=(!isWinning&&remainingToLimit<=0.6)?('<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 1 21h22L12 2z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Cerca del límite'):'';
+    var dal=g('ddal');if(dal)dal.innerHTML=isWinning?'':('<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 1 21h22L12 2z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Alerta: '+(s.maxTotalLoss*s.alertAt/100).toFixed(1)+'%');
     var dlm=g('ddlim');if(dlm){dlm.innerHTML=isWinning?'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg> Meta: '+(s.profitTarget||10)+'%':'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7" fill="currentColor" stroke="none"/></svg> Límite: '+(s.maxTotalLoss||10)+'%';dlm.style.color=isWinning?'#00e676':'#ff1744';}
     var ll=g('dd-left-label');if(ll)ll.textContent=isWinning?'Ganancia: +'+profPct.toFixed(2)+'%':'Pérdida: -'+Math.abs(profPct).toFixed(2)+'%';
     var dg=g('ddgoal');if(dg){dg.innerHTML=profPct.toFixed(2)+'% / '+(isWinning?(s.profitTarget||10):( s.maxTotalLoss||10))+'%'+(isWinning&&profPct>=(s.profitTarget||10)?' <svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z"/></svg> ¡META!':!isWinning&&Math.abs(profPct)>=(s.maxTotalLoss||10)?' <svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-3-2-4-2-7 0 3-2 4-4 2 0 2-1 3-1 5a2 2 0 0 0-2 0c0-1 0-3 1-5-3 1-5 3-5 5a6 6 0 0 0 6 7z"/></svg> QUEMADA':'');dg.style.color=isWinning?'#00e676':'#ff5252';}
@@ -5283,7 +5563,7 @@ function dashRenderInsights(trades){
   if(trades.length<3){el.innerHTML='<div style="color:var(--gray2);font-size:10px;text-align:center;padding:10px">Registra más operaciones para ver recomendaciones.</div>';return;}
 
   var recs=[];
-  var sorted2=trades.slice().sort(function(a,b){return a.date.localeCompare(b.date);});
+  var sorted2=trades.slice().sort(function(a,b){return a.date.localeCompare(b.date)||cmpTradeTime(a,b);});
   var tp=trades.filter(function(t){return t.result==='TP';});
   var sl=trades.filter(function(t){return t.result==='SL';});
   var wr=(tp.length+sl.length)?tp.length/(tp.length+sl.length):0;
@@ -5318,7 +5598,7 @@ function dashRenderInsights(trades){
   var aArr=Object.keys(byA).filter(function(a){return byA[a].total>=2;});
   if(aArr.length>=1){
     var bestA=aArr.reduce(function(b,a){return byA[a].pnl>byA[b].pnl?a:b;},aArr[0]);
-    if(byA[bestA].pnl>0)recs.push({p:4,icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',c:'var(--cyan)',t:bestA+' es tu activo más rentable — especialízate'});
+    recs.push({p:4,icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',c:'var(--cyan)',t:bestA+' es tu activo más rentable — especialízate'});
     if(aArr.length>=2){var worstA=aArr.reduce(function(b,a){return byA[a].pnl<byA[b].pnl?a:b;},aArr[0]);if(byA[worstA].pnl<0)recs.push({p:2,icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7" fill="currentColor" stroke="none"/></svg>',c:'var(--red)',t:worstA+' te genera pérdidas — revisa tus entradas'});}
   }
 
@@ -5468,7 +5748,7 @@ function renderCal(){
       var pc=isPureBE?'be':(data.pnl>=0?'pos':'neg');
       inner+='<div class="cpnl '+pc+'">'+(data.pnl>=0?'+$':'-$')+Math.abs(data.pnl).toFixed(2)+'</div>';
       var tot=(data.tp||0)+(data.sl||0)+(data.be||0);
-      if(tot>0)inner+='<div class="cal-cell-ops">'+tot+(tot===1?' operación':' operaciones')+'</div>';
+      if(tot>0)inner+='<div class="cal-cell-ops">'+tot+(tot===1?' OP':' OPS')+'</div>';
     }
     html+='<div class="'+cls+'" onclick="selectDay('+day+')">'+inner+'</div>';
   }
@@ -5492,7 +5772,7 @@ function selectDay(d){
   // ── PANEL DETALLE: mostrar operaciones del día en panel derecho ──
   try{
     var _ds=dateVal;
-    var _dt=(S&&S.trades?S.trades:[]).filter(function(t){return t.date===_ds;}).sort(function(a,b){return(a.time||'').localeCompare(b.time||'');});
+    var _dt=(S&&S.trades?S.trades:[]).filter(function(t){return t.date===_ds;}).sort(cmpTradeTime);
     var _ph=document.getElementById('rp-placeholder'),_cn=document.getElementById('rp-content');
     if(!_dt.length){
       if(_ph)_ph.style.display='flex';
@@ -5577,7 +5857,7 @@ function showDayOpsSheet(trades, dateStr){
       ' onmouseover="this.style.background=\'var(--card3)\'" onmouseout="this.style.background=\'var(--card2)\'">';
     html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">';
     html += '<div style="display:flex;align-items:center;gap:8px">';
-    html += '<span style="font-size:10px;color:var(--gray2);font-family:&quot;DM Sans&quot;,system-ui,sans-serif">'+(t.time||'—')+'</span>';
+    html += '<span style="font-size:10px;color:var(--gray2);font-family:&quot;DM Sans&quot;,system-ui,sans-serif">'+tradeTimeLbl(t)+'</span>';
     html += '<span style="font-size:14px;font-weight:900;font-family:&quot;DM Sans&quot;,system-ui,sans-serif;color:var(--text)">'+(t.asset||'—')+'</span>';
     html += '<span class="'+(t.result==='TP'?'btp':(t.result==='BE'?'bbe':'bsl'))+'" style="font-size:10px;padding:2px 6px">'+t.result+'</span>';
     html += '</div>';
@@ -5603,7 +5883,7 @@ function renderDayDetail(){
   if(!selDay){detail.style.display='none';return;}
   var mo=String(calMonth+1).padStart(2,'0'),dy=String(selDay).padStart(2,'0');
   var ds=calYear+'-'+mo+'-'+dy;
-  var dt=S.trades.filter(function(t){return t.date===ds;}).sort(function(a,b){return(a.time||'').localeCompare(b.time||'');});
+  var dt=S.trades.filter(function(t){return t.date===ds;}).sort(cmpTradeTime);
   var title=g('day-detail-title');
   if(title)title.textContent='Operaciones del '+String(selDay)+' de '+MONTHS[calMonth].toLowerCase();
   var badge=g('day-detail-badge');
@@ -5620,7 +5900,7 @@ function renderDayDetail(){
     var rr=t.rr?'1:'+t.rr:'—';
     var hasNote=noteTxt?'<span style="display:inline-block;width:8px;height:8px;background:var(--green);border-radius:50%;vertical-align:middle;margin-left:3px"></span>':'';
     return'<tr onclick="openTDPById(\''+t.id+'\',\''+ds+'\','+tIdx+')" class="'+(editId===t.id?'sel-row':'')+'">'+
-      '<td style="color:var(--cyan);font-family:\'DM Sans\',sans-serif;font-size:10px">'+( t.time||'—')+'</td>'+
+      '<td style="color:var(--cyan);font-family:\'DM Sans\',sans-serif;font-size:10px">'+tradeTimeLbl(t)+'</td>'+
       '<td style="font-weight:700;color:var(--blue)"><span style="font-size:10px;color:var(--gray2);margin-right:2px">›</span>'+t.asset+'</td>'+
       '<td><span style="font-size:10px;color:var(--gray2);margin-right:2px">›</span><span style="color:'+(t.direction==='BUY'?'var(--green)':'var(--red)')+'">'+( t.direction==='BUY'?'Compra':'Venta')+'</span></td>'+
       '<td style="color:var(--gray2);font-size:10px">'+(t.tf||'—')+'</td>'+
@@ -5737,7 +6017,7 @@ function renderTable(){
     var tfDisp = t.tf ? '<span style="font-size:10px;background:rgba(59,130,246,.15);color:var(--blue);padding:2px 5px;border-radius:4px;">'+t.tf+'</span>' : '—';
     var sessDisp = t.session ? '<span style="font-size:10px;background:rgba(245,158,11,.12);color:var(--gold);padding:2px 5px;border-radius:4px;">'+t.session+'</span>' : '—';
     var tagsDisp = t.tags ? t.tags.split(',').filter(Boolean).map(function(tg){return'<span style="font-size:9px;background:rgba(139,92,246,.15);color:#a78bfa;padding:1px 5px;border-radius:8px;">'+tg.trim()+'</span>';}).join(' ') : '—';
-    return'<tr><td style="color:var(--gray2);font-size:9px">'+(sorted.length-i)+'</td><td>'+toD(t.date)+'</td><td style="color:var(--cyan)">'+( t.time||'—')+'</td><td style="color:var(--blue);font-weight:700">'+t.asset+'</td><td><span class="'+(t.direction==='BUY'?'bbuy':'bsell')+'">'+(t.direction||'—')+'</span></td><td><span class="'+(t.result==='TP'?'btp':(t.result==='BE'?'bbe':'bsl'))+'">'+t.result+'</span></td><td class="'+(t.pnl>=0?'pp':'pn')+'">'+fU(t.pnl)+'</td><td>'+rrDisp+'</td><td>'+tfDisp+'</td><td>'+sessDisp+'</td><td style="color:var(--gray2);font-size:10px">'+(t.strategy||'—')+'</td><td>'+tagsDisp+'</td><td style="text-align:center;white-space:nowrap"><button class="icon-btn edit" onclick="editTrade('+t.id+')"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></button><button class="icon-btn del" onclick="delTrade('+t.id+')" style="margin-left:3px"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13"/></svg></button></td></tr>';
+    return'<tr><td style="color:var(--gray2);font-size:9px">'+(sorted.length-i)+'</td><td>'+toD(t.date)+'</td><td style="color:var(--cyan)">'+tradeTimeLbl(t)+'</td><td style="color:var(--blue);font-weight:700">'+t.asset+'</td><td><span class="'+(t.direction==='BUY'?'bbuy':'bsell')+'">'+(t.direction||'—')+'</span></td><td><span class="'+(t.result==='TP'?'btp':(t.result==='BE'?'bbe':'bsl'))+'">'+t.result+'</span></td><td class="'+(t.pnl>=0?'pp':'pn')+'">'+fU(t.pnl)+'</td><td>'+rrDisp+'</td><td>'+tfDisp+'</td><td>'+sessDisp+'</td><td style="color:var(--gray2);font-size:10px">'+(t.strategy||'—')+'</td><td>'+tagsDisp+'</td><td style="text-align:center;white-space:nowrap"><button class="icon-btn edit" onclick="editTrade('+t.id+')"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></button><button class="icon-btn del" onclick="delTrade('+t.id+')" style="margin-left:3px"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13"/></svg></button></td></tr>';
   }).join(''):'<tr><td colspan="11" style="text-align:center;color:var(--gray2);padding:30px">Sin operaciones</td></tr>';
 }
 
@@ -5761,7 +6041,7 @@ function renderStats(){
   // <svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Usar S.trades completo — getSorted() aplicaría filtros del Registro
   // y contaminaría las estadísticas con datos incompletos
   var yTrades=[].concat(S.trades).filter(function(t){return t.date.startsWith(String(yr));})
-    .sort(function(a,b){var r=a.date.localeCompare(b.date);return r!==0?r:(a.time||'').localeCompare(b.time||'');});
+    .sort(function(a,b){var r=a.date.localeCompare(b.date);return r!==0?r:cmpTradeTime(a,b);});
   var mSt=MONTHS.map(function(_,i){
     var f=yTrades.filter(function(t){return+t.date.split('-')[1]===i+1;});
     var tp=f.filter(function(t){return t.result==='TP';}).length;
@@ -6047,7 +6327,7 @@ function renderA(){
     var hlRow=g('a-highlight-row');
     var st=getAdvancedStats(ft);
     if(hlRow&&st){
-      var sorted2=ft.slice().sort(function(a,b){return a.date.localeCompare(b.date)||(a.time||'').localeCompare(b.time||'');});
+      var sorted2=ft.slice().sort(function(a,b){return a.date.localeCompare(b.date)||cmpTradeTime(a,b);});
       var mWS=0,mLS=0,cWS=0,cLS=0;
       sorted2.forEach(function(t){if(t.result==='TP'){cWS++;cLS=0;if(cWS>mWS)mWS=cWS;}else if(t.result==='SL'){cLS++;cWS=0;if(cLS>mLS)mLS=cLS;}});
       var hl=[
@@ -6214,7 +6494,7 @@ window.aResetFilters = function(){
 function aRenderEquity(ft){
   var el=g('a-equity');if(!el)return;
   var mode=g('a-equity-mode');var daily=(mode&&mode.value==='diario');
-  var sorted=ft.slice().sort(function(a,b){return a.date.localeCompare(b.date)||(a.time||'').localeCompare(b.time||'');});
+  var sorted=ft.slice().sort(function(a,b){return a.date.localeCompare(b.date)||cmpTradeTime(a,b);});
   var labels=[],data=[],cum=0;
   sorted.forEach(function(t){
     cum+=(t.pnl||0);
@@ -6309,7 +6589,7 @@ function aRenderInstrList(ft,targetId){
   var el=g(targetId);if(!el)return;
   var byI={};
   ft.forEach(function(t){var k=t.asset||'Sin activo';if(!byI[k])byI[k]={pnl:0,total:0,tp:0};byI[k].pnl+=(t.pnl||0);byI[k].total++;if(t.result==='TP')byI[k].tp++;});
-  var arr=Object.keys(byI).map(function(k){return{name:k,pnl:byI[k].pnl,total:byI[k].total,wr:byI[k].total?byI[k].tp/byI[k].total*100:0};}).sort(function(a,b){return b.pnl-a.pnl;});
+  var arr=Object.keys(byI).map(function(k){return{name:k,pnl:byI[k].pnl,total:byI[k].total,tp:byI[k].tp,wr:byI[k].total?byI[k].tp/byI[k].total*100:0};}).sort(function(a,b){return b.pnl-a.pnl;});
   var maxAbs=Math.max.apply(null,arr.map(function(d){return Math.abs(d.pnl);}).concat([1]));
   el.innerHTML=arr.map(function(d){
     var pct=Math.round(Math.abs(d.pnl)/maxAbs*100);
@@ -6320,7 +6600,7 @@ function aRenderInstrList(ft,targetId){
       +'<div style="flex:1;height:6px;background:var(--bdr);border-radius:3px;overflow:hidden">'
       +'<div style="width:'+pct+'%;height:100%;background:'+barCol+';border-radius:3px"></div></div>'
       +'<div style="width:55px;text-align:right;font-size:10px;font-weight:700;color:'+col+';font-family:\'DM Sans\',sans-serif">'+fU(d.pnl)+'</div>'
-      +'<div style="width:30px;text-align:right;font-size:9px;color:var(--gray2)">'+d.wr.toFixed(0)+'%</div>'
+      +'<div title="Win rate: '+d.tp+' de '+d.total+' operaciones ganadas (TP)" style="width:48px;text-align:right;line-height:1.25;flex-shrink:0"><div style="font-size:10px;font-weight:700;color:var(--text)">'+d.wr.toFixed(0)+'% WR</div><div style="font-size:8.5px;color:var(--gray2)">'+d.total+(d.total===1?' op':' ops')+'</div></div>'
       +'</div>';
   }).join('');
 }
@@ -6373,7 +6653,7 @@ window.aExportReport = function(){toast('<svg class="ic" width="14" height="14" 
 function clearAF(){window.aResetFilters&&window.aResetFilters();}
 function renderStreaks(trades){
   var se=g('streak-kpis'),st=document.querySelector('#tstreak tbody');if(!se)return;
-  var srt=[].concat(trades).sort(function(a,b){var r=a.date.localeCompare(b.date);return r!==0?r:(a.time||'').localeCompare(b.time||'');});
+  var srt=[].concat(trades).sort(function(a,b){var r=a.date.localeCompare(b.date);return r!==0?r:cmpTradeTime(a,b);});
   var mTP=0,mSL=0,cTP=0,cSL=0;
   var ws=srt.map(function(t){
     if(t.result==='TP'){cTP++;cSL=0;}else if(t.result==='SL'){cSL++;cTP=0;}else{cTP=0;cSL=0;}
@@ -6511,13 +6791,151 @@ function exportCSV(){
   toast('<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> CSV exportado — '+( rows.length-1)+' operaciones');
 }
 
+// ── Elegir origen del archivo (MT5 o Tradovate) antes de importar ─────────
+var IMP_TZS = [
+  ['America/Guayaquil','Ecuador'],['America/Bogota','Colombia'],['America/Lima','Perú'],['America/Mexico_City','México'],
+  ['America/Panama','Panamá'],['America/Costa_Rica','Costa Rica'],['America/Guatemala','Guatemala'],['America/Santo_Domingo','Rep. Dominicana'],
+  ['America/Caracas','Venezuela'],['America/La_Paz','Bolivia'],['America/Santiago','Chile'],['America/Argentina/Buenos_Aires','Argentina'],
+  ['America/Montevideo','Uruguay'],['America/Asuncion','Paraguay'],['America/Sao_Paulo','Brasil'],
+  ['Europe/Madrid','España'],['Europe/Lisbon','Portugal'],['Europe/London','Reino Unido'],['Europe/Paris','Francia / Alemania / Italia'],
+  ['America/New_York','EE. UU. Este (Nueva York)'],['America/Chicago','EE. UU. Centro (Chicago)'],['America/Denver','EE. UU. Montaña (Denver)'],
+  ['America/Los_Angeles','EE. UU. Pacífico (Los Ángeles)'],['UTC','UTC']
+];
+window.openImportSource = function(){
+  var m = document.getElementById('imp-src-mo'); if(!m) return;
+  document.getElementById('imp-step1').style.display = 'block';
+  document.getElementById('imp-step2').style.display = 'none';
+  m.classList.add('show');
+};
+window.importSourceBack = function(){
+  document.getElementById('imp-step1').style.display = 'block';
+  document.getElementById('imp-step2').style.display = 'none';
+};
+window._openImportFile = function(src){
+  window._impSrc = src;
+  var m = document.getElementById('imp-src-mo'); if(m) m.classList.remove('show');
+  var inp = document.getElementById('imp-file'); if(!inp) return;
+  inp.accept = (src === 'mt5') ? '.xlsx,.xls' : '.csv';
+  inp.value = '';
+  inp.click();
+};
+window.pickImportSource = function(src){
+  window._impPending = src;
+  // Preparar la lista de zonas (solo se usa con Tradovate en modo Nueva York)
+  var saved = ''; try{ saved = localStorage.getItem('tt_tv_tz') || ''; }catch(e){}
+  var browserTz = ''; try{ browserTz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; }catch(e){}
+  var cur = saved || browserTz || 'America/Guayaquil';
+  var list = IMP_TZS.slice();
+  if(!list.some(function(z){ return z[0] === cur; })) list.unshift([cur, cur.replace(/_/g,' ') + ' (tu zona)']);
+  var sel = document.getElementById('imp-tz');
+  sel.innerHTML = list.map(function(z){ return '<option value="'+z[0]+'"'+(z[0]===cur?' selected':'')+'>'+z[1]+'</option>'; }).join('');
+  var savedSrv = 'ny7'; try{ savedSrv = localStorage.getItem('tt_mt5_srv') || 'ny7'; }catch(e){}
+  var srvSel = document.getElementById('imp-mt5-srv');
+  if(srvSel){ srvSel.value = savedSrv; if(srvSel.value !== savedSrv) srvSel.value = 'ny7'; }
+  // Recordar la última opción de horas elegida
+  var mode = 'ny'; try{ mode = localStorage.getItem('tt_imp_mode') === 'file' ? 'file' : 'ny'; }catch(e){}
+  Array.prototype.forEach.call(document.getElementsByName('imp-mode'), function(r){ r.checked = (r.value === mode); });
+  document.getElementById('imp-step1').style.display = 'none';
+  document.getElementById('imp-step2').style.display = 'block';
+  var grp = 'pos'; try{ grp = localStorage.getItem('tt_imp_grp') === 'entry' ? 'entry' : 'pos'; }catch(e){}
+  Array.prototype.forEach.call(document.getElementsByName('imp-grp'), function(r){ r.checked = (r.value === grp); });
+  updateImpStep2();
+};
+window.updateImpStep2 = function(){
+  var r = document.querySelector('input[name="imp-mode"]:checked');
+  var gw = document.getElementById('imp-grp-wrap');
+  if(gw) gw.style.display = (window._impPending === 'tv') ? 'block' : 'none';
+  var wrap = document.getElementById('imp-tz-wrap');
+  if(wrap) wrap.style.display = (window._impPending === 'tv' && r && r.value === 'ny') ? 'block' : 'none';
+  var w2 = document.getElementById('imp-mt5-wrap');
+  if(w2) w2.style.display = (window._impPending === 'mt5' && r && r.value === 'ny') ? 'block' : 'none';
+};
+window.confirmImportTz = function(){
+  var gr = document.querySelector('input[name="imp-grp"]:checked');
+  window._impGroup = (gr && gr.value === 'entry') ? 'entry' : 'pos';
+  try{ localStorage.setItem('tt_imp_grp', window._impGroup); }catch(e){}
+  var r = document.querySelector('input[name="imp-mode"]:checked');
+  var mode = (r && r.value === 'file') ? 'file' : 'ny';
+  window._impMode = mode;
+  try{ localStorage.setItem('tt_imp_mode', mode); }catch(e){}
+  if(window._impPending === 'tv' && mode === 'ny'){
+    var tz = document.getElementById('imp-tz').value || 'America/Guayaquil';
+    window._impTz = tz;
+    try{ localStorage.setItem('tt_tv_tz', tz); }catch(e){}
+  }
+  if(window._impPending === 'mt5' && mode === 'ny'){
+    var ss = document.getElementById('imp-mt5-srv');
+    window._impMt5Srv = ss.value || 'ny7';
+    window._impMt5Label = ss.options[ss.selectedIndex].text;
+    try{ localStorage.setItem('tt_mt5_srv', window._impMt5Srv); }catch(e){}
+  }
+  window._openImportFile(window._impPending || 'tv');
+};
+
 // ── Importar CSV con upsert + preview + confirmación ────────────────────
 window.importCSV = function(input){
   var file = input.files[0]; if(!file) return;
+  var isXlsx = /\.xlsx?$/i.test(file.name);
+  var _src = window._impSrc || '';
+  var IMP_FILE_TIME = (window._impMode === 'file');   // true = guardar la hora del archivo sin convertir
+  var IMP_BY_POS = (window._impGroup !== 'entry');    // true = día y conteo como Tradovate (por posición); false = día de entrada con parciales unidos
+  // Une las filas de un mismo cierre parcial en UNA sola operación (suma P&L y volumen, precio de salida promedio).
+  // grp: [{id, ord, pnl, vol, exit}]  ·  base: datos de la operación (de la primera fila)
+  var impDec = function(x){ var m = String(x).match(/\.(\d+)/); return m ? m[1].length : 0; };
+  var impMerge = function(grp, base){
+    grp.sort(function(a,b){ return a.ord - b.ord; });
+    var out = Object.assign({}, base);
+    out.id = grp[0].id;
+    if(grp.length > 1){
+      var vol = 0, sum = 0, pnl = 0, ok = true, dec = 0;
+      grp.forEach(function(x){
+        vol += x.vol; pnl += x.pnl;
+        var n = parseFloat(x.exit);
+        if(isNaN(n) || !x.vol) ok = false; else sum += n * x.vol;
+        dec = Math.max(dec, impDec(x.exit));
+      });
+      out.pnl = Math.round(pnl * 100) / 100;
+      out.result = out.pnl > 0 ? 'TP' : (out.pnl < 0 ? 'SL' : 'BE');
+      if(vol) out.volume = String(Math.round(vol * 1e6) / 1e6);
+      if(ok && vol) out.exit = (sum / vol).toFixed(dec);
+      var seen = {}; out._merged = [];
+      grp.forEach(function(x){ if(!seen[x.id]){ seen[x.id] = 1; out._merged.push(x.id); } });
+    }
+    return out;
+  };
+  // Utilidades de zona horaria (para el horario del servidor MT5)
+  var impNYfmt = new Intl.DateTimeFormat('en-CA', {timeZone:'America/New_York', hourCycle:'h23', year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit'});
+  var impNY = function(utcMs){
+    var p = {}; impNYfmt.formatToParts(new Date(utcMs)).forEach(function(x){ p[x.type] = x.value; });
+    return { date: p.year+'-'+p.month+'-'+p.day, time: p.hour+':'+p.minute };
+  };
+  var impZonedToUtc = function(guess, tz){
+    var f = new Intl.DateTimeFormat('en-US', {timeZone:tz, hourCycle:'h23', year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit'});
+    var off = function(u){ var q = {}; f.formatToParts(new Date(u)).forEach(function(x){ q[x.type] = x.value; });
+      return Date.UTC(+q.year, +q.month-1, +q.day, +q.hour, +q.minute, +q.second) - Math.floor(u/1000)*1000; };
+    var ms = guess - off(guess);
+    return guess - off(ms);   // segunda pasada: corrige cambios de horario de verano
+  };
+  if(_src === 'mt5' && !isXlsx){ toast('Elegiste MT5: el archivo debe ser Excel (.xlsx)','var(--red)'); input.value=''; return; }
+  if(_src === 'tv' && isXlsx){ toast('Elegiste Tradovate: el archivo debe ser CSV','var(--red)'); input.value=''; return; }
+  if(isXlsx && !window.XLSX){
+    var sc = document.createElement('script');
+    sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+    sc.onload = function(){ window.importCSV(input); };
+    sc.onerror = function(){ toast('No se pudo cargar el lector de Excel. Revisa tu conexión e intenta de nuevo.','var(--red)'); input.value=''; };
+    document.head.appendChild(sc);
+    return;
+  }
   var reader = new FileReader();
   reader.onload = function(e){
     try{
-      var lines = e.target.result.split(/\r?\n/).filter(function(l){ return l.trim(); });
+      // .xlsx (reporte MT5): se lee como tabla de filas; .csv: como texto
+      var mt5Rows = null;
+      if(e.target.result instanceof ArrayBuffer){
+        var wbk = XLSX.read(new Uint8Array(e.target.result), {type:'array'});
+        mt5Rows = XLSX.utils.sheet_to_json(wbk.Sheets[wbk.SheetNames[0]], {header:1, raw:true, defval:''});
+      }
+      var lines = mt5Rows ? ['mt5','mt5'] : e.target.result.split(/\r?\n/).filter(function(l){ return l.trim(); });
       if(lines.length < 2){ toast('<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> CSV vacío o inválido','var(--red)'); return; }
       // Parsear header
       function parseRow(line){
@@ -6548,7 +6966,151 @@ window.importCSV = function(input){
         notes:   headers.findIndex(function(h){ return h.includes('nota'); })
       };
       var parsed = [];
-      lines.slice(1).forEach(function(line, li){
+      // ── Formato Tradovate (Performance.csv): columnas en inglés, una fila por operación cerrada ──
+      // Se ignoran espacios y guiones bajos en los títulos (Performance: boughtTimestamp · Position History: Bought Timestamp)
+      var hn = headers.map(function(h){ return h.replace(/[\s_]/g,''); });
+      var isTV = hn.indexOf('boughttimestamp') >= 0 && hn.indexOf('soldtimestamp') >= 0;
+      if(_src === 'tv' && !isTV){ toast('Este archivo no parece de Tradovate (Position History / Performance)','var(--red)'); input.value=''; return; }
+      if(isTV){
+        var hi = function(){ for(var k=0;k<arguments.length;k++){ var x=hn.indexOf(arguments[k]); if(x>=0) return x; } return -1; };
+        var iSym=hi('symbol','product','contract'), iQty=hi('qty','pairedqty'), iBP=hi('buyprice'), iSP=hi('sellprice'), iPnl=hi('pnl','p/l'),
+            iBT=hi('boughttimestamp'), iST=hi('soldtimestamp'), iBF=hi('buyfillid'), iSF=hi('sellfillid'), iTD=hi('tradedate'), iPT=hi('timestamp');
+        // Fecha en formato MM/DD/AAAA HH:MM:SS.
+        // El archivo viene en la zona horaria que el usuario eligió al importar (por defecto Ecuador) y se convierte
+        // a hora de Nueva York. Ambas zonas respetan su horario de verano/invierno automáticamente.
+        var TV_TZ = window._impTz || 'America/Guayaquil';
+        var TV_SRC = null;
+        try{ TV_SRC = new Intl.DateTimeFormat('en-US', {timeZone:TV_TZ, hourCycle:'h23', year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit'}); }
+        catch(eTz){ TV_TZ = 'America/Guayaquil'; TV_SRC = new Intl.DateTimeFormat('en-US', {timeZone:TV_TZ, hourCycle:'h23', year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit'}); }
+        // Diferencia (ms) entre la hora local de la zona del archivo y UTC en un instante dado
+        var tvOff = function(utcMs){
+          var q = {};
+          TV_SRC.formatToParts(new Date(utcMs)).forEach(function(x){ q[x.type] = x.value; });
+          return Date.UTC(+q.year, +q.month-1, +q.day, +q.hour, +q.minute, +q.second) - Math.floor(utcMs/1000)*1000;
+        };
+        var TV_NY = new Intl.DateTimeFormat('en-CA', {timeZone:'America/New_York', hourCycle:'h23',
+          year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit'});
+        var tvTs = function(str){
+          var m = String(str||'').match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})[ T](\d{1,2}):(\d{2})(?::(\d{2}))?/);
+          if(!m) return null;
+          var guess = Date.UTC(+m[3], +m[1]-1, +m[2], +m[4], +m[5], +(m[6]||0));
+          if(IMP_FILE_TIME){   // hora tal como viene en el archivo, sin convertir
+            var p2f = function(n){ return ('0'+n).slice(-2); };
+            return { date: m[3]+'-'+p2f(m[1])+'-'+p2f(m[2]), time: p2f(m[4])+':'+m[5], key: guess, h: +m[4] };
+          }
+          var ms = guess - tvOff(guess);
+          ms = guess - tvOff(ms);   // segunda pasada: corrige cambios de horario de verano
+          var p = {};
+          TV_NY.formatToParts(new Date(ms)).forEach(function(x){ p[x.type] = x.value; });
+          return { date: p.year+'-'+p.month+'-'+p.day, time: p.hour+':'+p.minute, key: ms, h: +p.hour };
+        };
+        // Dinero: $156.25 · $(81.25) = negativo
+        var tvMoney = function(str){
+          str = String(str||'').trim();
+          var neg = /^-?\$?\(.*\)$/.test(str) || str.indexOf('-') >= 0;
+          var n = parseFloat(str.replace(/[^0-9.]/g,'')) || 0;
+          return Math.round((neg ? -n : n) * 100) / 100;
+        };
+        var tvG = {}, tvOrder = [];
+        lines.slice(1).forEach(function(line, li){
+          var c = parseRow(line);
+          var b = tvTs(c[iBT]), so = tvTs(c[iST]);
+          if(!b || !so) return;
+          var isLong = b.key <= so.key;           // compró primero = BUY; vendió primero = SELL
+          var e = isLong ? b : so;                // fecha y hora de entrada
+          var pnl = tvMoney(c[iPnl]);
+          // Día de la operación = fecha de NUEVA YORK de la hora de ENTRADA (la hora de cierre no cuenta).
+          // Pasada la medianoche de Nueva York ya es el día siguiente.
+          // Como Tradovate: cada operación va al día en que Tradovate registra su POSICIÓN (columna Timestamp = cierre
+          // de la posición completa) y cada registro es una fila. Por hora de entrada: día de entrada en NY.
+          var posTs = (IMP_BY_POS && iPT >= 0) ? tvTs(c[iPT]) : null;
+          var tdate = posTs ? posTs.date : e.date;
+          var oldId = (c[iBF] && c[iSF]) ? ('tv-'+c[iBF]+'-'+c[iSF]) : ('tv-'+e.key+'-'+li);
+          var entryFill = isLong ? c[iBF] : c[iSF];     // fill que abrió la operación
+          var exitFill  = isLong ? c[iSF] : c[iBF];     // fill que la cerró
+          var exitStr   = String((isLong ? c[iSP] : c[iBP]) || '').trim();
+          var gk = (entryFill && !IMP_BY_POS) ? ('E'+entryFill) : ('R'+li);   // por hora de entrada: misma entrada = misma operación (cierre parcial)
+          if(!tvG[gk]){ tvG[gk] = { grp: [], base: {
+            date:      tdate,
+            edate:     e.date,
+            time:      e.time,
+            asset:     String(c[iSym]||'').toUpperCase().replace(/[FGHJKMNQUVXZ]\d{1,2}$/,''),
+            direction: isLong ? 'BUY' : 'SELL',
+            entry:     String((isLong ? c[iBP] : c[iSP]) || '').trim(),
+            strategy:  '', session: '', notes: ''
+          } }; tvOrder.push(gk); }
+          tvG[gk].grp.push({ id: oldId, ord: parseFloat(exitFill) || li, pnl: pnl, vol: parseFloat(c[iQty]) || 0, exit: exitStr });
+        });
+        tvOrder.forEach(function(gk){
+          var G = tvG[gk], f = G.grp[0];
+          var o = impMerge(G.grp, Object.assign({ pnl: f.pnl, result: f.pnl > 0 ? 'TP' : (f.pnl < 0 ? 'SL' : 'BE'), exit: f.exit, volume: f.vol ? String(f.vol) : '' }, G.base));
+          parsed.push(o);
+        });
+      }
+      // ── Reporte de historial de MT5 (Excel): sección "Posiciones", una fila por operación cerrada ──
+      var isMT5 = !!mt5Rows;
+      if(isMT5){
+        // La hora del servidor de IC Markets (y brokers con cierre en Nueva York) va SIEMPRE 7 h por delante de Nueva York:
+        // GMT+2 en invierno / GMT+3 en verano, con el cambio de horario de EE. UU. Por eso restar 7 h da la hora de Nueva York
+        // y se adapta solo al horario de verano e invierno.
+        var MT5_NY_DIFF_H = 7;
+        var MT5_SRV = window._impMt5Srv || 'ny7';   // horario del servidor elegido al importar
+        var mnum = function(v){ return typeof v === 'number' ? v : (parseFloat(String(v||'').replace(/[\s\u00a0]/g,'').replace(/,/g,'')) || 0); };
+        var p2 = function(n){ return ('0'+n).slice(-2); };
+        var mt5T = function(str){
+          var m = String(str||'').match(/^(\d{4})[.\-\/](\d{2})[.\-\/](\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?/);
+          if(!m) return null;
+          if(IMP_FILE_TIME){   // hora del servidor tal como viene en el archivo, sin convertir
+            return { day: m[1]+'-'+m[2]+'-'+m[3], time: m[4]+':'+m[5] };
+          }
+          var raw = Date.UTC(+m[1], +m[2]-1, +m[3], +m[4], +m[5], +(m[6]||0));
+          // día y hora = fecha y hora de NUEVA YORK de la apertura (pasada la medianoche de NY ya es el día siguiente)
+          if(MT5_SRV === 'ny7'){
+            var d = new Date(raw - MT5_NY_DIFF_H*3600000);
+            return { day: d.getUTCFullYear()+'-'+p2(d.getUTCMonth()+1)+'-'+p2(d.getUTCDate()), time: p2(d.getUTCHours())+':'+p2(d.getUTCMinutes()) };
+          }
+          var utc = (MT5_SRV.indexOf('fix:') === 0) ? raw - parseFloat(MT5_SRV.slice(4))*3600000 : impZonedToUtc(raw, MT5_SRV.slice(3));
+          var q = impNY(utc);
+          return { day: q.date, time: q.time };
+        };
+        var acct = '';
+        mt5Rows.slice(0, 12).forEach(function(r){
+          if(/cuenta|account/i.test(String(r[0]||''))){ var am = r.join(' ').match(/\d{5,}/); if(am) acct = am[0]; }
+        });
+        var start = -1;
+        for(var mi=0; mi<mt5Rows.length; mi++){
+          var h0 = String(mt5Rows[mi][0]||'').trim().toLowerCase();
+          if(h0 === 'posiciones' || h0 === 'positions'){ start = mi + 2; break; }
+        }
+        var mtG = {}, mtOrder = [];
+        if(start >= 0){
+          for(var mk=start; mk<mt5Rows.length; mk++){
+            var r = mt5Rows[mk];
+            if(!r[0] || /^(órdenes|ordenes|orders|transacciones|deals|resultados|results)/i.test(String(r[0]).trim())) break;
+            var typ = String(r[3]||'').toLowerCase();
+            var ot = mt5T(r[0]);
+            if(!ot || (typ !== 'buy' && typ !== 'sell')) continue;
+            // Beneficio neto = beneficio + comisión + swap (igual que "Beneficio Neto" del reporte de MT5)
+            var net = Math.round((mnum(r[12]) + mnum(r[10]) + mnum(r[11])) * 100) / 100;
+            // Misma apertura (activo, tipo, hora y precio de entrada) = misma operación con cierres parciales
+            var gk5 = [String(r[2]).toUpperCase(), typ, String(r[0]), String(r[5])].join('|');
+            if(!mtG[gk5]){ mtG[gk5] = { grp: [], base: {
+              date:      ot.day,
+              time:      ot.time,
+              asset:     String(r[2]||'').toUpperCase(),
+              direction: typ === 'sell' ? 'SELL' : 'BUY',
+              entry:     String(r[5]),
+              strategy:  '', session: '', notes: ''
+            } }; mtOrder.push(gk5); }
+            mtG[gk5].grp.push({ id: 'mt5-' + (acct ? acct + '-' : '') + r[1], ord: parseFloat(r[1]) || mk, pnl: net, vol: mnum(r[4]), exit: String(r[9]) });
+          }
+          mtOrder.forEach(function(gk5){
+            var G = mtG[gk5], f = G.grp[0];
+            parsed.push(impMerge(G.grp, Object.assign({ pnl: f.pnl, result: f.pnl > 0 ? 'TP' : (f.pnl < 0 ? 'SL' : 'BE'), exit: f.exit, volume: String(f.vol) }, G.base)));
+          });
+        }
+      }
+      (isTV || isMT5 ? [] : lines.slice(1)).forEach(function(line, li){
         var cols = parseRow(line);
         var pnl = parseFloat((cols[idx.pnl]||'0').replace(',','.')) || 0;
         var result = (cols[idx.result]||'').toUpperCase();
@@ -6572,17 +7134,52 @@ window.importCSV = function(input){
       if(!parsed.length){ toast('<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> No se encontraron operaciones','var(--red)'); return; }
       // Calcular preview: nuevas vs actualizadas
       var existingIds = new Set(S.trades.map(function(t){ return t.id; }));
-      var nuevas = parsed.filter(function(t){ return !existingIds.has(t.id); }).length;
+      var nuevas = parsed.filter(function(t){ return !existingIds.has(t.id) && !(t._merged||[]).some(function(o){ return existingIds.has(o); }); }).length;
       var actualiza = parsed.length - nuevas;
       // Confirmación antes de importar
-      var msg = '<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7"/><polyline points="7 11 12 16 17 11"/><line x1="12" y1="4" x2="12" y2="16"/></svg> Importar '+parsed.length+' operaciones:\n• '+nuevas+' nuevas\n• '+actualiza+' a actualizar\n\n¿Continuar?';
-      if(!confirm(msg)) return;
+      // Resumen para el cuadro de confirmación
+      var _dts = parsed.map(function(t){ return t.date; }).filter(Boolean).sort();
+      var _fmt = function(d){ var q=String(d).split('-'); return q.length===3 ? q[2]+'/'+q[1]+'/'+q[0] : d; };
+      var _tot = parsed.reduce(function(a,t){ return a + (t.pnl||0); }, 0);
+      var _totTxt = (_tot>=0?'+':'−') + '$' + Math.abs(_tot).toFixed(2);
+      var _row = function(l,v,c){ return '<div style="display:flex;justify-content:space-between;gap:16px;padding:3px 0"><span style="color:var(--gray2)">'+l+'</span><b'+(c?' style="color:'+c+'"':'')+'>'+v+'</b></div>'; };
+      var _prev = _row('Operaciones nuevas', nuevas)
+                + _row('A actualizar', actualiza)
+                + (_dts.length ? _row('Período', _fmt(_dts[0])+' – '+_fmt(_dts[_dts.length-1])) : '')
+                + _row('Horas', IMP_FILE_TIME ? 'Del archivo (sin convertir)' : 'Hora de Nueva York')
+                + (isTV ? _row('Agrupación', IMP_BY_POS ? 'Como Tradovate (por posición)' : 'Por hora de entrada (parciales unidos)') : '')
+                + (isTV && !IMP_FILE_TIME ? _row('Zona horaria del archivo', TV_TZ.replace(/_/g,' ')) : '')
+                + (isMT5 && !IMP_FILE_TIME ? _row('Horario del servidor', window._impMt5Label || 'Cierre en Nueva York') : '')
+                + _row('Ganancia total', _totTxt, _tot>=0?'var(--green)':'var(--red)');
+      var doImport = function(){
+        try{
+      // Tradovate: registrar los activos nuevos para que aparezcan en los selectores
+      if(isTV || isMT5){
+        if(!S.settings.assets) S.settings.assets = [];
+        parsed.forEach(function(t){ if(t.asset && S.settings.assets.indexOf(t.asset) < 0) S.settings.assets.push(t.asset); });
+        if(typeof renderAssets==='function') renderAssets();
+        if(typeof renderASels==='function') renderASels();
+      }
       // Upsert: actualizar si existe, agregar si no
       var tradeMap = {};
       S.trades.forEach(function(t){ tradeMap[t.id] = t; });
+      // Cierres parciales unidos: las filas sueltas que ya estaban guardadas se funden en la operación única (conserva estrategia, sesión y notas)
+      parsed.forEach(function(t){
+        if(!t._merged) return;
+        t._merged.forEach(function(oid){
+          if(oid === t.id || !tradeMap[oid]) return;
+          var old = tradeMap[oid], keep = tradeMap[t.id];
+          if(!keep){ old.id = t.id; tradeMap[t.id] = old; delete tradeMap[oid]; return; }
+          ['strategy','session','notes'].forEach(function(k){ if(!keep[k] && old[k]) keep[k] = old[k]; });
+          S.trades = S.trades.filter(function(x){ return x !== old; });
+          delete tradeMap[oid];
+        });
+        delete t._merged;
+      });
       parsed.forEach(function(t){
         if(tradeMap[t.id]){
-          Object.assign(tradeMap[t.id], t); // actualizar existente
+          if(isTV || isMT5){ var u = Object.assign({}, t); delete u.strategy; delete u.session; delete u.notes; Object.assign(tradeMap[t.id], u); }
+          else Object.assign(tradeMap[t.id], t); // actualizar existente
         } else {
           S.trades.push(t); // agregar nueva
         }
@@ -6591,12 +7188,18 @@ window.importCSV = function(input){
       if(typeof syncToCloudDeferred==='function') syncToCloud();
       refresh();
       toast('<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> '+nuevas+' nuevas · '+actualiza+' actualizadas','var(--green)');
+        }catch(err2){
+          toast('Error al importar: '+err2.message,'var(--red)');
+        }
+      };
+      showConfirm('<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7"/><polyline points="7 11 12 16 17 11"/><line x1="12" y1="4" x2="12" y2="16"/></svg> Importar operaciones',
+        'Se encontraron '+parsed.length+' operaciones en el archivo. ¿Quieres importarlas?', doImport, _prev, 'Importar');
     }catch(err){
       toast('<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Error: '+err.message,'var(--red)');
     }
     input.value = '';
   };
-  reader.readAsText(file, 'UTF-8');
+  if(isXlsx) reader.readAsArrayBuffer(file); else reader.readAsText(file, 'UTF-8');
 };
 
 // ── Reporte .txt para Claude — Operaciones ───────────────────────────────
@@ -6677,7 +7280,7 @@ window.exportClaudeTxtStats = function(){
     return '  '+m+': '+fU(d.pnl)+' WR:'+(tot?Math.round(d.tp/tot*100)+'%':'—')+' (TP:'+d.tp+' SL:'+d.sl+')';
   }).join('\n');
   // Racha
-  var sorted = trades.slice().sort(function(a,b){ return a.date.localeCompare(b.date); });
+  var sorted = trades.slice().sort(function(a,b){ return a.date.localeCompare(b.date)||cmpTradeTime(a,b); });
   var maxWin=0,maxLoss=0,curW=0,curL=0;
   sorted.forEach(function(t){
     if(t.result==='TP'){ curW++; curL=0; maxWin=Math.max(maxWin,curW); }
@@ -7728,7 +8331,7 @@ function getAdvancedStats(trades){
   var avgPnl = trades.reduce(function(s,t){return s+(t.pnl||0);},0)/trades.length;
   // Drawdown máximo
   var peak=0,eq=0,maxDD=0;
-  trades.slice().sort(function(a,b){return a.date.localeCompare(b.date)||((a.time||'').localeCompare(b.time||''));}).forEach(function(t){
+  trades.slice().sort(function(a,b){return a.date.localeCompare(b.date)||(cmpTradeTime(a,b));}).forEach(function(t){
     eq+=(t.pnl||0); if(eq>peak)peak=eq;
     var dd=peak-eq; if(dd>maxDD)maxDD=dd;
   });
@@ -7739,7 +8342,7 @@ function getAdvancedStats(trades){
   var expectancy = (wr*avgWin) - ((1-wr)*avgLoss);
   // Rachas
   var maxWS=0,maxLS=0,cWS=0,cLS=0;
-  trades.slice().sort(function(a,b){return a.date.localeCompare(b.date);}).forEach(function(t){
+  trades.slice().sort(function(a,b){return a.date.localeCompare(b.date)||cmpTradeTime(a,b);}).forEach(function(t){
     if(t.result==='TP'){cWS++;cLS=0;if(cWS>maxWS)maxWS=cWS;}
     else if(t.result==='SL'){cLS++;cWS=0;if(cLS>maxLS)maxLS=cLS;}
   });
@@ -7811,7 +8414,7 @@ function renderInsights(trades){
   function bold(s){ return '<b style="color:var(--text)">'+s+'</b>'; }
   function highlight(s,c){ return '<b style="color:'+(c||'var(--cyan)')+'">'+s+'</b>'; }
 
-  var sorted = trades.slice().sort(function(a,b){ return a.date.localeCompare(b.date)||(a.time||'').localeCompare(b.time||''); });
+  var sorted = trades.slice().sort(function(a,b){ return a.date.localeCompare(b.date)||cmpTradeTime(a,b); });
   var tp = trades.filter(function(t){return t.result==='TP';});
   var sl = trades.filter(function(t){return t.result==='SL';});
   var totalPnl = trades.reduce(function(s,t){return s+(t.pnl||0);},0);
@@ -7876,10 +8479,8 @@ function renderInsights(trades){
     var worstDay=dayArr.reduce(function(b,d){return byDay[d].pnl<byDay[b].pnl?d:b;},dayArr[0]);
     var bdWR=(byDay[bestDay].wins/byDay[bestDay].total*100).toFixed(0);
     var wdWR=(byDay[worstDay].wins/byDay[worstDay].total*100).toFixed(0);
-    if(byDay[bestDay].pnl>0){
     recs.push({priority:4,icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="4" x2="8" y2="9"/><line x1="16" y1="4" x2="16" y2="9"/></svg>',color:'var(--green)',title:'Tu día más rentable: '+bestDay,
       text:highlight(bestDay,'var(--green)')+' es tu mejor día con '+highlight(bdWR+'%','var(--green)')+' de win rate y '+highlight('$'+byDay[bestDay].pnl.toFixed(2),pnlColor(byDay[bestDay].pnl))+' acumulado. Prioriza operar en este día cuando tengas señales de alta calidad.'});
-    }
     if(byDay[worstDay].pnl<0){
       recs.push({priority:3,icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="5.5" y1="5.5" x2="18.5" y2="18.5"/></svg>',color:'var(--red)',title:'Evita operar los '+worstDay,
         text:highlight(worstDay,'var(--red)')+' tiene solo '+highlight(wdWR+'%','var(--red)')+' de acierto y '+highlight('$'+byDay[worstDay].pnl.toFixed(2),'var(--red)')+' de pérdida. Considera no operar este día o reducir el tamaño de posición significativamente.'});
@@ -7899,10 +8500,8 @@ function renderInsights(trades){
   if(hourArr.length>=2){
     var bestHour=hourArr.reduce(function(b,h){return byHour[h].pnl>byHour[b].pnl?h:b;},hourArr[0]);
     var worstHour=hourArr.reduce(function(b,h){return byHour[h].pnl<byHour[b].pnl?h:b;},hourArr[0]);
-    if(byHour[bestHour].pnl>0){
     recs.push({priority:4,icon:'⏰',color:'var(--blue)',title:'Mejor ventana horaria: '+bestHour+':00',
       text:'Las '+ highlight(bestHour+':00','var(--blue)')+' es tu hora más efectiva con '+ highlight((byHour[bestHour].wins/byHour[bestHour].total*100).toFixed(0)+'%','var(--green)')+' de acierto. Concentra tu máxima atención y tamaño de posición en este horario.'});
-    }
     if(byHour[worstHour].pnl<0){
       recs.push({priority:3,icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 10h3M15 12l3-1-3-1"/><path d="M8 16c1.5 1 5.5 1 7 0"/></svg>',color:'var(--org)',title:'Hora problemática: '+worstHour+':00',
         text:'A las '+highlight(worstHour+':00','var(--red)')+' acumulas '+highlight('$'+byHour[worstHour].pnl.toFixed(2),'var(--red)')+'. Evalúa si en ese horario el mercado tiene condiciones distintas o si tu concentración baja.'});
@@ -7920,10 +8519,8 @@ function renderInsights(trades){
   var assetArr=Object.keys(byAsset).filter(function(a){return byAsset[a].total>=2;});
   if(assetArr.length>=1){
     var bestAsset=assetArr.reduce(function(b,a){return byAsset[a].pnl>byAsset[b].pnl?a:b;},assetArr[0]);
-    if(byAsset[bestAsset].pnl>0){
     recs.push({priority:4,icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',color:'var(--cyan)',title:'Activo estrella: '+bestAsset,
       text:highlight(bestAsset,'var(--cyan)')+' es tu instrumento más rentable con '+highlight('$'+byAsset[bestAsset].pnl.toFixed(2),'var(--green)')+' y '+highlight((byAsset[bestAsset].wins/byAsset[bestAsset].total*100).toFixed(0)+'%','var(--green)')+' de acierto. Especialízate aún más en este activo.'});
-    }
     var worstAsset=assetArr.reduce(function(b,a){return byAsset[a].pnl<byAsset[b].pnl?a:b;},assetArr[0]);
     if(assetArr.length>=2 && byAsset[worstAsset].pnl<0){
       recs.push({priority:3,icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7" fill="currentColor" stroke="none"/></svg>',color:'var(--red)',title:'Activo problemático: '+worstAsset,
@@ -7941,10 +8538,8 @@ function renderInsights(trades){
   var sessArr=Object.keys(bySess).filter(function(s){return bySess[s].total>=2;});
   if(sessArr.length>=1){
     var bestSess=sessArr.reduce(function(b,s){return bySess[s].pnl>bySess[b].pnl?s:b;},sessArr[0]);
-    if(bySess[bestSess].pnl>0){
     recs.push({priority:4,icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18z"/></svg>',color:'var(--gold)',title:'Sesión más efectiva: '+bestSess,
       text:'En la sesión '+highlight(bestSess,'var(--gold)')+' tienes '+highlight((bySess[bestSess].wins/bySess[bestSess].total*100).toFixed(0)+'%','var(--green)')+' de acierto y '+highlight('$'+bySess[bestSess].pnl.toFixed(2),pnlColor(bySess[bestSess].pnl))+'. Alinea tu plan diario para maximizar presencia en esta ventana.'});
-    }
     if(sessArr.length>=2){
       var worstSess=sessArr.reduce(function(b,s){return bySess[s].pnl<bySess[b].pnl?s:b;},sessArr[0]);
       if(bySess[worstSess].pnl<0){
@@ -7964,10 +8559,8 @@ function renderInsights(trades){
   var stratArr=Object.keys(byStrat).filter(function(s){return byStrat[s].total>=2;});
   if(stratArr.length>=1){
     var bestStrat=stratArr.reduce(function(b,s){return byStrat[s].pnl>byStrat[b].pnl?s:b;},stratArr[0]);
-    if(byStrat[bestStrat].pnl>0){
     recs.push({priority:4,icon:'<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2z"/></svg>',color:'var(--purp)',title:'Estrategia ganadora: '+bestStrat,
       text:highlight(bestStrat,'var(--purp)')+' genera '+highlight('$'+byStrat[bestStrat].pnl.toFixed(2),'var(--green)')+' con '+highlight((byStrat[bestStrat].wins/byStrat[bestStrat].total*100).toFixed(0)+'%','var(--green)')+' de efectividad. Documenta exactamente las condiciones en que este setup aparece.'});
-    }
     if(stratArr.length>=2){
       var worstStrat=stratArr.reduce(function(b,s){return byStrat[s].pnl<byStrat[b].pnl?s:b;},stratArr[0]);
       if(byStrat[worstStrat].pnl<0){
@@ -8555,9 +9148,13 @@ button,[onclick],a,.ni,.cal-nav-btn,.rb,.tog,.acct-color-dot,.reg-nav-arrow,.reg
      Overlay para ver capturas de pantalla en tamaño completo.
 ════════════════════════════════════════════════════════════ -->
 <!-- LIGHTBOX -->
-<div id="lightbox" onclick="if(event.target===this)closeLightbox()">
+<div id="lightbox" onclick="if(event.target===this&&!window._lbJustDragged)closeLightbox()">
   <button id="lightbox-close" onclick="closeLightbox()"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   <img id="lightbox-img" src="" alt="Captura de trade">
+  <button id="lightbox-prev" onclick="lbStep(-1)" title="Anterior" aria-label="Imagen anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+  <button id="lightbox-next" onclick="lbStep(1)" title="Siguiente" aria-label="Imagen siguiente"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+  <div id="lightbox-count"></div>
+  <div id="lightbox-zoom"><button onclick="lbZoom(1/1.4,0,0)" title="Alejar" aria-label="Alejar">&minus;</button><button id="lightbox-zoom-pct" onclick="lbZoomReset()" title="Tamaño original">100%</button><button onclick="lbZoom(1.4,0,0)" title="Acercar" aria-label="Acercar">+</button></div>
 </div>
 
 
@@ -9053,10 +9650,10 @@ function populateDayPanel(trades, dateStr) {
 
     // Fila principal: hora + asset + dirección + PnL
     html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">';
-    html += '<div style="display:flex;align-items:center;gap:7px;min-width:0">';
-    html += '<span style="font-size:10px;color:var(--gray2);font-family:\'DM Sans\',sans-serif;flex-shrink:0">'+(t.time||'—')+'</span>';
-    html += '<span style="font-size:13px;font-weight:600;font-family:\'DM Sans\',sans-serif;color:var(--text)">'+( t.asset||'—')+'</span>';
-    html += '<span style="font-size:10px;color:var(--gray2)">'+( t.direction==='BUY'?'▲ L':'▼ S')+'</span>';
+    html += '<div style="display:grid;grid-template-columns:40px 52px 36px 24px;align-items:center;column-gap:8px;min-width:0">';
+    html += '<span style="font-size:10px;color:var(--gray2);font-family:\'DM Sans\',sans-serif">'+tradeTimeLbl(t)+'</span>';
+    html += '<span style="font-size:13px;font-weight:600;font-family:\'DM Sans\',sans-serif;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+( t.asset||'—')+'</span>';
+    html += '<span style="font-size:10px;font-weight:600;color:'+(t.direction==='BUY'?'var(--green)':'var(--red)')+'">'+( t.direction==='BUY'?'BUY':'SELL')+'</span>';
     html += '<span style="font-size:10px;color:'+pnlClr+';font-weight:600">'+t.result+'</span>';
     html += '</div>';
     html += '<span style="font-size:13px;font-weight:700;font-family:\'DM Sans\',sans-serif;color:'+pnlClr+';flex-shrink:0">'+(t.pnl>=0?'+$':'-$')+pnlAbs+'</span>';
@@ -9142,7 +9739,7 @@ window.openTDPById = function(id, dateStr, idx) {
   var trade = (S.trades || []).find(function(t){ return String(t.id) === String(id); });
   if (!trade) return;
   var dayList = (S.trades || []).filter(function(t){ return t.date === dateStr; })
-    .sort(function(a,b){ return (a.time||'').localeCompare(b.time||''); });
+    .sort(cmpTradeTime);
 
   var isMobile = window.innerWidth <= 640;
   if (isMobile) {
@@ -9315,7 +9912,7 @@ window.openTDP = function(trade, dayList, idx) {
     // Asset + direction + badge + PnL (todo en un solo cuadro)
     '<div style="background:var(--card2);border-radius:12px;border:1px solid var(--bdr);padding:14px;margin-bottom:12px">' +
       '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">' +
-        '<div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#2563eb,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;font-family:\'DM Sans\',sans-serif">'+( (trade.asset||'?').substring(0,2))+'</div>' +
+        '<div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--rp-av-a,#2563eb),var(--rp-av-b,#7c3aed));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;font-family:\'DM Sans\',sans-serif">'+( (trade.asset||'?').substring(0,2))+'</div>' +
         '<div>' +
           '<div style="font-size:15px;font-weight:900;font-family:\'DM Sans\',sans-serif;color:var(--text)">'+(trade.asset||'—')+'</div>' +
           '<div style="font-size:10px;color:'+(trade.direction==='BUY'?'var(--green)':'var(--red)')+'">'+( trade.direction==='BUY'?'▲ Compra':'▼ Venta')+'</div>' +
@@ -9348,7 +9945,7 @@ window.openTDP = function(trade, dayList, idx) {
     // Capturas / Archivos
     (images.length ? (
       '<div class="tdp-section">' +
-        '<div class="tdp-section-title">Capturas / Archivos <span style="background:rgba(124,58,237,.2);color:var(--purp);border-radius:10px;padding:1px 7px;font-size:9px">'+images.length+'</span></div>' +
+        '<div class="tdp-section-title">Capturas / Archivos <span style="background:var(--rp-badge-bg,rgba(124,58,237,.2));color:var(--purp);border-radius:10px;padding:1px 7px;font-size:9px">'+images.length+'</span></div>' +
         '<div class="img-gallery">' +
           images.map(function(img,i) {
             var _src = (img && img.src) ? img.src : String(img);
@@ -9363,7 +9960,7 @@ window.openTDP = function(trade, dayList, idx) {
     // Links
     (links.length ? (
       '<div class="tdp-section" style="margin-top:12px">' +
-        '<div class="tdp-section-title">Enlaces <span style="background:rgba(124,58,237,.2);color:var(--purp);border-radius:10px;padding:1px 7px;font-size:9px">'+links.length+'</span></div>' +
+        '<div class="tdp-section-title">Enlaces <span style="background:var(--rp-badge-bg,rgba(124,58,237,.2));color:var(--purp);border-radius:10px;padding:1px 7px;font-size:9px">'+links.length+'</span></div>' +
         links.map(function(link) {
           var short = link.replace('https://','').replace('http://','');
           return '<div class="link-item">' +
@@ -9434,7 +10031,7 @@ window.renderDayDetail = function() {
   }
   var mo=String(calMonth+1).padStart(2,'0'), dy=String(selDay).padStart(2,'0');
   var ds=calYear+'-'+mo+'-'+dy;
-  var dt=S.trades.filter(function(t){return t.date===ds;}).sort(function(a,b){return(a.time||'').localeCompare(b.time||'');});
+  var dt=S.trades.filter(function(t){return t.date===ds;}).sort(cmpTradeTime);
 
   // Poblar panel derecho directamente
   if(dt.length === 1){ populateRightPanel(dt[0]); return; }
@@ -9451,7 +10048,7 @@ window.renderDayDetail = function() {
   tbody.innerHTML=dt.map(function(t,i){
     var isWin=t.result==='TP';
     return '<tr onclick="if(!event.target.closest(\'button\')){openTDP(window._currentDayTrades['+i+'],window._currentDayTrades,'+i+');window._playClick&&window._playClick();}" style="cursor:pointer">'+
-      '<td style="font-family:\'DM Sans\',sans-serif;font-size:11px;color:var(--gray2)">'+(t.time||'—')+'</td>'+
+      '<td style="font-family:\'DM Sans\',sans-serif;font-size:11px;color:var(--gray2)">'+tradeTimeLbl(t)+'</td>'+
       '<td style="font-weight:800;font-size:12px;font-family:\'DM Sans\',sans-serif;color:var(--text)">'+( t.asset||'—')+'</td>'+
       '<td><span class="'+(t.direction==='BUY'?'bbuy':'bsell')+'">'+( t.direction==='BUY'?'▲ Compra':'▼ Venta')+'</span></td>'+
       '<td><span style="font-size:10px;background:rgba(124,58,237,.12);color:var(--purp);padding:2px 6px;border-radius:4px">'+(t.tf||'—')+'</span></td>'+
@@ -9512,9 +10109,8 @@ window.renderMonthSummary = function() {
   var slp=ft.filter(function(t){return t.result==='SL';}).reduce(function(a,t){return a+(t.pnl||0);},0);
   var avgWinMS=tp?tpp/tp:0;
   var avgLossMS=sl?Math.abs(slp)/sl:0;
-  var rrSumMS=avgLossMS>0?ft.reduce(function(a,t){
-    return a+((t.pnl||0)/avgLossMS);
-  },0):0;
+  // RR promedio del mes = ganancia promedio de las ganadoras / pérdida promedio de las perdedoras (sale del P&L real)
+  var rrAvgTxt = (tp && sl && avgLossMS) ? '1:'+(avgWinMS/avgLossMS).toFixed(2) : '—';
 
   el.innerHTML=[
     {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg>',label:'Operaciones',val:String(ft.length),color:'var(--text)'},
@@ -9523,7 +10119,7 @@ window.renderMonthSummary = function() {
     {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>',label:'Perdedoras',val:String(sl),color:'var(--red)'},
     {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/></svg>',label:'Resultado neto',val:(pnl>=0?'+$':'-$')+Math.abs(pnl).toFixed(2),color:pnl>=0?'var(--green)':'var(--red)'},
     {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/></svg>',label:'Win Rate',val:'+'+wr+'%',color:'var(--text)'},
-    {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v.09a7.001 7.001 0 015.91 5.91H17a1 1 0 110 2h-.09A7.001 7.001 0 0111 16.91V17a1 1 0 11-2 0v-.09A7.001 7.001 0 013.09 11H3a1 1 0 110-2h.09A7.001 7.001 0 019 3.09V3a1 1 0 011-1zm0 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z" clip-rule="evenodd"/></svg>',label:'RR TOTAL DEL MES',val:(rrSumMS>=0?'+':'')+Math.round(rrSumMS)+'R',color:rrSumMS>=0?'var(--green)':'var(--red)'}
+    {icon:'<svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v.09a7.001 7.001 0 015.91 5.91H17a1 1 0 110 2h-.09A7.001 7.001 0 0111 16.91V17a1 1 0 11-2 0v-.09A7.001 7.001 0 013.09 11H3a1 1 0 110-2h.09A7.001 7.001 0 019 3.09V3a1 1 0 011-1zm0 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z" clip-rule="evenodd"/></svg>',label:'RR PROMEDIO DEL MES',val:rrAvgTxt,color:'var(--cyan)'}
   ].map(function(item){
     return '<div class="msc">'+
       '<div style="display:flex;align-items:center;justify-content:center;gap:5px;margin-bottom:4px">'+
@@ -9585,7 +10181,7 @@ window.copyTradeTxt = function(trade) {
 
 window.renderRegCharts = function() {
   var yrS=String(calYear);
-  var ft=[].concat(S.trades).sort(function(a,b){return a.date.localeCompare(b.date)||(a.time||'').localeCompare(b.time||'');});
+  var ft=[].concat(S.trades).sort(function(a,b){return a.date.localeCompare(b.date)||cmpTradeTime(a,b);});
   var eq=[],running=0,labels=[];
   ft.forEach(function(t){running+=(t.pnl||0);eq.push(running);labels.push((t.date||'').slice(5));});
   if(typeof mkC==='function'){
@@ -9687,24 +10283,25 @@ function renderTradeSections(trade){
   var sections = trade.sections;
   var html = '<div class="rp-sections-wrap">';
   html += '<div class="rp-sections-title"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h5a3 3 0 0 1 3 3v13a2.5 2.5 0 0 0-2.5-2.5H4z"/><path d="M20 4h-5a3 3 0 0 0-3 3v13a2.5 2.5 0 0 1 2.5-2.5H20z"/></svg> Análisis multi-temporal</div>';
+  html += '<div class="rp-unified">';
   sections.forEach(function(sec, idx){
     var imgs = sec.images || [];
     var lnks = sec.links || [];
-    html += '<div class="rp-toggle'+(sec.open?' open':'')+'" data-sec-idx="'+idx+'">';
-    html += '<div class="rp-toggle-head" onclick="rpToggleSection('+idx+')">';
-    html += '<span class="rp-toggle-chevron"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>';
+    html += '<div class="rp-toggle" data-sec-idx="'+idx+'">';
+    html += '<div class="rp-toggle-head">';
     html += '<input class="rp-toggle-title" value="'+escAttr(sec.title||'Sección')+'" onclick="event.stopPropagation()" onchange="rpRenameSection('+idx+',this.value)">';
     if(imgs.length+lnks.length) html += '<span class="rp-toggle-count">'+(imgs.length+lnks.length)+'</span>';
-    html += '<label class="rp-toggle-icon-btn" title="Agregar desde el dispositivo" onclick="event.stopPropagation()"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg><input type="file" accept="image/*" multiple style="display:none" onchange="rpAddSectionImageFile('+idx+',this)"></label>';
-    html += '<button class="rp-toggle-icon-btn" title="Agregar link" onclick="event.stopPropagation();rpPromptSectionUrl('+idx+')"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17H7a5 5 0 0 1 0-10h2"/><path d="M15 7h2a5 5 0 0 1 0 10h-2"/><line x1="8" y1="12" x2="16" y2="12"/></svg></button>';
+    html += '<button class="rp-toggle-icon-btn" title="Agregar nota" onclick="event.stopPropagation();rpAddNote('+idx+')"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></button>';
+    html += '<label class="rp-toggle-icon-btn" title="Agregar imagen" onclick="event.stopPropagation()"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg><input type="file" accept="image/*" multiple style="display:none" onchange="rpAddSectionImageFile('+idx+',this)"></label>';
+    html += '<button class="rp-toggle-icon-btn" title="Agregar link de imagen" onclick="event.stopPropagation();rpPromptSectionUrl('+idx+')"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17H7a5 5 0 0 1 0-10h2"/><path d="M15 7h2a5 5 0 0 1 0 10h-2"/><line x1="8" y1="12" x2="16" y2="12"/></svg></button>';
     html += '<button class="rp-toggle-del" onclick="event.stopPropagation();rpDeleteSection('+idx+')" title="Eliminar sección"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>';
     html += '</div>';
     html += '<div class="rp-toggle-body">';
     html += '<div class="rp-toggle-body-inner">';
     var _cRows = Math.min(10, Math.max(1, Math.ceil((sec.comment||'').length/38), (sec.comment||'').split('\n').length));
-    html += '<textarea class="rp-sec-comment" rows="'+_cRows+'" placeholder="Escribe una nota, contexto o análisis..." '+
+    html += '<textarea class="rp-sec-comment" rows="'+_cRows+'"'+((sec.comment||'').trim()?'':' hidden')+' placeholder="Escribe una nota, contexto o análisis..." '+
             'oninput="this.rows=Math.min(10,Math.max(1,this.value.split(String.fromCharCode(10)).length,Math.ceil(this.value.length/38)))" '+
-            'onchange="rpUpdateSectionComment('+idx+',this.value)">'+escAttr(sec.comment||'')+'</textarea>';
+            'onchange="rpUpdateSectionComment('+idx+',this.value)" onblur="if(!this.value.trim())this.hidden=true">'+escAttr(sec.comment||'')+'</textarea>';
     if(lnks.length) {
       html += '<div class="rp-sec-links">';
       lnks.forEach(function(link, li) {
@@ -9731,7 +10328,7 @@ function renderTradeSections(trade){
   html += '<button class="rp-add-toggle-btn" onclick="rpAddSection()">';
   html += '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>';
   html += ' Agregar sección</button>';
-  html += '</div>';
+  html += '</div></div>';
   return html;
 }
 
@@ -9779,6 +10376,16 @@ window.rpRenameSection = function(idx, newTitle) {
   if(!trade || !trade.sections || !trade.sections[idx]) return;
   trade.sections[idx].title = (newTitle||'').trim() || 'Sección';
   if(typeof save==='function') save();
+};
+
+// Muestra la caja de nota solo en la temporalidad pulsada
+window.rpAddNote = function(idx) {
+  var container = _rpActiveContainer();
+  var row = container ? container.querySelector('.rp-toggle[data-sec-idx="'+idx+'"]') : null;
+  var ta = row ? row.querySelector('.rp-sec-comment') : null;
+  if(!ta) return;
+  ta.hidden = false;
+  ta.focus();
 };
 
 window.rpUpdateSectionComment = function(idx, val) {
@@ -9945,7 +10552,7 @@ function populateRightPanel(trade) {
 
   // ── Asset + dirección + resultado + PnL (todo en un solo cuadro) ──
   html += '<div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:10px;border:1px solid var(--bdr);margin-bottom:10px">';
-  html += '<div style="width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#2563eb,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;font-family:\'DM Sans\',sans-serif;flex-shrink:0">'+(liveTrade.asset||'?').substring(0,2)+'</div>';
+  html += '<div style="width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--rp-av-a,#2563eb),var(--rp-av-b,#7c3aed));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;font-family:\'DM Sans\',sans-serif;flex-shrink:0">'+(liveTrade.asset||'?').substring(0,2)+'</div>';
   html += '<div style="flex:1;min-width:0"><div style="font-size:15px;font-weight:900;font-family:\'DM Sans\',sans-serif;color:var(--text)">'+(liveTrade.asset||'—')+'</div>';
   html += '<div style="font-size:10px;font-weight:600;color:'+(liveTrade.direction==='BUY'?'var(--green)':'var(--red)')+'">'+( liveTrade.direction==='BUY'?'▲ Compra':'▼ Venta')+'</div></div>';
   html += '<div style="text-align:right;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px">';
@@ -9977,7 +10584,7 @@ function populateRightPanel(trade) {
   // ── Imágenes viejas (solo lectura + borrar, ya no se agregan aquí — ahora van en las secciones) ──
   if(images.length) {
     html += '<div style="margin-bottom:10px">';
-    html += '<div style="font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:7px;font-family:\'DM Sans\',sans-serif"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.5-3h5L16 7"/><circle cx="12" cy="13" r="3.5"/></svg> Capturas <span style="background:rgba(124,58,237,.2);color:var(--purp);border-radius:10px;padding:1px 7px;font-size:9px">'+images.length+'</span></div>';
+    html += '<div style="font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:7px;font-family:\'DM Sans\',sans-serif"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.5-3h5L16 7"/><circle cx="12" cy="13" r="3.5"/></svg> Capturas <span style="background:var(--rp-badge-bg,rgba(124,58,237,.2));color:var(--purp);border-radius:10px;padding:1px 7px;font-size:9px">'+images.length+'</span></div>';
     html += '<div class="rp-img-grid">';
     images.forEach(function(img, i) {
       var s = img.src || img;
@@ -10185,13 +10792,135 @@ window.openLightbox = function(src) {
     var idx = parseInt(src);
     url = (window._tradeImages && window._tradeImages[idx]) ? window._tradeImages[idx].src : src;
   }
-  img.src = url;
+  // Galería: todas las imágenes del mismo panel, en el orden en que se ven
+  var list = [url], idx = 0;
+  try {
+    var ev = window.event, t = ev && ev.target;
+    var root = (t && t.closest) ? t.closest('#trade-detail-panel, #reg-right-panel, #form-img-preview') : null;
+    if (root) {
+      var urls = [], cur = -1;
+      Array.prototype.forEach.call(root.querySelectorAll('img[onclick*="openLightbox"], [onclick*="openLightbox"] img'), function(n) {
+        var u = n.getAttribute('src') || n.src;
+        if (!u) return;
+        if (cur < 0 && (u === url || n.src === url)) cur = urls.length;
+        urls.push(u);
+      });
+      if (cur >= 0 && urls.length > 1) { list = urls; idx = cur; }
+    }
+  } catch(e) {}
+  window._lbList = list;
+  window._lbIdx = idx;
+  if (window.lbZoomReset) lbZoomReset();
+  img.src = list[idx];
+  lb.classList.toggle('multi', list.length > 1);
+  var cnt = document.getElementById('lightbox-count');
+  if (cnt) cnt.textContent = (idx + 1) + ' / ' + list.length;
   lb.classList.add('open');
 };
+
+// ── Zoom: botones, rueda del mouse, doble clic y arrastre ──
+window._lbScale = 1; window._lbX = 0; window._lbY = 0;
+function lbApply() {
+  var img = document.getElementById('lightbox-img');
+  if (img) {
+    img.style.transform = (_lbScale === 1 && !_lbX && !_lbY) ? '' : 'translate(' + _lbX + 'px,' + _lbY + 'px) scale(' + _lbScale + ')';
+    img.style.cursor = _lbScale > 1 ? 'grab' : 'zoom-in';
+  }
+  var pct = document.getElementById('lightbox-zoom-pct');
+  if (pct) pct.textContent = Math.round(_lbScale * 100) + '%';
+}
+// factor: >1 acerca, <1 aleja. cx, cy: punto de zoom respecto al centro de la pantalla
+window.lbZoom = function(factor, cx, cy) {
+  var ns = Math.min(6, Math.max(1, _lbScale * factor));
+  if (ns === _lbScale) return;
+  var r = ns / _lbScale;
+  _lbX = cx - r * (cx - _lbX);
+  _lbY = cy - r * (cy - _lbY);
+  _lbScale = ns;
+  if (ns === 1) { _lbX = 0; _lbY = 0; }
+  lbApply();
+};
+window.lbZoomReset = function() { _lbScale = 1; _lbX = 0; _lbY = 0; lbApply(); };
+(function() {
+  var lb = document.getElementById('lightbox'), img = document.getElementById('lightbox-img');
+  if (!lb || !img) return;
+  function off(e) {
+    var r = lb.getBoundingClientRect();
+    return { x: e.clientX - (r.left + r.width / 2), y: e.clientY - (r.top + r.height / 2) };
+  }
+  lb.addEventListener('wheel', function(e) {
+    if (!lb.classList.contains('open')) return;
+    e.preventDefault();
+    var o = off(e), d = Math.max(-100, Math.min(100, e.deltaY));
+    lbZoom(Math.exp(-d * 0.0025), o.x, o.y);
+  }, {passive: false});
+  img.addEventListener('dblclick', function(e) {
+    if (_lbScale > 1) lbZoomReset(); else { var o = off(e); lbZoom(2.5, o.x, o.y); }
+  });
+  img.addEventListener('dragstart', function(e) { e.preventDefault(); });
+  var drag = null;
+  img.addEventListener('pointerdown', function(e) {
+    if (_lbScale <= 1) return;
+    drag = { x: e.clientX, y: e.clientY, moved: false };
+    img.classList.add('dragging');
+    try { img.setPointerCapture(e.pointerId); } catch(err) {}
+  });
+  img.addEventListener('pointermove', function(e) {
+    if (!drag) return;
+    var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if (Math.abs(dx) + Math.abs(dy) > 3) drag.moved = true;
+    drag.x = e.clientX; drag.y = e.clientY;
+    _lbX += dx; _lbY += dy;
+    lbApply();
+  });
+  function endDrag() {
+    if (!drag) return;
+    if (drag.moved) { window._lbJustDragged = true; setTimeout(function() { window._lbJustDragged = false; }, 50); }
+    drag = null;
+    img.classList.remove('dragging');
+  }
+  img.addEventListener('pointerup', endDrag);
+  img.addEventListener('pointercancel', endDrag);
+})();
+
+// Pasar a la imagen siguiente (+1) o anterior (-1) sin cerrar la ventana
+window.lbStep = function(d) {
+  var L = window._lbList || [];
+  if (L.length < 2) return;
+  window._lbIdx = (window._lbIdx + d + L.length) % L.length;
+  var img = document.getElementById('lightbox-img');
+  if (window.lbZoomReset) lbZoomReset();
+  if (img) img.src = L[window._lbIdx];
+  var cnt = document.getElementById('lightbox-count');
+  if (cnt) cnt.textContent = (window._lbIdx + 1) + ' / ' + L.length;
+};
+
+// Flechas del teclado y deslizar el dedo en móvil
+document.addEventListener('keydown', function(e) {
+  var lb = document.getElementById('lightbox');
+  if (!lb || !lb.classList.contains('open')) return;
+  if (e.key === 'ArrowRight') { e.preventDefault(); lbStep(1); }
+  else if (e.key === 'ArrowLeft') { e.preventDefault(); lbStep(-1); }
+  else if (e.key === '+' || e.key === '=') { lbZoom(1.4, 0, 0); }
+  else if (e.key === '-') { lbZoom(1/1.4, 0, 0); }
+  else if (e.key === '0') { lbZoomReset(); }
+});
+(function() {
+  var lb = document.getElementById('lightbox'), x0 = null;
+  if (!lb) return;
+  lb.addEventListener('touchstart', function(e) { x0 = e.touches.length === 1 ? e.touches[0].clientX : null; }, {passive:true});
+  lb.addEventListener('touchend', function(e) {
+    if (x0 === null || window._lbScale > 1) { x0 = null; return; }
+    var dx = e.changedTouches[0].clientX - x0;
+    x0 = null;
+    if (Math.abs(dx) > 50) lbStep(dx < 0 ? 1 : -1);
+  }, {passive:true});
+})();
 
 window.closeLightbox = function() {
   var lb = document.getElementById('lightbox');
   if(lb) lb.classList.remove('open');
+  if(window.lbZoomReset) lbZoomReset();
 };
 
 
@@ -10251,7 +10980,7 @@ window.closeLightbox = function() {
 
     // ── Activo + dirección + resultado + PnL (todo en un solo cuadro) ──
     h += '<div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:10px;border:1px solid var(--bdr);margin-bottom:10px">';
-    h += '<div style="width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#2563eb,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;flex-shrink:0">'
+    h += '<div style="width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--rp-av-a,#2563eb),var(--rp-av-b,#7c3aed));display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;flex-shrink:0">'
        + (t.asset || '?').substring(0, 2) + '</div>';
     h += '<div style="flex:1"><div style="font-size:15px;font-weight:900;color:var(--text);font-family:\'DM Sans\',sans-serif">' + (t.asset || '—') + '</div>'
        + '<div style="font-size:10px;color:' + (t.direction === 'BUY' ? 'var(--green)' : 'var(--red)') + ';font-weight:700">'
@@ -10289,7 +11018,7 @@ window.closeLightbox = function() {
     if (imgs.length) {
       h += '<div style="margin-bottom:10px">';
       h += '<div style="font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:7px;font-family:\'DM Sans\',sans-serif"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.5-3h5L16 7"/><circle cx="12" cy="13" r="3.5"/></svg> Capturas '
-         + '<span style="background:rgba(124,58,237,.2);color:var(--purp);border-radius:10px;padding:1px 7px;font-size:9px">' + imgs.length + '</span></div>';
+         + '<span style="background:var(--rp-badge-bg,rgba(124,58,237,.2));color:var(--purp);border-radius:10px;padding:1px 7px;font-size:9px">' + imgs.length + '</span></div>';
       var _tid = t.id;
       h += '<div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch;scrollbar-width:thin">';
       imgs.forEach(function (img, _ii) {
@@ -10315,8 +11044,8 @@ window.closeLightbox = function() {
         var url   = typeof lk === 'string' ? lk : (lk.url || '');
         var short = url.replace(/^https?:\/\//, '').substring(0, 36);
         h += '<a href="' + url + '" target="_blank" rel="noopener" '
-           + 'style="display:flex;align-items:center;gap:6px;background:rgba(67,97,238,.08);border:1px solid rgba(67,97,238,.2);'
-           + 'border-radius:6px;padding:6px 9px;margin-bottom:4px;font-size:10px;color:#818cf8;text-decoration:none;'
+           + 'style="display:flex;align-items:center;gap:6px;background:var(--rp-ind-bg,rgba(67,97,238,.08));border:1px solid var(--rp-ind-bd,rgba(67,97,238,.2));'
+           + 'border-radius:6px;padding:6px 9px;margin-bottom:4px;font-size:10px;color:var(--rp-ind-fg,#818cf8);text-decoration:none;'
            + 'white-space:nowrap;overflow:hidden;text-overflow:ellipsis"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17H7a5 5 0 0 1 0-10h2"/><path d="M15 7h2a5 5 0 0 1 0 10h-2"/><line x1="8" y1="12" x2="16" y2="12"/></svg> ' + short + '</a>';
       });
       h += '</div>';
@@ -10329,8 +11058,8 @@ window.closeLightbox = function() {
     var tid = t.id;
     h += '<div style="display:flex;gap:6px;padding-top:10px;border-top:1px solid var(--bdr)">';
     h += '<button onclick="var _et=S.trades.find(function(x){return x.id==='+tid+';});editTrade(' + tid + ');if(typeof openNewOpPanel===\'function\')openNewOpPanel(_et)"'
-       + ' style="flex:1;padding:8px;background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.3);'
-       + 'color:#818cf8;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg> Editar</button>';
+       + ' style="flex:1;padding:8px;background:var(--rp-ind-bg,rgba(99,102,241,.12));border:1px solid var(--rp-ind-bd,rgba(99,102,241,.3));'
+       + 'color:var(--rp-ind-fg,#818cf8);border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg> Editar</button>';
     h += '<button onclick="delTrade(' + tid + ')"'
        + ' style="flex:1;padding:8px;background:rgba(255,56,96,.08);border:1px solid rgba(255,56,96,.25);'
        + 'color:var(--red);border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13"/></svg> Eliminar</button>';
@@ -10448,7 +11177,7 @@ console.log('[TradeTrack] <svg class="ic" width="14" height="14" viewBox="0 0 24
         var ds = calYear+'-'+mo+'-'+dy;
         var dt = (window.S && window.S.trades ? window.S.trades : [])
           .filter(function(t){ return t.date === ds; })
-          .sort(function(a,b){ return (a.time||'').localeCompare(b.time||''); });
+          .sort(cmpTradeTime);
         window._rpDayTrades = dt;
         if(dt.length === 1){
           window._rpDayIdx = 0;
