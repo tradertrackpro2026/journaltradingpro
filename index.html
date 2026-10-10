@@ -170,11 +170,13 @@ select.fi.fi-empty option{color:var(--text)}
 .cal-cell.other{opacity:.15;cursor:default;pointer-events:none}
 .cal-cell.today{border-color:rgba(67,97,238,.7)!important;box-shadow:0 0 20px rgba(67,97,238,.25),inset 0 0 12px rgba(67,97,238,.06)}
 .cal-cell.sel{border-color:rgba(247,201,72,.6)!important;box-shadow:0 0 16px rgba(247,201,72,.2)!important}
-.cal-cell.all-tp{background:linear-gradient(135deg,rgba(0,229,176,.4),rgba(0,229,176,.14))!important;border-color:rgba(0,229,176,.85)!important;box-shadow:0 0 16px rgba(0,229,176,.25)}
-.cal-cell.all-be{background:linear-gradient(135deg,rgba(245,165,36,.4),rgba(245,165,36,.14))!important;border-color:rgba(245,165,36,.85)!important;box-shadow:0 0 16px rgba(245,165,36,.25)}
-.cal-cell.all-sl{background:linear-gradient(135deg,rgba(255,56,96,.4),rgba(255,56,96,.14))!important;border-color:rgba(255,56,96,.85)!important;box-shadow:0 0 16px rgba(255,56,96,.25)}
-.cal-cell.mix-win{background:linear-gradient(135deg,rgba(0,229,176,.2),rgba(0,229,176,.06))!important;border-color:rgba(0,229,176,.5)!important}
-.cal-cell.mix-loss{background:linear-gradient(135deg,rgba(255,56,96,.2),rgba(255,56,96,.06))!important;border-color:rgba(255,56,96,.5)!important}
+.cal-cell.all-tp{background:linear-gradient(145deg,#0f5e47 0%,#083a2b 55%,#04201a 100%)!important;border-color:#17906b!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 2px 12px rgba(0,0,0,.5)}
+.cal-cell.all-be{background:linear-gradient(145deg,#6e4d0b 0%,#402c06 55%,#201603 100%)!important;border-color:#a77412!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 2px 12px rgba(0,0,0,.5)}
+.cal-cell.all-sl{background:linear-gradient(145deg,#661225 0%,#3a0a14 55%,#1c050a 100%)!important;border-color:#a11f3a!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 2px 12px rgba(0,0,0,.5)}
+.cal-cell.mix-win{background:linear-gradient(145deg,#0a4a39 0%,#062c21 55%,#031812 100%)!important;border-color:#0f7656!important}
+.cal-cell.mix-loss{background:linear-gradient(145deg,#4f0e1c 0%,#2c0810 55%,#15040a 100%)!important;border-color:#82182f!important}
+.cal-cell.all-tp .cdn,.cal-cell.all-be .cdn,.cal-cell.all-sl .cdn,.cal-cell.mix-win .cdn,.cal-cell.mix-loss .cdn{color:#fff;font-weight:800}
+.cal-cell.all-tp .cpnl,.cal-cell.all-be .cpnl,.cal-cell.all-sl .cpnl,.cal-cell.mix-win .cpnl,.cal-cell.mix-loss .cpnl{color:#fff;font-weight:800;background:rgba(0,0,0,.38)}
 .cdn{font-size:9px;font-weight:800;color:var(--text);margin-bottom:4px;font-family:'DM Sans',system-ui,sans-serif;letter-spacing:.3px}
 .cal-cell.today .cdn{color:#818cf8}
 .cal-cell.sel .cdn{color:var(--gold)}
@@ -11779,7 +11781,7 @@ function renderMt5List(){
     var act = ok ? "switchAccount('mt5_" + lg + "')" : 'openMt5Setup(' + lg + ')';
     return '<button onclick="' + act + '" title="' + (a.broker ? String(a.broker).replace(/[<>"&]/g, '') + ' · ' : '') + lg + '" style="display:flex;align-items:center;gap:7px;width:100%;background:var(--card2);border:1px solid var(--bdr);color:var(--text);border-radius:7px;padding:6px 8px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;text-align:left;box-sizing:border-box">' +
       '<span style="width:7px;height:7px;border-radius:50%;flex-shrink:0;background:' + (on ? '#22c55e' : '#6b7280') + '"></span>' +
-      '<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + _mt5Label(a, accts) + '</span>' +
+      '<span style="display:flex;flex-direction:column;min-width:0;line-height:1.2"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + _mt5Short(a) + '</span><span style="font-size:9px;font-weight:600;color:var(--gray2);letter-spacing:.2px">' + lg + '</span></span>' +
       '<span style="margin-left:auto;font-size:9px;font-weight:700;color:' + (!ok ? '#f5a524' : (on ? '#22c55e' : 'var(--gray2)')) + '">' + (!ok ? 'CONFIGURAR' : (on ? 'EN VIVO' : 'SIN SEÑAL')) + '</span></button>';
   }).join('');
   var mm = document.getElementById('mt5-modal-accts');
