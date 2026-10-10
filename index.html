@@ -1667,14 +1667,16 @@ tr:hover td{background:rgba(14,18,41,.8)}
         </button>
       </div>
       <div id="sb-acct-list" style="display:flex;flex-direction:column;gap:2px;max-height:220px;overflow-y:auto;overflow-x:hidden;padding:0 2px;overscroll-behavior:contain;"></div>
-      <!-- Conectar cuenta MT5 (próximamente) -->
-      <button id="sb-mt5-connect" onclick="toast('Conectar cuenta MT5: próximamente','var(--blue)')" title="Conectar cuenta MT5 (próximamente)" style="display:flex;flex-direction:column;align-items:flex-start;gap:5px;width:100%;margin-top:6px;background:transparent;border:1px dashed var(--bdr2);color:var(--text2);border-radius:7px;padding:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',system-ui,sans-serif;text-align:left;box-sizing:border-box">
+      <!-- Conectar cuenta MT5 (visible solo si el administrador lo habilitó para este correo) -->
+      <div id="sb-mt5-wrap" style="display:none">
+      <button id="sb-mt5-connect" onclick="openMt5Modal()" title="Conectar cuenta MT5" style="display:flex;flex-direction:column;align-items:flex-start;gap:5px;width:100%;margin-top:6px;background:transparent;border:1px dashed var(--bdr2);color:var(--text2);border-radius:7px;padding:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',system-ui,sans-serif;text-align:left;box-sizing:border-box">
         <span style="display:flex;align-items:center;gap:7px;width:100%">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="13" height="13" style="flex-shrink:0"><path d="M10 13a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07L11.5 4.4"/><path d="M14 11a5 5 0 0 0-7.07 0L4.1 13.83a5 5 0 0 0 7.07 7.07l1.33-1.33"/></svg>
           <span style="white-space:nowrap">Conectar cuenta MT5</span>
         </span>
-        <span style="margin-left:20px;font-size:8px;font-weight:800;letter-spacing:.8px;color:var(--gold,#f5a524);border:1px solid rgba(245,165,36,.45);border-radius:4px;padding:2px 5px">PRÓXIMAMENTE</span>
       </button>
+      <div id="sb-mt5-list" style="display:flex;flex-direction:column;gap:3px;margin-top:5px"></div>
+      </div>
     </div>
     <!-- Bottom user area -->
     <div style="margin-top:auto;padding:10px 0 4px;border-top:1px solid var(--bdr)">
@@ -2876,6 +2878,7 @@ async function checkLicenseOnLoad() {
     // <svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> MULTI-SUPABASE: leer servidor asignado y aplicarlo antes de cualquier sync
     var servidorFB = (f.servidor && f.servidor.stringValue) || stored.servidor || 'sb_basic_1';
     setSupabaseServer(servidorFB);
+    if(typeof ttMt5Apply === 'function') ttMt5Apply(f);
     stored.servidor = servidorFB; // guardar en caché local para modo offline
 
     // Verificar si fue revocada
@@ -4132,6 +4135,7 @@ function startLicensePolling(){
 
       // <svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> MULTI-SUPABASE: mantener servidor correcto en cada polling
       setSupabaseServer((f.servidor && f.servidor.stringValue) || stored.servidor || 'sb_basic_1');
+      if(typeof ttMt5Apply === 'function') ttMt5Apply(f);
 
       // ❶ Licencia REVOCADA
       if(f.active && f.active.booleanValue === false){
@@ -11525,6 +11529,200 @@ document.addEventListener('keydown',function(e){ if(e.key==='Escape') mobSidebar
   }
 })();
 
+</script>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+//  MT5 · sincronización automática (solo si el administrador lo habilitó para este correo)
+//  El código del EA y la descarga aparecen aquí; las operaciones llegan solas al calendario.
+// ═══════════════════════════════════════════════════════════════
+var MT5_FN        = 'https://qrgdockgalxlhgnqijsz.supabase.co/functions/v1/mt5';
+var MT5_EA_URL    = 'https://qrgdockgalxlhgnqijsz.supabase.co/storage/v1/object/public/ea/TradeTrack_MT5_Sync.ex5';
+var MT5_ALLOW_URL = 'https://qrgdockgalxlhgnqijsz.supabase.co';
+var _mt5 = { enabled:false, code:'', accounts:[] };
+var _mt5Busy = false;
+
+// Se llama cada vez que se lee la licencia (al iniciar y en cada revisión periódica)
+function ttMt5Apply(f){
+  var en   = !!(f && f.mt5Enabled && f.mt5Enabled.booleanValue === true);
+  var code = (f && f.mt5Code && f.mt5Code.stringValue) || '';
+  var was  = _mt5.enabled;
+  _mt5.enabled = en && !!code;
+  _mt5.code = code;
+  var w = document.getElementById('sb-mt5-wrap');
+  if(w) w.style.display = _mt5.enabled ? 'block' : 'none';
+  if(_mt5.enabled && !was) setTimeout(ttMt5Sync, 3000);
+  if(!_mt5.enabled){ var m = document.getElementById('mt5-modal'); if(m) m.remove(); }
+}
+
+// Fecha y hora de Nueva York (con horario de verano) a partir de un instante UTC
+function _mt5NY(iso){
+  var d = new Date(iso); if(isNaN(d.getTime())) return null;
+  var o = {};
+  new Intl.DateTimeFormat('en-CA', {timeZone:'America/New_York', year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', hourCycle:'h23'})
+    .formatToParts(d).forEach(function(p){ o[p.type] = p.value; });
+  return { day: o.year + '-' + o.month + '-' + o.day, time: o.hour + ':' + o.minute };
+}
+
+function _mt5Trade(login, t){
+  var ny = _mt5NY(t.open_time); if(!ny) return null;
+  var pnl = Math.round((parseFloat(t.net) || 0) * 100) / 100;
+  return {
+    id: 'mt5-' + login + '-' + t.position_id,
+    date: ny.day, time: ny.time,
+    asset: String(t.symbol || '').toUpperCase(),
+    direction: t.direction === 'SELL' ? 'SELL' : 'BUY',
+    entry: String(t.entry), exit: String(t.exit),
+    pnl: pnl, result: pnl > 0 ? 'TP' : (pnl < 0 ? 'SL' : 'BE'),
+    volume: String(t.volume),
+    strategy: '', session: '', notes: ''
+  };
+}
+
+// Agrega o actualiza (sin pisar estrategia, sesión ni notas). Reconoce también el id de la importación por Excel.
+function _mt5Upsert(list, incoming){
+  var map = {}, added = 0, updated = 0;
+  list.forEach(function(x){ map[x.id] = x; });
+  incoming.forEach(function(t){
+    var ex = map[t.id] || map['mt5-' + t.id.split('-').pop()];
+    if(ex){
+      var u = Object.assign({}, t);
+      delete u.id; delete u.strategy; delete u.session; delete u.notes;
+      Object.assign(ex, u); updated++;
+    } else { list.push(t); map[t.id] = t; added++; }
+  });
+  return { added: added, updated: updated };
+}
+
+// Cada cuenta MT5 es una cuenta independiente del journal: mt5_<login>
+function _mt5EnsureAccount(a){
+  var id = 'mt5_' + a.login, accts = getAccounts();
+  if(accts.find(function(x){ return x.id === id; })) return false;
+  accts.push({ id:id, name:'MT5 · ' + a.login, type:'normal', initialBalance:10000, currency:a.currency || 'USD', color:'#4d9fff' });
+  saveAccounts(accts);
+  saveAccountData(id, [], { accountSize:10000, assets:(S.settings.assets || []).slice(), challengeActive:false, maxDailyLoss:5, maxTotalLoss:10, profitTarget:10, alertAt:80 });
+  return true;
+}
+
+async function ttMt5Sync(){
+  if(_mt5Busy || !_mt5.enabled || !_mt5.code) return;
+  if(typeof getLicensePrefix !== 'function' || !getLicensePrefix()) return;
+  _mt5Busy = true;
+  try{
+    var pfx = getLicensePrefix(), sinceKey = pfx + 'mt5_since';
+    var since = localStorage.getItem(sinceKey) || '1970-01-01T00:00:00Z';
+    var res = await fetch(MT5_FN, { method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ action:'fetch', code:_mt5.code, since:since }) });
+    if(!res.ok) return;
+    var data = await res.json();
+    var accts = data.accounts || [], trades = data.trades || [];
+    var changed = false, activeChanged = false, added = 0, updated = 0;
+
+    accts.forEach(function(a){ if(_mt5EnsureAccount(a)) changed = true; });
+
+    var byLogin = {};
+    trades.forEach(function(t){ (byLogin[t.login] = byLogin[t.login] || []).push(t); });
+    var activeId = getActiveId();
+
+    Object.keys(byLogin).forEach(function(login){
+      if(_mt5EnsureAccount({ login: login })) changed = true;
+      var id = 'mt5_' + login;
+      var inc = byLogin[login].map(function(t){ return _mt5Trade(login, t); }).filter(Boolean);
+      if(!inc.length) return;
+      var r;
+      if(id === activeId){
+        r = _mt5Upsert(S.trades, inc);
+        if(!S.settings.assets) S.settings.assets = [];
+        inc.forEach(function(t){ if(t.asset && S.settings.assets.indexOf(t.asset) < 0) S.settings.assets.push(t.asset); });
+        activeChanged = true;
+      } else {
+        var n = parseInt(localStorage.getItem(pfx + 'n_' + id) || '1'), list = [];
+        for(var i = 0; i < n; i++){
+          var x = localStorage.getItem(pfx + id + '_' + i);
+          if(x) try{ list = list.concat(JSON.parse(x)); }catch(e){}
+        }
+        var cfg = {}; try{ cfg = JSON.parse(localStorage.getItem(pfx + 'cfg_' + id) || '{}'); }catch(e){}
+        if(!cfg.assets) cfg.assets = [];
+        inc.forEach(function(t){ if(t.asset && cfg.assets.indexOf(t.asset) < 0) cfg.assets.push(t.asset); });
+        r = _mt5Upsert(list, inc);
+        saveAccountData(id, list, cfg);
+      }
+      added += r.added; updated += r.updated;
+    });
+
+    if(activeChanged){
+      save();
+      if(typeof renderAssets === 'function') renderAssets();
+      if(typeof renderASels === 'function') renderASels();
+      refresh();
+    }
+    if(changed && typeof renderSidebarAccounts === 'function') renderSidebarAccounts();
+    if(changed || added || updated){ if(typeof syncToCloud === 'function') syncToCloud(); }
+    if(added && typeof toast === 'function') toast('📈 MT5: ' + added + (added === 1 ? ' operación nueva' : ' operaciones nuevas'), 'var(--green)');
+
+    _mt5.accounts = accts;
+    renderMt5List();
+    if(data.server_time) localStorage.setItem(sinceKey, new Date(Date.parse(data.server_time) - 120000).toISOString());
+  }catch(e){
+    console.warn('[TradeTrack] MT5 sync:', e);
+  }finally{
+    _mt5Busy = false;
+  }
+}
+
+function renderMt5List(){
+  var now = Date.now(), accts = _mt5.accounts || [];
+  var live = function(a){ return a.last_seen && (now - Date.parse(a.last_seen)) < 10 * 60 * 1000; };
+  var el = document.getElementById('sb-mt5-list');
+  if(el) el.innerHTML = accts.map(function(a){
+    var lg = parseInt(a.login, 10), on = live(a);
+    return '<button onclick="switchAccount(\'mt5_' + lg + '\')" title="' + (a.broker ? String(a.broker).replace(/[<>"&]/g, '') : 'MT5') + '" style="display:flex;align-items:center;gap:7px;width:100%;background:var(--card2);border:1px solid var(--bdr);color:var(--text);border-radius:7px;padding:6px 8px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;text-align:left;box-sizing:border-box">' +
+      '<span style="width:7px;height:7px;border-radius:50%;flex-shrink:0;background:' + (on ? '#22c55e' : '#6b7280') + '"></span>' +
+      '<span>MT5 · ' + lg + '</span>' +
+      '<span style="margin-left:auto;font-size:9px;font-weight:700;color:' + (on ? '#22c55e' : 'var(--gray2)') + '">' + (on ? 'EN VIVO' : 'SIN SEÑAL') + '</span></button>';
+  }).join('');
+  var mm = document.getElementById('mt5-modal-accts');
+  if(mm) mm.innerHTML = accts.length
+    ? accts.map(function(a){ var on = live(a); return '<div style="display:flex;align-items:center;gap:7px;font-size:12px"><span style="width:8px;height:8px;border-radius:50%;background:' + (on ? '#22c55e' : '#6b7280') + '"></span>MT5 · ' + parseInt(a.login, 10) + '<span style="color:var(--gray2);font-size:11px">' + (on ? 'conectada' : 'sin señal') + '</span></div>'; }).join('')
+    : '<div style="font-size:12px;color:var(--gray2)">Todavía no hay cuentas conectadas. Aparecerán aquí solas cuando actives el EA.</div>';
+}
+
+function mt5Copy(txt){
+  var done = function(){ if(typeof toast === 'function') toast('Copiado', 'var(--green)'); };
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done, function(){}); return; }
+  var ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); done(); }catch(e){}
+  document.body.removeChild(ta);
+}
+
+function openMt5Modal(){
+  if(!_mt5.enabled) return;
+  var old = document.getElementById('mt5-modal'); if(old) old.remove();
+  var m = document.createElement('div');
+  m.id = 'mt5-modal';
+  m.style.cssText = 'position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.65);display:flex;align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto';
+  m.onclick = function(e){ if(e.target === m) m.remove(); };
+  var code = String(_mt5.code).replace(/[^A-Za-z0-9\-]/g, '');
+  var box = 'display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:9px 10px;margin-top:8px';
+  var cpy = 'background:var(--card2);border:1px solid var(--bdr2,var(--bdr));color:var(--text);border-radius:6px;padding:5px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;flex-shrink:0';
+  var step = function(n, title, body){ return '<div style="display:flex;gap:10px;margin-top:16px"><div style="flex-shrink:0;width:22px;height:22px;border-radius:50%;background:rgba(77,159,255,.18);color:#4d9fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center">' + n + '</div><div style="flex:1;min-width:0"><div style="font-weight:700;font-size:13px;color:var(--text)">' + title + '</div><div style="font-size:12px;line-height:1.6;color:var(--text2);margin-top:3px">' + body + '</div></div></div>'; };
+  m.innerHTML =
+    '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:14px;max-width:480px;width:100%;padding:22px;margin:auto;box-sizing:border-box">' +
+      '<div style="display:flex;align-items:center;justify-content:space-between"><div style="font-size:16px;font-weight:800;color:var(--text)">Conectar cuenta MT5</div><button onclick="document.getElementById(\'mt5-modal\').remove()" style="background:none;border:none;color:var(--text2);font-size:20px;cursor:pointer;line-height:1">×</button></div>' +
+      '<div style="font-size:12px;color:var(--text2);margin-top:4px">Sigue estos pasos una sola vez. Después tus operaciones aparecerán solas en el calendario.</div>' +
+      step(1, 'Descarga el EA', '<a href="' + MT5_EA_URL + '" download style="display:inline-block;margin-top:6px;background:linear-gradient(135deg,#1e6fd9,#4d9fff);color:#fff;text-decoration:none;border-radius:8px;padding:8px 14px;font-weight:700;font-size:12px">⬇ Descargar TradeTrack_MT5_Sync.ex5</a>') +
+      step(2, 'Instálalo en MT5', 'En MT5: <b>Archivo → Abrir carpeta de datos → MQL5 → Experts</b>. Pega el archivo ahí y reinicia MT5.') +
+      step(3, 'Permite la conexión (una sola vez)', 'En MT5: <b>Herramientas → Opciones → Asesores Expertos</b>. Marca <b>Permitir WebRequest para las URL listadas</b> y agrega esta dirección:<div style="' + box + '"><code style="flex:1;font-size:11px;word-break:break-all;color:var(--text)">' + MT5_ALLOW_URL + '</code><button style="' + cpy + '" onclick="mt5Copy(\'' + MT5_ALLOW_URL + '\')">Copiar</button></div>') +
+      step(4, 'Actívalo con tu código', 'Arrastra <b>TradeTrack_MT5_Sync</b> desde el Navegador de MT5 a cualquier gráfico. En la pestaña <b>Parámetros</b> pega este código y pulsa Aceptar (el botón Algo Trading debe estar activo):<div style="' + box + '"><code style="flex:1;font-size:15px;font-weight:800;letter-spacing:1px;color:var(--text)">' + code + '</code><button style="' + cpy + '" onclick="mt5Copy(\'' + code + '\')">Copiar</button></div>') +
+      '<div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--bdr)"><div style="font-size:11px;font-weight:800;letter-spacing:.6px;color:var(--text2);margin-bottom:8px">CUENTAS CONECTADAS</div><div id="mt5-modal-accts" style="display:flex;flex-direction:column;gap:6px"></div></div>' +
+      '<div style="font-size:11px;color:var(--gray2);margin-top:14px;line-height:1.5">MT5 de escritorio (PC o VPS) debe estar abierto para que se sincronice. Si lo cierras, al volver a abrirlo se recupera todo lo pendiente.</div>' +
+    '</div>';
+  document.body.appendChild(m);
+  renderMt5List();
+  ttMt5Sync();
+}
+
+setInterval(ttMt5Sync, 60000);
 </script>
 
 </html>
