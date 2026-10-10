@@ -11636,6 +11636,27 @@ function _mt5Upsert(list, incoming){
   return { added: added, updated: updated };
 }
 
+// Nombre corto del broker a partir del servidor de MT5 (ej. ICMarketsSC-Demo -> "IC Markets", FTMO-Server3 -> "FTMO")
+function _mt5Short(a){
+  var src = String(a.name || a.broker || '').trim();
+  var first = src.split(/[-_.\s]+/)[0] || '';
+  var w = first;
+  for(var i = 0; i < 3; i++) w = w.replace(/(SC|EU|AU|UK|INT)$/, '').replace(/(MT5|MT4|Live|Demo|Real)$/i, '');
+  if(!w) w = first;
+  w = w.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2').replace(/[<>"&']/g, '').trim();
+  if(w.length > 16){
+    if(w.indexOf(' ') > 0) w = w.split(' ').map(function(x){ return x.charAt(0).toUpperCase(); }).join('').slice(0, 4);
+    else w = w.slice(0, 14) + '…';
+  }
+  return w || 'MT5';
+}
+// Si hay dos cuentas del mismo broker, se agregan los últimos 4 dígitos para distinguirlas
+function _mt5Label(a, all){
+  var l = _mt5Short(a);
+  var dup = (all || []).filter(function(x){ return _mt5Short(x) === l; }).length > 1;
+  return dup ? l + ' · ' + String(a.login).slice(-4) : l;
+}
+
 function _mt5Acct(login){
   var id = 'mt5_' + login;
   return getAccounts().find(function(x){ return x.id === id; });
@@ -11673,6 +11694,22 @@ async function ttMt5Sync(full){
     if(!data) return;
     _mt5.accounts = data.accounts;
     var added = 0, updated = 0, activeChanged = false, activeId = getActiveId();
+
+    // Cuentas con nombre automático ("MT5 · número" o el nombre del broker): se actualizan; si el usuario las renombró, no se tocan
+    var accts0 = getAccounts(), renamed = false;
+    data.accounts.forEach(function(a){
+      var ac = accts0.find(function(x){ return x.id === 'mt5_' + a.login; });
+      if(!ac || !ac.mt5cfg) return;
+      var lbl = _mt5Label(a, data.accounts);
+      var auto = String(ac.name).indexOf('MT5 · ') === 0 || (ac.mt5label && ac.name === ac.mt5label);
+      if(auto && ac.name !== lbl){ ac.name = lbl; ac.mt5label = lbl; renamed = true; }
+    });
+    if(renamed){
+      saveAccounts(accts0);
+      if(typeof updateAcctBtn === 'function') updateAcctBtn();
+      if(typeof renderSidebarAccounts === 'function') renderSidebarAccounts();
+      if(typeof syncToCloud === 'function') syncToCloud();
+    }
 
     var byLogin = {};
     data.trades.forEach(function(t){ (byLogin[t.login] = byLogin[t.login] || []).push(t); });
@@ -11740,16 +11777,16 @@ function renderMt5List(){
   if(el) el.innerHTML = accts.map(function(a){
     var lg = parseInt(a.login, 10), on = live(a), ac = _mt5Acct(lg), ok = !!(ac && ac.mt5cfg);
     var act = ok ? "switchAccount('mt5_" + lg + "')" : 'openMt5Setup(' + lg + ')';
-    return '<button onclick="' + act + '" title="' + (a.broker ? String(a.broker).replace(/[<>"&]/g, '') : 'MT5') + '" style="display:flex;align-items:center;gap:7px;width:100%;background:var(--card2);border:1px solid var(--bdr);color:var(--text);border-radius:7px;padding:6px 8px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;text-align:left;box-sizing:border-box">' +
+    return '<button onclick="' + act + '" title="' + (a.broker ? String(a.broker).replace(/[<>"&]/g, '') + ' · ' : '') + lg + '" style="display:flex;align-items:center;gap:7px;width:100%;background:var(--card2);border:1px solid var(--bdr);color:var(--text);border-radius:7px;padding:6px 8px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;text-align:left;box-sizing:border-box">' +
       '<span style="width:7px;height:7px;border-radius:50%;flex-shrink:0;background:' + (on ? '#22c55e' : '#6b7280') + '"></span>' +
-      '<span>MT5 · ' + lg + '</span>' +
+      '<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + _mt5Label(a, accts) + '</span>' +
       '<span style="margin-left:auto;font-size:9px;font-weight:700;color:' + (!ok ? '#f5a524' : (on ? '#22c55e' : 'var(--gray2)')) + '">' + (!ok ? 'CONFIGURAR' : (on ? 'EN VIVO' : 'SIN SEÑAL')) + '</span></button>';
   }).join('');
   var mm = document.getElementById('mt5-modal-accts');
   if(mm) mm.innerHTML = accts.length
     ? accts.map(function(a){
         var lg = parseInt(a.login, 10), on = live(a), ac = _mt5Acct(lg), ok = !!(ac && ac.mt5cfg);
-        return '<div style="display:flex;align-items:center;gap:7px;font-size:12px;flex-wrap:wrap"><span style="width:8px;height:8px;border-radius:50%;background:' + (on ? '#22c55e' : '#6b7280') + '"></span>MT5 · ' + lg +
+        return '<div style="display:flex;align-items:center;gap:7px;font-size:12px;flex-wrap:wrap"><span style="width:8px;height:8px;border-radius:50%;background:' + (on ? '#22c55e' : '#6b7280') + '"></span>' + _mt5Label(a, accts) + ' <span style="color:var(--gray2);font-size:11px">' + lg + '</span>' +
           '<span style="color:var(--gray2);font-size:11px">' + (on ? 'conectada' : 'sin señal') + '</span>' +
           '<button onclick="openMt5Setup(' + lg + ')" style="margin-left:auto;background:var(--card2);border:1px solid var(--bdr);color:var(--text);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">' + (ok ? 'Importar historial' : 'Configurar') + '</button></div>';
       }).join('')
@@ -11835,7 +11872,8 @@ function mt5SetupConfirm(login){
   var cfg = { mode: mode, from: mode === 'range' ? from : '', to: mode === 'range' ? to : '',
               start: (ac && ac.mt5cfg && ac.mt5cfg.start) || new Date().toISOString() };
   if(!ac){
-    ac = { id:id, name:'MT5 · ' + login, type:'normal', initialBalance:10000, currency:info.currency || 'USD', color:'#4d9fff' };
+    var _lbl = _mt5Label(info.login ? info : { login: login }, _mt5.accounts);
+    ac = { id:id, name:_lbl, mt5label:_lbl, type:'normal', initialBalance:10000, currency:info.currency || 'USD', color:'#4d9fff' };
     accts.push(ac);
     saveAccountData(id, [], { accountSize:10000, assets:(S.settings.assets || []).slice(), challengeActive:false, maxDailyLoss:5, maxTotalLoss:10, profitTarget:10, alertAt:80 });
   }
