@@ -1379,7 +1379,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
 #tab-registro .btp,#tab-stats .btp,#day-ops-sheet .btp,#td-detail-sheet .btp,#trade-detail-panel .btp{background:rgba(23,144,107,.16);color:#17906b;border-color:rgba(23,144,107,.35)}
 #tab-registro .bbe,#tab-stats .bbe,#day-ops-sheet .bbe,#td-detail-sheet .bbe,#trade-detail-panel .bbe{background:rgba(209,149,26,.16);color:#d1951a;border-color:rgba(209,149,26,.35)}
 #tab-registro .bsl,#tab-stats .bsl,#day-ops-sheet .bsl,#td-detail-sheet .bsl,#trade-detail-panel .bsl{background:rgba(161,31,58,.16);color:#a11f3a;border-color:rgba(161,31,58,.35)}
-#tab-registro .bsell,#tab-stats .bsell,#day-ops-sheet .bsell,#td-detail-sheet .bsell,#trade-detail-panel .bsell{background:rgba(209,149,26,.14);color:#d1951a}
+#tab-registro .bbuy,#tab-registro .bsell,#tab-stats .bbuy,#tab-stats .bsell,#day-ops-sheet .bbuy,#day-ops-sheet .bsell,#td-detail-sheet .bbuy,#td-detail-sheet .bsell,#trade-detail-panel .bbuy,#trade-detail-panel .bsell{background:rgba(255,255,255,.06);color:var(--text);border:1px solid var(--bdr2)}
 #tab-registro .trade-badge.win,#tab-registro .rp-badge.win,#tab-stats .trade-badge.win,#tab-stats .rp-badge.win,#day-ops-sheet .trade-badge.win,#day-ops-sheet .rp-badge.win,#td-detail-sheet .trade-badge.win,#td-detail-sheet .rp-badge.win,#trade-detail-panel .trade-badge.win,#trade-detail-panel .rp-badge.win{background:rgba(23,144,107,.18);border-color:rgba(23,144,107,.4);color:#17906b}
 #tab-registro .trade-badge.loss,#tab-registro .rp-badge.loss,#tab-stats .trade-badge.loss,#tab-stats .rp-badge.loss,#day-ops-sheet .trade-badge.loss,#day-ops-sheet .rp-badge.loss,#td-detail-sheet .trade-badge.loss,#td-detail-sheet .rp-badge.loss,#trade-detail-panel .trade-badge.loss,#trade-detail-panel .rp-badge.loss{background:rgba(161,31,58,.18);border-color:rgba(161,31,58,.4);color:#a11f3a}
 #tab-registro .trade-badge.be,#tab-registro .rp-badge.be,#tab-stats .trade-badge.be,#tab-stats .rp-badge.be,#day-ops-sheet .trade-badge.be,#day-ops-sheet .rp-badge.be,#td-detail-sheet .trade-badge.be,#td-detail-sheet .rp-badge.be,#trade-detail-panel .trade-badge.be,#trade-detail-panel .rp-badge.be{background:rgba(209,149,26,.18);border-color:rgba(209,149,26,.4);color:#d1951a}
@@ -1684,7 +1684,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
     <!-- Lista de cuentas -->
     <div style="margin-top:8px;padding:6px 0 4px;border-top:1px solid var(--bdr)">
       <div style="display:flex;align-items:center;justify-content:space-between;padding-top:4px;margin-bottom:4px">
-        <div class="ns" style="padding-top:0;font-size:12px;letter-spacing:1.5px;color:var(--text)">Cuentas</div>
+        <div class="ns" style="padding-top:0;font-size:12px;letter-spacing:1.5px;color:var(--text)">Cuentas manuales</div>
         <button id="nav-config" onclick="showTab('config',this)" title="Nueva Cuenta" style="display:flex;align-items:center;gap:4px;background:var(--card2);border:1px solid var(--bdr2);color:var(--text);border-radius:6px;padding:3px 7px;font-size:9px;font-weight:700;cursor:pointer;font-family:'DM Sans',system-ui,sans-serif;letter-spacing:.5px;transition:all .2s">
           <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
           Nueva
@@ -1693,6 +1693,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
       <div id="sb-acct-list" style="display:flex;flex-direction:column;gap:2px;max-height:220px;overflow-y:auto;overflow-x:hidden;padding:0 2px;overscroll-behavior:contain;"></div>
       <!-- Conectar cuenta MT5 (visible solo si el administrador lo habilitó para este correo) -->
       <div id="sb-mt5-wrap" style="display:none">
+      <div class="ns" style="padding:10px 0 4px;margin-top:10px;border-top:1px solid var(--bdr);font-size:12px;letter-spacing:1.5px;color:var(--text)">Cuentas MT5</div>
       <button id="sb-mt5-connect" onclick="openMt5Modal()" title="Conectar cuenta MT5" style="display:flex;flex-direction:column;align-items:flex-start;gap:5px;width:100%;margin-top:6px;background:transparent;border:1px dashed var(--bdr2);color:var(--text2);border-radius:7px;padding:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',system-ui,sans-serif;text-align:left;box-sizing:border-box">
         <span style="display:flex;align-items:center;gap:7px;width:100%">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="13" height="13" style="flex-shrink:0"><path d="M10 13a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07L11.5 4.4"/><path d="M14 11a5 5 0 0 0-7.07 0L4.1 13.83a5 5 0 0 0 7.07 7.07l1.33-1.33"/></svg>
@@ -5940,7 +5941,7 @@ function renderDayDetail(){
     return'<tr onclick="openTDPById(\''+t.id+'\',\''+ds+'\','+tIdx+')" class="'+(editId===t.id?'sel-row':'')+'">'+
       '<td style="color:var(--cyan);font-family:\'DM Sans\',sans-serif;font-size:10px">'+tradeTimeLbl(t)+'</td>'+
       '<td style="font-weight:700;color:var(--blue)"><span style="font-size:10px;color:var(--gray2);margin-right:2px">›</span>'+t.asset+'</td>'+
-      '<td><span style="font-size:10px;color:var(--gray2);margin-right:2px">›</span><span style="color:'+(t.direction==='BUY'?'var(--green)':'var(--red)')+'">'+( t.direction==='BUY'?'Compra':'Venta')+'</span></td>'+
+      '<td><span style="font-size:10px;color:var(--gray2);margin-right:2px">›</span><span style="color:'+'var(--text)'+'">'+( t.direction==='BUY'?'Compra':'Venta')+'</span></td>'+
       '<td style="color:var(--gray2);font-size:10px">'+(t.tf||'—')+'</td>'+
       '<td><span class="'+(t.result==='TP'?'btp':(t.result==='BE'?'bbe':'bsl'))+'">'+t.result+'</span></td>'+
       '<td class="'+(t.pnl>=0?'pp':'pn')+'" style="font-weight:700">'+fU(t.pnl)+'</td>'+
@@ -7780,8 +7781,13 @@ function renderSidebarAccounts(){
   if(!el) return;
   var accounts = getAccounts();
   var activeId = getActiveId();
+  // Las cuentas conectadas por MT5 se muestran solo en la sección "Cuentas MT5" (sin duplicarse aquí)
+  if(accounts && typeof _mt5 !== 'undefined' && _mt5.enabled){
+    accounts = accounts.filter(function(x){ return String(x.id).indexOf('mt5_') !== 0; });
+  }
   if(!accounts || !accounts.length){
-    el.innerHTML = '<div style="font-size:10px;color:#555;padding:6px 4px;text-align:center;">Sin cuentas</div>';
+    el.innerHTML = '<div style="font-size:10px;color:#555;padding:6px 4px;text-align:center;">Sin cuentas manuales</div>';
+    if(typeof renderMt5List === 'function') renderMt5List();
     return;
   }
   var html = '';
@@ -7829,6 +7835,7 @@ function renderSidebarAccounts(){
     html += '</div></div></div>';
   }
   el.innerHTML = html;
+  if(typeof renderMt5List === 'function') renderMt5List();
 }
 
 function editarCuentaSidebar(id){
@@ -9691,7 +9698,7 @@ function populateDayPanel(trades, dateStr) {
     html += '<div style="display:grid;grid-template-columns:40px 52px 36px 24px;align-items:center;column-gap:8px;min-width:0">';
     html += '<span style="font-size:10px;color:var(--gray2);font-family:\'DM Sans\',sans-serif">'+tradeTimeLbl(t)+'</span>';
     html += '<span style="font-size:13px;font-weight:600;font-family:\'DM Sans\',sans-serif;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+( t.asset||'—')+'</span>';
-    html += '<span style="font-size:10px;font-weight:600;color:'+(t.direction==='BUY'?'var(--green)':'var(--red)')+'">'+( t.direction==='BUY'?'BUY':'SELL')+'</span>';
+    html += '<span style="font-size:10px;font-weight:600;color:'+'var(--text)'+'">'+( t.direction==='BUY'?'BUY':'SELL')+'</span>';
     html += '<span style="font-size:10px;color:'+pnlClr+';font-weight:600">'+t.result+'</span>';
     html += '</div>';
     html += '<span style="font-size:13px;font-weight:700;font-family:\'DM Sans\',sans-serif;color:'+pnlClr+';flex-shrink:0">'+(t.pnl>=0?'+$':'-$')+pnlAbs+'</span>';
@@ -9953,7 +9960,7 @@ window.openTDP = function(trade, dayList, idx) {
         '<div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--rp-av-a,#2563eb),var(--rp-av-b,#7c3aed));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;font-family:\'DM Sans\',sans-serif">'+( (trade.asset||'?').substring(0,2))+'</div>' +
         '<div>' +
           '<div style="font-size:15px;font-weight:900;font-family:\'DM Sans\',sans-serif;color:var(--text)">'+(trade.asset||'—')+'</div>' +
-          '<div style="font-size:10px;color:'+(trade.direction==='BUY'?'var(--green)':'var(--red)')+'">'+( trade.direction==='BUY'?'▲ Compra':'▼ Venta')+'</div>' +
+          '<div style="font-size:10px;color:'+'var(--text)'+'">'+( trade.direction==='BUY'?'▲ Compra':'▼ Venta')+'</div>' +
         '</div>' +
         '<div style="margin-left:auto;text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:4px">' +
           '<span class="trade-badge '+(isWin?'win':(isBE?'be':'loss'))+'" style="font-size:9px">' +
@@ -10592,7 +10599,7 @@ function populateRightPanel(trade) {
   html += '<div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--card2);border-radius:10px;border:1px solid var(--bdr);margin-bottom:10px">';
   html += '<div style="width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--rp-av-a,#2563eb),var(--rp-av-b,#7c3aed));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;font-family:\'DM Sans\',sans-serif;flex-shrink:0">'+(liveTrade.asset||'?').substring(0,2)+'</div>';
   html += '<div style="flex:1;min-width:0"><div style="font-size:15px;font-weight:900;font-family:\'DM Sans\',sans-serif;color:var(--text)">'+(liveTrade.asset||'—')+'</div>';
-  html += '<div style="font-size:10px;font-weight:600;color:'+(liveTrade.direction==='BUY'?'var(--green)':'var(--red)')+'">'+( liveTrade.direction==='BUY'?'▲ Compra':'▼ Venta')+'</div></div>';
+  html += '<div style="font-size:10px;font-weight:600;color:'+'var(--text)'+'">'+( liveTrade.direction==='BUY'?'▲ Compra':'▼ Venta')+'</div></div>';
   html += '<div style="text-align:right;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px">';
   html += '<span class="rp-badge '+(isBE?'be':(isWin?'win':'loss'))+'" style="font-size:9px;padding:3px 8px">'+(isBE?'BE — Break Even':(isWin?'TP — Ganadora':'SL — Perdedora'))+'</span>';
   html += '<span class="rp-pnl '+(pnl>=0?'pos':'neg')+'" style="font-size:16px">'+(pnl>=0?'+$':'-$')+Math.abs(pnl).toFixed(2)+'</span>';
@@ -10655,7 +10662,7 @@ function populateRightPanel(trade) {
   // ── Botones editar / eliminar ─────────────────────
   html += '<div style="display:flex;gap:6px;margin-top:12px;padding-top:10px;border-top:1px solid var(--bdr)">';
   html += '<button class="btn" style="flex:1;justify-content:center;font-size:10px" onclick="if(window._currentTrade)editTrade(window._currentTrade.id)"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg> Editar todo</button>';
-  html += '<button class="btn" style="flex:1;justify-content:center;font-size:10px;border-color:rgba(161,31,58,.3);color:var(--red)" onclick="if(window._currentTrade)delTrade(window._currentTrade.id)"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13"/></svg> Eliminar</button>';
+  html += '<button class="btn" style="flex:1;justify-content:center;font-size:10px" onclick="if(window._currentTrade)delTrade(window._currentTrade.id)"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13"/></svg> Eliminar</button>';
   html += '</div>';
 
   cnt.innerHTML = html;
@@ -11021,7 +11028,7 @@ window.closeLightbox = function() {
     h += '<div style="width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--rp-av-a,#2563eb),var(--rp-av-b,#7c3aed));display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;flex-shrink:0">'
        + (t.asset || '?').substring(0, 2) + '</div>';
     h += '<div style="flex:1"><div style="font-size:15px;font-weight:900;color:var(--text);font-family:\'DM Sans\',sans-serif">' + (t.asset || '—') + '</div>'
-       + '<div style="font-size:10px;color:' + (t.direction === 'BUY' ? 'var(--green)' : 'var(--red)') + ';font-weight:700">'
+       + '<div style="font-size:10px;color:' + 'var(--text)' + ';font-weight:700">'
        + (t.direction === 'BUY' ? '▲ Compra' : '▼ Venta') + '</div></div>';
     h += '<div style="text-align:right;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px">';
     h += '<span style="padding:3px 8px;border-radius:7px;font-size:9px;font-weight:700;font-family:\'DM Sans\',sans-serif;'
@@ -11096,11 +11103,11 @@ window.closeLightbox = function() {
     var tid = t.id;
     h += '<div style="display:flex;gap:6px;padding-top:10px;border-top:1px solid var(--bdr)">';
     h += '<button onclick="var _et=S.trades.find(function(x){return x.id==='+tid+';});editTrade(' + tid + ');if(typeof openNewOpPanel===\'function\')openNewOpPanel(_et)"'
-       + ' style="flex:1;padding:8px;background:var(--rp-ind-bg,rgba(99,102,241,.12));border:1px solid var(--rp-ind-bd,rgba(99,102,241,.3));'
-       + 'color:var(--rp-ind-fg,#818cf8);border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg> Editar</button>';
+       + ' style="flex:1;padding:8px;background:var(--card2);border:1px solid var(--bdr2);'
+       + 'color:var(--text);border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg> Editar</button>';
     h += '<button onclick="delTrade(' + tid + ')"'
-       + ' style="flex:1;padding:8px;background:rgba(161,31,58,.08);border:1px solid rgba(161,31,58,.25);'
-       + 'color:var(--red);border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13"/></svg> Eliminar</button>';
+       + ' style="flex:1;padding:8px;background:var(--card2);border:1px solid var(--bdr2);'
+       + 'color:var(--text);border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit"><svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13"/></svg> Eliminar</button>';
     h += '</div>';
 
     h += '</div>';
@@ -11813,14 +11820,26 @@ function renderMt5List(){
   var now = Date.now(), accts = _mt5.accounts || [];
   var live = function(a){ return a.last_seen && (now - Date.parse(a.last_seen)) < 10 * 60 * 1000; };
   var el = document.getElementById('sb-mt5-list');
-  if(el) el.innerHTML = accts.map(function(a){
-    var lg = parseInt(a.login, 10), on = live(a), ac = _mt5Acct(lg), ok = !!(ac && ac.mt5cfg);
-    var act = ok ? "switchAccount('mt5_" + lg + "')" : 'openMt5Setup(' + lg + ')';
-    return '<button onclick="' + act + '" title="' + (a.broker ? String(a.broker).replace(/[<>"&]/g, '') + ' · ' : '') + lg + '" style="display:flex;align-items:center;gap:7px;width:100%;background:var(--card2);border:1px solid var(--bdr);color:var(--text);border-radius:7px;padding:6px 8px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;text-align:left;box-sizing:border-box">' +
-      '<span style="width:7px;height:7px;border-radius:50%;flex-shrink:0;background:' + (on ? '#22c55e' : '#6b7280') + '"></span>' +
-      '<span style="display:flex;flex-direction:column;min-width:0;line-height:1.2"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + _mt5Short(a) + '</span><span style="font-size:9px;font-weight:600;color:var(--gray2);letter-spacing:.2px">' + lg + ' · <b style="color:' + (_mt5IsDemo(a) ? '#f5a524' : '#4d9fff') + '">' + (_mt5IsDemo(a) ? 'DEMO' : 'REAL') + '</b></span></span>' +
-      '<span style="margin-left:auto;font-size:9px;font-weight:700;color:' + (!ok ? '#f5a524' : (on ? '#22c55e' : 'var(--gray2)')) + '">' + (!ok ? 'CONFIGURAR' : (on ? 'EN VIVO' : 'SIN SEÑAL')) + '</span></button>';
-  }).join('');
+  if(el){
+    // Cuentas MT5 guardadas que el servidor aún no devolvió (p. ej. sin conexión): se muestran igual
+    var sbAccts = accts.slice();
+    getAccounts().forEach(function(x){
+      if(String(x.id).indexOf('mt5_') !== 0) return;
+      var lg0 = x.id.slice(4);
+      if(!sbAccts.some(function(a){ return String(a.login) === lg0; })) sbAccts.push({ login: lg0, name: x.name, last_seen: null });
+    });
+    var activeId = getActiveId();
+    el.innerHTML = sbAccts.map(function(a){
+      var lg = parseInt(a.login, 10), on = live(a), ac = _mt5Acct(lg), ok = !!(ac && ac.mt5cfg);
+      var isAct = ok && activeId === 'mt5_' + lg;
+      var dotCol = on ? '#22c55e' : '#6b7280';
+      var act = ok ? "switchAccount('mt5_" + lg + "')" : 'openMt5Setup(' + lg + ')';
+      return '<button onclick="' + act + '" title="' + (a.broker ? String(a.broker).replace(/[<>"&]/g, '') + ' · ' : '') + lg + '" style="display:flex;align-items:center;gap:7px;width:100%;background:' + (isAct ? 'var(--ni-act-bg)' : 'var(--card2)') + ';border:1px solid ' + (isAct ? 'var(--ni-act-border)' : 'var(--bdr)') + ';color:var(--text);border-radius:7px;padding:6px 8px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;text-align:left;box-sizing:border-box">' +
+        '<span style="display:inline-block;width:8px;height:8px;min-width:8px;border-radius:50%;flex-shrink:0;background:' + dotCol + ';' + (isAct ? 'animation:active-pulse-col 1.4s ease-in-out infinite;box-shadow:0 0 5px ' + dotCol + 'bb;' : 'opacity:.35;') + '"></span>' +
+        '<span style="display:flex;flex-direction:column;min-width:0;line-height:1.2"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + _mt5Short(a) + '</span><span style="font-size:9px;font-weight:600;color:var(--gray2);letter-spacing:.2px">' + lg + ' · <b style="color:' + (_mt5IsDemo(a) ? '#f5a524' : '#4d9fff') + '">' + (_mt5IsDemo(a) ? 'DEMO' : 'REAL') + '</b></span></span>' +
+        '<span style="margin-left:auto;font-size:9px;font-weight:700;color:' + (!ok ? '#f5a524' : (on ? '#22c55e' : 'var(--gray2)')) + '">' + (!ok ? 'CONFIGURAR' : (on ? 'EN VIVO' : 'SIN SEÑAL')) + '</span></button>';
+    }).join('');
+  }
   var mm = document.getElementById('mt5-modal-accts');
   if(mm) mm.innerHTML = accts.length
     ? accts.map(function(a){
