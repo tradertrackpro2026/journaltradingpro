@@ -168,7 +168,7 @@ select.fi.fi-empty option{color:var(--text)}
 .cal-cell::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.02),transparent);pointer-events:none}
 .cal-cell:hover{border-color:var(--bdr3);transform:scale(1.025);box-shadow:0 8px 28px rgba(0,0,0,.4),0 0 0 1px rgba(99,102,241,.15);z-index:2}
 .cal-cell.other{opacity:.15;cursor:default;pointer-events:none}
-.cal-cell.today{border-color:rgba(67,97,238,.7)!important;box-shadow:0 0 20px rgba(67,97,238,.25),inset 0 0 12px rgba(67,97,238,.06)}
+/* hoy ya no se marca en azul en el calendario */
 .cal-cell.sel{border-color:rgba(247,201,72,.6)!important;box-shadow:0 0 16px rgba(247,201,72,.2)!important}
 .cal-cell.all-tp{background:linear-gradient(145deg,#0f5e47 0%,#083a2b 55%,#04201a 100%)!important;border-color:#17906b!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 2px 12px rgba(0,0,0,.5)}
 .cal-cell.all-be{background:linear-gradient(145deg,#6e4d0b 0%,#402c06 55%,#201603 100%)!important;border-color:#a77412!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 2px 12px rgba(0,0,0,.5)}
@@ -178,7 +178,6 @@ select.fi.fi-empty option{color:var(--text)}
 .cal-cell.all-tp .cdn,.cal-cell.all-be .cdn,.cal-cell.all-sl .cdn,.cal-cell.mix-win .cdn,.cal-cell.mix-loss .cdn{color:#fff;font-weight:800}
 .cal-cell.all-tp .cpnl,.cal-cell.all-be .cpnl,.cal-cell.all-sl .cpnl,.cal-cell.mix-win .cpnl,.cal-cell.mix-loss .cpnl{color:#fff;font-weight:800;background:transparent}
 .cdn{font-size:9px;font-weight:800;color:var(--text);margin-bottom:4px;font-family:'DM Sans',system-ui,sans-serif;letter-spacing:.3px}
-.cal-cell.today .cdn{color:#818cf8}
 .cal-cell.sel .cdn{color:var(--gold)}
 .cpnl{font-size:11px;font-weight:700;border-radius:6px;padding:3px 7px;display:block;width:fit-content;margin:0 auto 4px;font-family:'DM Sans',system-ui,sans-serif;letter-spacing:-0.3px}
 .cpnl.pos{background:rgba(3,64,49,.85);color:#5ef0c4}
@@ -1685,7 +1684,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
     <!-- Lista de cuentas -->
     <div style="margin-top:8px;padding:6px 0 4px;border-top:1px solid var(--bdr)">
       <div style="display:flex;align-items:center;justify-content:space-between;padding-top:4px;margin-bottom:4px">
-        <div class="ns" style="padding-top:0;font-size:12px;letter-spacing:1.5px;color:var(--text)">Cuentas manuales</div>
+        <div class="ns" style="padding-top:0;font-size:10px;letter-spacing:.8px;white-space:nowrap;color:var(--text)">Cuentas manuales</div>
         <button id="nav-config" onclick="showTab('config',this)" title="Nueva Cuenta" style="display:flex;align-items:center;gap:4px;background:var(--card2);border:1px solid var(--bdr2);color:var(--text);border-radius:6px;padding:3px 7px;font-size:9px;font-weight:700;cursor:pointer;font-family:'DM Sans',system-ui,sans-serif;letter-spacing:.5px;transition:all .2s">
           <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg>
           Nueva
@@ -1694,7 +1693,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
       <div id="sb-acct-list" style="display:flex;flex-direction:column;gap:2px;max-height:220px;overflow-y:auto;overflow-x:hidden;padding:0 2px;overscroll-behavior:contain;"></div>
       <!-- Conectar cuenta MT5 (visible solo si el administrador lo habilitó para este correo) -->
       <div id="sb-mt5-wrap" style="display:none">
-      <div class="ns" style="padding:10px 0 4px;margin-top:10px;border-top:1px solid var(--bdr);font-size:12px;letter-spacing:1.5px;color:var(--text)">Cuentas MT5</div>
+      <div class="ns" style="padding:10px 0 4px;margin-top:10px;border-top:1px solid var(--bdr);font-size:10px;letter-spacing:.8px;white-space:nowrap;color:var(--text)">Cuentas MT5</div>
       <button id="sb-mt5-connect" onclick="openMt5Modal()" title="Conectar cuenta MT5" style="display:flex;flex-direction:column;align-items:flex-start;gap:5px;width:100%;margin-top:6px;background:transparent;border:1px dashed var(--bdr2);color:var(--text2);border-radius:7px;padding:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',system-ui,sans-serif;text-align:left;box-sizing:border-box">
         <span style="display:flex;align-items:center;gap:7px;width:100%">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="13" height="13" style="flex-shrink:0"><path d="M10 13a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07L11.5 4.4"/><path d="M14 11a5 5 0 0 0-7.07 0L4.1 13.83a5 5 0 0 0 7.07 7.07l1.33-1.33"/></svg>
