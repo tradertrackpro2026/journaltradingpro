@@ -351,11 +351,11 @@ tr:hover td{background:rgba(14,18,41,.8)}
 .rp-val{font-size:11px;color:var(--text);font-weight:500}
 /* Lista de propiedades estilo Notion para el detalle de la operación: filas planas, sin tarjetas */
 .rp-grid2{display:flex;flex-direction:column}
-.rp-row2{display:flex;align-items:center;gap:10px;padding:8px 2px;border-bottom:1px solid rgba(30,37,64,.4);min-width:0}
+.rp-row2{display:flex;align-items:center;gap:10px;padding:7px 2px;border-bottom:1px solid rgba(30,37,64,.4);min-width:0}
 .rp-row2:last-child{border-bottom:none}
-.rp-row2 .rp-icon{width:16px;height:16px;color:var(--gray2);background:none;border:none;border-radius:0;flex-shrink:0}
-.rp-label2{font-size:12px;color:var(--gray2);width:84px;flex-shrink:0;font-family:'DM Sans',system-ui,sans-serif;margin-bottom:0}
-.rp-val2{font-size:13px;color:var(--text);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right;flex:1}
+.rp-row2 .rp-icon{width:14px;height:14px;color:var(--gray2);background:none;border:none;border-radius:0;flex-shrink:0}
+.rp-label2{font-size:11px;color:var(--gray2);width:78px;flex-shrink:0;font-family:'DM Sans',system-ui,sans-serif;margin-bottom:0}
+.rp-val2{font-size:11px;color:var(--text);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right;flex:1}
 .rp-mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin:10px 0}
 .rp-mini{background:var(--card2);border-radius:8px;border:1px solid var(--bdr);padding:8px;text-align:center}
 .rp-mini-l{font-size:9px;color:var(--gray2);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px;font-family:'DM Sans',system-ui,sans-serif}
@@ -1706,7 +1706,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
       <div id="sb-acct-list" style="display:flex;flex-direction:column;gap:2px;max-height:220px;overflow-y:auto;overflow-x:hidden;padding:0 2px;overscroll-behavior:contain;"></div>
       <!-- Conectar cuenta MT5 (visible solo si el administrador lo habilitó para este correo) -->
       <div id="sb-mt5-wrap" style="display:none">
-      <div class="ns" style="padding:10px 0 4px;margin-top:10px;border-top:1px solid var(--bdr);font-size:10px;letter-spacing:.8px;white-space:nowrap;color:var(--text)">Cuentas MT5</div>
+      <div class="ns" style="padding:10px 16px 4px;margin-top:10px;border-top:1px solid var(--bdr);font-size:10px;letter-spacing:.8px;white-space:nowrap;color:var(--text)">Cuentas MT5</div>
       <button id="sb-mt5-connect" onclick="openMt5Modal()" title="Conectar cuenta MT5" style="display:flex;flex-direction:column;align-items:flex-start;gap:5px;width:100%;margin-top:6px;background:transparent;border:1px dashed var(--bdr2);color:var(--text2);border-radius:7px;padding:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',system-ui,sans-serif;text-align:left;box-sizing:border-box">
         <span style="display:flex;align-items:center;gap:7px;width:100%">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="13" height="13" style="flex-shrink:0"><path d="M10 13a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07L11.5 4.4"/><path d="M14 11a5 5 0 0 0-7.07 0L4.1 13.83a5 5 0 0 0 7.07 7.07l1.33-1.33"/></svg>
