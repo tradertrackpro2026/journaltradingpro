@@ -9669,18 +9669,18 @@ function populateDayPanel(trades, dateStr) {
 
   // Cabecera del día — minimalista tipo Notion
   html += '<div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--bdr)">';
-  html += '<div style="font-size:11px;color:var(--gray2);font-family:\'DM Sans\',sans-serif;margin-bottom:6px;display:flex;align-items:center;gap:6px"><svg class="ic" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="4" x2="8" y2="9"/><line x1="16" y1="4" x2="16" y2="9"/></svg> '+fechaLbl+'</div>';
+  html += '<div style="font-size:12px;font-weight:400;color:var(--gray2);font-family:\'DM Sans\',sans-serif;margin-bottom:6px;display:flex;align-items:center;gap:6px"><svg class="ic" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="4" x2="8" y2="9"/><line x1="16" y1="4" x2="16" y2="9"/></svg> '+fechaLbl+'</div>';
   html += '<div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:7px">';
-  html += '<span style="font-size:14px;font-weight:600;color:var(--text)">'+trades.length+' operaci'+(trades.length===1?'ón':'ones')+'</span>';
-  html += '<span style="font-size:18px;font-weight:700;font-family:\'DM Sans\',sans-serif;color:'+(dayPnl>=0?'var(--green)':'var(--red)')+'">'+(dayPnl>=0?'+$':'-$')+Math.abs(dayPnl).toFixed(2)+'</span>';
+  html += '<span style="font-size:12px;font-weight:400;color:var(--text)">'+trades.length+' operaci'+(trades.length===1?'ón':'ones')+'</span>';
+  html += '<span style="font-size:12px;font-weight:400;font-family:\'DM Sans\',sans-serif;color:'+(dayPnl>=0?'var(--green)':'var(--red)')+'">'+(dayPnl>=0?'+$':'-$')+Math.abs(dayPnl).toFixed(2)+'</span>';
   html += '</div>';
-  html += '<div style="font-size:11px;color:var(--gray2);font-family:\'DM Sans\',sans-serif">';
+  html += '<div style="font-size:12px;font-weight:400;color:var(--gray2);font-family:\'DM Sans\',sans-serif">';
   html += '<span style="color:var(--text)">'+tp+' TP</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span style="color:var(--text)">'+sl+' SL</span>&nbsp;&nbsp;·&nbsp;&nbsp;'+wr+'% WR';
   html += '</div>';
   html += '</div>';
 
   // Lista de operaciones — filas planas con divisores, sin tarjetas
-  html += '<div style="font-size:10px;color:var(--gray2);margin-bottom:6px;font-family:\'DM Sans\',sans-serif">Toca una operación para ver el detalle</div>';
+  html += '<div style="font-size:12px;font-weight:400;color:var(--gray2);margin-bottom:6px;font-family:\'DM Sans\',sans-serif">Toca una operación para ver el detalle</div>';
   html += '<div style="display:flex;flex-direction:column">';
   trades.forEach(function(t, i) {
     var isWin  = t.result === 'TP';
@@ -9695,13 +9695,13 @@ function populateDayPanel(trades, dateStr) {
 
     // Fila principal: hora + asset + dirección + PnL
     html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">';
-    html += '<div style="display:grid;grid-template-columns:40px 52px 36px 24px;align-items:center;column-gap:8px;min-width:0">';
-    html += '<span style="font-size:10px;color:var(--gray2);font-family:\'DM Sans\',sans-serif">'+tradeTimeLbl(t)+'</span>';
-    html += '<span style="font-size:13px;font-weight:600;font-family:\'DM Sans\',sans-serif;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+( t.asset||'—')+'</span>';
-    html += '<span style="font-size:10px;font-weight:600;color:'+'var(--text)'+'">'+( t.direction==='BUY'?'BUY':'SELL')+'</span>';
-    html += '<span style="font-size:10px;color:var(--text);font-weight:600">'+t.result+'</span>';
+    html += '<div style="display:grid;grid-template-columns:48px 70px 44px 28px;align-items:center;column-gap:8px;min-width:0">';
+    html += '<span style="font-size:12px;font-weight:400;color:var(--gray2);font-family:\'DM Sans\',sans-serif">'+tradeTimeLbl(t)+'</span>';
+    html += '<span style="font-size:12px;font-weight:400;font-family:\'DM Sans\',sans-serif;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+( t.asset||'—')+'</span>';
+    html += '<span style="font-size:12px;font-weight:400;color:'+'var(--text)'+'">'+( t.direction==='BUY'?'BUY':'SELL')+'</span>';
+    html += '<span style="font-size:12px;color:var(--text);font-weight:400">'+t.result+'</span>';
     html += '</div>';
-    html += '<span style="font-size:13px;font-weight:700;font-family:\'DM Sans\',sans-serif;color:'+pnlClr+';flex-shrink:0">'+(t.pnl>=0?'+$':'-$')+pnlAbs+'</span>';
+    html += '<span style="font-size:12px;font-weight:400;font-family:\'DM Sans\',sans-serif;color:'+pnlClr+';flex-shrink:0">'+(t.pnl>=0?'+$':'-$')+pnlAbs+'</span>';
     html += '</div>';
 
     // Detalles secundarios: TF, estrategia, RR
@@ -9710,7 +9710,7 @@ function populateDayPanel(trades, dateStr) {
     if(t.strategy) extras.push(t.strategy);
     if(t.rr)       extras.push('RR 1:'+t.rr);
     if(extras.length){
-      html += '<div style="font-size:10px;color:var(--gray2);margin-bottom:4px">'+extras.join(' · ')+'</div>';
+      html += '<div style="font-size:11px;font-weight:400;color:var(--gray2);margin-bottom:4px">'+extras.join(' · ')+'</div>';
     }
 
     // Miniaturas de imágenes
@@ -9731,7 +9731,7 @@ function populateDayPanel(trades, dateStr) {
       var bits = [];
       if(t.notes) bits.push('Nota');
       if(lnks.length) bits.push(lnks.length+' enlace'+(lnks.length>1?'s':''));
-      html += '<div style="font-size:9px;color:var(--gray2);margin-top:3px">'+bits.join(' · ')+'</div>';
+      html += '<div style="font-size:11px;font-weight:400;color:var(--gray2);margin-top:3px">'+bits.join(' · ')+'</div>';
     }
     html += '</div>';
   });
