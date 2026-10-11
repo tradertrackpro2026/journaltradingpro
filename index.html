@@ -1388,6 +1388,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
 #tab-registro .trow.editing,#tab-stats .trow.editing,#day-ops-sheet .trow.editing,#td-detail-sheet .trow.editing,#trade-detail-panel .trow.editing{border-color:rgba(209,149,26,.5);box-shadow:0 0 10px rgba(209,149,26,.12)}
 #tab-registro .day-ops-table tr.sel-row td,#tab-stats .day-ops-table tr.sel-row td,#day-ops-sheet .day-ops-table tr.sel-row td,#td-detail-sheet .day-ops-table tr.sel-row td,#trade-detail-panel .day-ops-table tr.sel-row td{background:rgba(209,149,26,.07);border-color:rgba(209,149,26,.25)}
 #tab-registro .img-thumb-del,#tab-stats .img-thumb-del,#day-ops-sheet .img-thumb-del,#td-detail-sheet .img-thumb-del,#trade-detail-panel .img-thumb-del{background:rgba(161,31,58,.85)}
+#tab-registro .btp,#tab-registro .bbe,#tab-registro .bsl,#tab-registro .trade-badge.win,#tab-registro .trade-badge.loss,#tab-registro .trade-badge.be,#tab-registro .rp-badge.win,#tab-registro .rp-badge.loss,#tab-registro .rp-badge.be,#tab-stats .btp,#tab-stats .bbe,#tab-stats .bsl,#tab-stats .trade-badge.win,#tab-stats .trade-badge.loss,#tab-stats .trade-badge.be,#tab-stats .rp-badge.win,#tab-stats .rp-badge.loss,#tab-stats .rp-badge.be,#day-ops-sheet .btp,#day-ops-sheet .bbe,#day-ops-sheet .bsl,#day-ops-sheet .trade-badge.win,#day-ops-sheet .trade-badge.loss,#day-ops-sheet .trade-badge.be,#day-ops-sheet .rp-badge.win,#day-ops-sheet .rp-badge.loss,#day-ops-sheet .rp-badge.be,#td-detail-sheet .btp,#td-detail-sheet .bbe,#td-detail-sheet .bsl,#td-detail-sheet .trade-badge.win,#td-detail-sheet .trade-badge.loss,#td-detail-sheet .trade-badge.be,#td-detail-sheet .rp-badge.win,#td-detail-sheet .rp-badge.loss,#td-detail-sheet .rp-badge.be,#trade-detail-panel .btp,#trade-detail-panel .bbe,#trade-detail-panel .bsl,#trade-detail-panel .trade-badge.win,#trade-detail-panel .trade-badge.loss,#trade-detail-panel .trade-badge.be,#trade-detail-panel .rp-badge.win,#trade-detail-panel .rp-badge.loss,#trade-detail-panel .rp-badge.be{background:rgba(255,255,255,.06);border-color:var(--bdr2);color:var(--text)}
 </style>
 </head>
 <body>
@@ -5856,8 +5857,8 @@ function showDayOpsSheet(trades, dateStr){
   sheet.id = 'day-ops-sheet';
   sheet.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:9400;background:var(--card);border-radius:20px 20px 0 0;border-top:1px solid var(--bdr2);box-shadow:0 -8px 40px rgba(0,0,0,.6);max-height:80vh;display:flex;flex-direction:column;';
 
-  var tp_txt = tp > 0 ? '<span style="color:var(--green);font-weight:700">'+tp+' TP</span>' : '';
-  var sl_txt = sl > 0 ? '<span style="color:var(--red);font-weight:700">'+sl+' SL</span>' : '';
+  var tp_txt = tp > 0 ? '<span style="color:var(--text);font-weight:700">'+tp+' TP</span>' : '';
+  var sl_txt = sl > 0 ? '<span style="color:var(--text);font-weight:700">'+sl+' SL</span>' : '';
   var sep = tp > 0 && sl > 0 ? ' &middot; ' : '';
 
   sheet.innerHTML =
@@ -9675,7 +9676,7 @@ function populateDayPanel(trades, dateStr) {
   html += '<span style="font-size:18px;font-weight:700;font-family:\'DM Sans\',sans-serif;color:'+(dayPnl>=0?'var(--green)':'var(--red)')+'">'+(dayPnl>=0?'+$':'-$')+Math.abs(dayPnl).toFixed(2)+'</span>';
   html += '</div>';
   html += '<div style="font-size:11px;color:var(--gray2);font-family:\'DM Sans\',sans-serif">';
-  html += '<span style="color:var(--green)">'+tp+' TP</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span style="color:var(--red)">'+sl+' SL</span>&nbsp;&nbsp;·&nbsp;&nbsp;'+wr+'% WR';
+  html += '<span style="color:var(--text)">'+tp+' TP</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span style="color:var(--text)">'+sl+' SL</span>&nbsp;&nbsp;·&nbsp;&nbsp;'+wr+'% WR';
   html += '</div>';
   html += '</div>';
 
@@ -9699,7 +9700,7 @@ function populateDayPanel(trades, dateStr) {
     html += '<span style="font-size:10px;color:var(--gray2);font-family:\'DM Sans\',sans-serif">'+tradeTimeLbl(t)+'</span>';
     html += '<span style="font-size:13px;font-weight:600;font-family:\'DM Sans\',sans-serif;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+( t.asset||'—')+'</span>';
     html += '<span style="font-size:10px;font-weight:600;color:'+'var(--text)'+'">'+( t.direction==='BUY'?'BUY':'SELL')+'</span>';
-    html += '<span style="font-size:10px;color:'+pnlClr+';font-weight:600">'+t.result+'</span>';
+    html += '<span style="font-size:10px;color:var(--text);font-weight:600">'+t.result+'</span>';
     html += '</div>';
     html += '<span style="font-size:13px;font-weight:700;font-family:\'DM Sans\',sans-serif;color:'+pnlClr+';flex-shrink:0">'+(t.pnl>=0?'+$':'-$')+pnlAbs+'</span>';
     html += '</div>';
@@ -11032,9 +11033,8 @@ window.closeLightbox = function() {
        + (t.direction === 'BUY' ? '▲ Compra' : '▼ Venta') + '</div></div>';
     h += '<div style="text-align:right;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px">';
     h += '<span style="padding:3px 8px;border-radius:7px;font-size:9px;font-weight:700;font-family:\'DM Sans\',sans-serif;'
-       + (isWin ? 'background:rgba(23,144,107,.15);color:#17906b;border:1px solid rgba(23,144,107,.3)'
-                : isBE ? 'background:rgba(209,149,26,.15);color:#d1951a;border:1px solid rgba(209,149,26,.3)'
-                : 'background:rgba(161,31,58,.15);color:#a11f3a;border:1px solid rgba(161,31,58,.3)') + '">'
+       + 'background:rgba(255,255,255,.06);color:var(--text);border:1px solid var(--bdr2)'
+       + '">'
        + (isWin ? 'TP — Ganadora' : isBE ? 'BE — Break Even' : 'SL — Perdedora') + '</span>';
     h += '<span style="font-size:16px;font-weight:900;color:' + pnlC + '">' + pnlS + '</span>';
     h += '</div>';
