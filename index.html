@@ -6,7 +6,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#0a1628">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%237c3aed'/><text x='16' y='22' text-anchor='middle' font-size='18' fill='white'>⚡</text></svg>">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070b18'/%3E%3Cdefs%3E%3Cfilter id='f' x='-60%' y='-60%' width='220%' height='220%'%3E%3CfeGaussianBlur in='SourceAlpha' stdDeviation='2.4' result='b'/%3E%3CfeFlood flood-color='%2300cfff' flood-opacity='.95'/%3E%3CfeComposite in2='b' operator='in' result='g'/%3E%3CfeMerge%3E%3CfeMergeNode in='g'/%3E%3CfeMergeNode in='SourceGraphic'/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3Cg filter='url(%23f)'%3E%3Cpath d='M18 25C8 24 3 14 8 5C10 13 15 17 22 19Z' fill='%23fff'/%3E%3Cpath d='M46 25C56 24 61 14 56 5C54 13 49 17 42 19Z' fill='%23fff'/%3E%3Cpath d='M17 28L4 26L12 34Z' fill='%23fff'/%3E%3Cpath d='M47 28L60 26L52 34Z' fill='%23fff'/%3E%3Cpath d='M20 18C26 15 38 15 44 18C47 22 47 28 45 34C44 42 40 50 32 57C24 50 20 42 19 34C17 28 17 22 20 18Z' fill='%23fff'/%3E%3Cpath d='M22.5 30L29.5 32.5L28.5 35L22.5 33.5Z' fill='%2300cfff'/%3E%3Cpath d='M41.5 30L34.5 32.5L35.5 35L41.5 33.5Z' fill='%2300cfff'/%3E%3Cellipse cx='32' cy='47' rx='9.5' ry='6.5' fill='%23070b18'/%3E%3Ccircle cx='28.3' cy='47' r='1.7' fill='%23fff'/%3E%3Ccircle cx='35.7' cy='47' r='1.7' fill='%23fff'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="manifest" id="pwa-manifest">
 <meta name="apple-mobile-web-app-title" content="TraderTrack Journal">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -1365,6 +1365,47 @@ tr:hover td{background:rgba(14,18,41,.8)}
 .bw-scope .il{color:var(--bwfg3)!important}
 .bw-scope .klbl{color:var(--bwfg3)!important}
 .bw-scope ::-webkit-scrollbar-thumb{background:var(--bwline2)}
+
+/* ── ESTADÍSTICAS: letras y números más compactos (la curva de equity .st-keep queda igual) ── */
+#tab-stats .bw-h1{font-size:19px}
+#tab-stats .bw-sub{font-size:12px}
+#tab-stats .bw-eyebrow{font-size:10px}
+#tab-stats .bw-kpi{padding:10px 11px}
+#tab-stats .bw-kpi-lbl{font-size:9.5px}
+#tab-stats .bw-kpi-val{font-size:19px}
+#tab-stats .bw-kpi-sub{font-size:9.5px}
+#tab-stats .bw-row{padding:5px 0}
+#tab-stats .bw-row-lbl{font-size:11px}
+#tab-stats .bw-row-val{font-size:12px}
+#tab-stats .bw-btn{font-size:10.5px;padding:6px 10px}
+#tab-stats table.bw-xls{font-size:11px}
+#tab-stats table.bw-xls th{font-size:9px;padding:6px 8px}
+#tab-stats table.bw-xls td{font-size:11px;padding:6px 8px}
+#tab-stats .bw-filter-lbl{font-size:8.5px}
+#tab-stats .bw-reset{font-size:9px}
+#tab-stats .klbl{font-size:9px!important}
+#tab-stats .kval{font-size:21px!important}
+#tab-stats [style*="font-size:8px"]{font-size:9px!important}
+#tab-stats [style*="font-size:8.5px"]{font-size:9.5px!important}
+#tab-stats [style*="font-size:9px"]{font-size:10px!important}
+#tab-stats [style*="font-size:9.5px"]{font-size:10.5px!important}
+#tab-stats [style*="font-size:10px"]{font-size:11px!important}
+#tab-stats [style*="font-size:10.5px"]{font-size:11.5px!important}
+#tab-stats [style*="font-size:11px"]{font-size:12px!important}
+#tab-stats [style*="font-size:12px"]{font-size:13px!important}
+#tab-stats [style*="font-size:13px"]{font-size:14px!important}
+#tab-stats [style*="font-size:14px"]{font-size:13px!important}
+#tab-stats [style*="font-size:15px"]{font-size:16px!important}
+#tab-stats [style*="font-size:16px"]{font-size:15px!important}
+#tab-stats [style*="font-size:17px"]{font-size:17px!important}
+#tab-stats [style*="font-size:18px"]{font-size:16px!important}
+#tab-stats [style*="font-size:20px"]{font-size:18px!important}
+#tab-stats [style*="font-size:21px"]{font-size:19px!important}
+#tab-stats [style*="font-size:22px"]{font-size:20px!important}
+#tab-stats [style*="font-size:24px"]{font-size:21px!important}
+/* la curva de equity conserva exactamente los tamaños de antes */
+#tab-stats .st-keep [style*="font-size:9px"]{font-size:11px!important}
+#tab-stats .st-keep [style*="font-size:11px"]{font-size:13px!important}
 </style>
 
 <style id="tonos-oscuros-ops-stats">
@@ -1427,16 +1468,8 @@ tr:hover td{background:rgba(14,18,41,.8)}
   <div style="padding:14px 16px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
     <!-- Logo SVG móvil -->
     <div style="display:flex;align-items:center;gap:9px">
-      <div style="width:36px;height:36px;flex-shrink:0;background:#000;border-radius:9px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 12px rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.18)">
-        <svg width="23" height="23" viewBox="0 0 32 32" fill="none">
-          <path d="M6 10 C4 7 4 4 6 2.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-          <path d="M26 10 C28 7 28 4 26 2.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-          <path d="M8 11 L4.5 9.5 M24 11 L27.5 9.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
-          <path d="M8 12 C8 8.5 11.5 6.5 16 6.5 C20.5 6.5 24 8.5 24 12 C24 17 21 21 16 21 C11 21 8 17 8 12 Z" fill="#fff"/>
-          <ellipse cx="16" cy="18.5" rx="5.5" ry="4" stroke="#fff" stroke-width="1.3" fill="#000"/>
-          <circle cx="13.6" cy="18.5" r="1" fill="#fff"/>
-          <circle cx="18.4" cy="18.5" r="1" fill="#fff"/>
-        </svg>
+      <div style="width:36px;height:36px;flex-shrink:0;background:#000;border-radius:9px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 14px rgba(0,207,255,.35);border:1px solid rgba(0,207,255,.35)">
+        <svg width="27" height="27" viewBox="0 0 64 64" fill="none"><defs><filter id="ttbull-m" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur in="SourceAlpha" stdDeviation="2.4" result="b"/><feFlood flood-color="#00cfff" flood-opacity=".95"/><feComposite in2="b" operator="in" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#ttbull-m)"><path d="M18 25C8 24 3 14 8 5C10 13 15 17 22 19Z" fill="#fff"/><path d="M46 25C56 24 61 14 56 5C54 13 49 17 42 19Z" fill="#fff"/><path d="M17 28L4 26L12 34Z" fill="#fff"/><path d="M47 28L60 26L52 34Z" fill="#fff"/><path d="M20 18C26 15 38 15 44 18C47 22 47 28 45 34C44 42 40 50 32 57C24 50 20 42 19 34C17 28 17 22 20 18Z" fill="#fff"/><path d="M22.5 30L29.5 32.5L28.5 35L22.5 33.5Z" fill="#00cfff"/><path d="M41.5 30L34.5 32.5L35.5 35L41.5 33.5Z" fill="#00cfff"/><ellipse cx="32" cy="47" rx="9.5" ry="6.5" fill="#070b18"/><circle cx="28.3" cy="47" r="1.7" fill="#fff"/><circle cx="35.7" cy="47" r="1.7" fill="#fff"/></g></svg>
       </div>
       <div>
         <div style="font-family:'DM Sans',system-ui,sans-serif;font-size:11px;font-weight:900;letter-spacing:1.5px;color:var(--text);line-height:1.2">TRADER<span style="color:var(--cyan)">TRACKER</span></div>
@@ -1640,22 +1673,8 @@ tr:hover td{background:rgba(14,18,41,.8)}
     <!-- LOGO SVG: Trader Tracker Journal -->
     <div style="display:flex;align-items:center;gap:10px">
       <!-- Ícono: toro minimalista blanco y negro, estilo trading -->
-      <div style="width:40px;height:40px;flex-shrink:0;background:#000;border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 14px rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.18);position:relative;overflow:hidden">
-        <svg width="26" height="26" viewBox="0 0 32 32" fill="none">
-          <!-- Cuernos -->
-          <path d="M6 10 C4 7 4 4 6 2.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-          <path d="M26 10 C28 7 28 4 26 2.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none"/>
-          <!-- Orejas -->
-          <path d="M8 11 L4.5 9.5 M24 11 L27.5 9.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
-          <!-- Cabeza -->
-          <path d="M8 12 C8 8.5 11.5 6.5 16 6.5 C20.5 6.5 24 8.5 24 12 C24 17 21 21 16 21 C11 21 8 17 8 12 Z" fill="#fff"/>
-          <!-- Hocico (recorte en negro para contraste) -->
-          <ellipse cx="16" cy="18.5" rx="5.5" ry="4" fill="#000"/>
-          <ellipse cx="16" cy="18.5" rx="5.5" ry="4" stroke="#fff" stroke-width="1.3" fill="#000"/>
-          <!-- Fosas nasales -->
-          <circle cx="13.6" cy="18.5" r="1" fill="#fff"/>
-          <circle cx="18.4" cy="18.5" r="1" fill="#fff"/>
-        </svg>
+      <div style="width:40px;height:40px;flex-shrink:0;background:#000;border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px rgba(0,207,255,.35);border:1px solid rgba(0,207,255,.35);position:relative;overflow:hidden">
+        <svg width="30" height="30" viewBox="0 0 64 64" fill="none"><defs><filter id="ttbull-d" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur in="SourceAlpha" stdDeviation="2.4" result="b"/><feFlood flood-color="#00cfff" flood-opacity=".95"/><feComposite in2="b" operator="in" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#ttbull-d)"><path d="M18 25C8 24 3 14 8 5C10 13 15 17 22 19Z" fill="#fff"/><path d="M46 25C56 24 61 14 56 5C54 13 49 17 42 19Z" fill="#fff"/><path d="M17 28L4 26L12 34Z" fill="#fff"/><path d="M47 28L60 26L52 34Z" fill="#fff"/><path d="M20 18C26 15 38 15 44 18C47 22 47 28 45 34C44 42 40 50 32 57C24 50 20 42 19 34C17 28 17 22 20 18Z" fill="#fff"/><path d="M22.5 30L29.5 32.5L28.5 35L22.5 33.5Z" fill="#00cfff"/><path d="M41.5 30L34.5 32.5L35.5 35L41.5 33.5Z" fill="#00cfff"/><ellipse cx="32" cy="47" rx="9.5" ry="6.5" fill="#070b18"/><circle cx="28.3" cy="47" r="1.7" fill="#fff"/><circle cx="35.7" cy="47" r="1.7" fill="#fff"/></g></svg>
       </div>
       <!-- Texto del logo -->
       <div>
@@ -2067,7 +2086,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
 
         <!-- 2 · Evolución del capital -->
         <div class="bw-eyebrow">02 · Evolución del capital</div>
-        <div class="bw-card" style="margin-bottom:24px">
+        <div class="bw-card st-keep" style="margin-bottom:24px">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
             <span style="font-size:11px;font-weight:800;color:var(--bwfg)">Curva de capital</span>
             <select id="a-equity-mode" onchange="renderA()" style="font-size:9px;padding:3px 6px">
@@ -8956,13 +8975,13 @@ document.addEventListener('DOMContentLoaded',function(){
     orientation: "portrait-primary",
     icons: [
       {
-        src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='32' fill='%230a1628'/%3E%3Ctext y='130' x='20' font-size='120' font-family='sans-serif'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E",
+        src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='32' fill='%23070b18'/%3E%3Cg transform='translate(28.799999999999997 28.799999999999997) scale(2.0999999999999996)'%3E%3Cdefs%3E%3Cfilter id='m' x='-60%' y='-60%' width='220%' height='220%'%3E%3CfeGaussianBlur in='SourceAlpha' stdDeviation='2.4' result='b'/%3E%3CfeFlood flood-color='%2300cfff' flood-opacity='.95'/%3E%3CfeComposite in2='b' operator='in' result='g'/%3E%3CfeMerge%3E%3CfeMergeNode in='g'/%3E%3CfeMergeNode in='SourceGraphic'/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3Cg filter='url(%23m)'%3E%3Cpath d='M18 25C8 24 3 14 8 5C10 13 15 17 22 19Z' fill='%23fff'/%3E%3Cpath d='M46 25C56 24 61 14 56 5C54 13 49 17 42 19Z' fill='%23fff'/%3E%3Cpath d='M17 28L4 26L12 34Z' fill='%23fff'/%3E%3Cpath d='M47 28L60 26L52 34Z' fill='%23fff'/%3E%3Cpath d='M20 18C26 15 38 15 44 18C47 22 47 28 45 34C44 42 40 50 32 57C24 50 20 42 19 34C17 28 17 22 20 18Z' fill='%23fff'/%3E%3Cpath d='M22.5 30L29.5 32.5L28.5 35L22.5 33.5Z' fill='%2300cfff'/%3E%3Cpath d='M41.5 30L34.5 32.5L35.5 35L41.5 33.5Z' fill='%2300cfff'/%3E%3Cellipse cx='32' cy='47' rx='9.5' ry='6.5' fill='%23070b18'/%3E%3Ccircle cx='28.3' cy='47' r='1.7' fill='%23fff'/%3E%3Ccircle cx='35.7' cy='47' r='1.7' fill='%23fff'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
         sizes: "192x192",
         type: "image/svg+xml",
         purpose: "any maskable"
       },
       {
-        src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='80' fill='%230a1628'/%3E%3Ctext y='380' x='40' font-size='340' font-family='sans-serif'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E",
+        src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='87' fill='%23070b18'/%3E%3Cg transform='translate(76.8 76.8) scale(5.6)'%3E%3Cdefs%3E%3Cfilter id='m' x='-60%' y='-60%' width='220%' height='220%'%3E%3CfeGaussianBlur in='SourceAlpha' stdDeviation='2.4' result='b'/%3E%3CfeFlood flood-color='%2300cfff' flood-opacity='.95'/%3E%3CfeComposite in2='b' operator='in' result='g'/%3E%3CfeMerge%3E%3CfeMergeNode in='g'/%3E%3CfeMergeNode in='SourceGraphic'/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3Cg filter='url(%23m)'%3E%3Cpath d='M18 25C8 24 3 14 8 5C10 13 15 17 22 19Z' fill='%23fff'/%3E%3Cpath d='M46 25C56 24 61 14 56 5C54 13 49 17 42 19Z' fill='%23fff'/%3E%3Cpath d='M17 28L4 26L12 34Z' fill='%23fff'/%3E%3Cpath d='M47 28L60 26L52 34Z' fill='%23fff'/%3E%3Cpath d='M20 18C26 15 38 15 44 18C47 22 47 28 45 34C44 42 40 50 32 57C24 50 20 42 19 34C17 28 17 22 20 18Z' fill='%23fff'/%3E%3Cpath d='M22.5 30L29.5 32.5L28.5 35L22.5 33.5Z' fill='%2300cfff'/%3E%3Cpath d='M41.5 30L34.5 32.5L35.5 35L41.5 33.5Z' fill='%2300cfff'/%3E%3Cellipse cx='32' cy='47' rx='9.5' ry='6.5' fill='%23070b18'/%3E%3Ccircle cx='28.3' cy='47' r='1.7' fill='%23fff'/%3E%3Ccircle cx='35.7' cy='47' r='1.7' fill='%23fff'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
         sizes: "512x512",
         type: "image/svg+xml",
         purpose: "any maskable"
@@ -11900,11 +11919,13 @@ function renderMt5List(){
     el.innerHTML = sbAccts.map(function(a){
       var lg = parseInt(a.login, 10), on = live(a), ac = _mt5Acct(lg), ok = !!(ac && ac.mt5cfg);
       var isAct = ok && activeId === 'mt5_' + lg;
+      var bal = (a.balance === null || a.balance === undefined || a.balance === '') ? NaN : parseFloat(a.balance);
+      var balTxt = isFinite(bal) ? ' · <span style="color:var(--text2)">$' + bal.toLocaleString('en', {minimumFractionDigits:2, maximumFractionDigits:2}) + '</span>' : '';
       var dotCol = on ? '#22c55e' : '#6b7280';
       var act = ok ? "switchAccount('mt5_" + lg + "')" : 'openMt5Setup(' + lg + ')';
       return '<button onclick="' + act + '" title="' + (a.broker ? String(a.broker).replace(/[<>"&]/g, '') + ' · ' : '') + lg + '" style="display:flex;align-items:center;gap:7px;width:100%;background:' + (isAct ? 'var(--ni-act-bg)' : 'var(--card2)') + ';border:1px solid ' + (isAct ? 'var(--ni-act-border)' : 'var(--bdr)') + ';color:var(--text);border-radius:7px;padding:6px 8px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;text-align:left;box-sizing:border-box">' +
         '<span style="display:inline-block;width:8px;height:8px;min-width:8px;border-radius:50%;flex-shrink:0;background:' + dotCol + ';' + (isAct ? 'animation:active-pulse-col 1.4s ease-in-out infinite;box-shadow:0 0 5px ' + dotCol + 'bb;' : 'opacity:.35;') + '"></span>' +
-        '<span style="display:flex;flex-direction:column;min-width:0;line-height:1.2"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + _mt5Short(a) + '</span><span style="font-size:9px;font-weight:600;color:var(--gray2);letter-spacing:.2px">' + lg + ' · <b style="color:' + (_mt5IsDemo(a) ? '#f5a524' : '#4d9fff') + '">' + (_mt5IsDemo(a) ? 'DEMO' : 'REAL') + '</b></span></span>' +
+        '<span style="display:flex;flex-direction:column;min-width:0;line-height:1.2"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + _mt5Short(a) + '</span><span style="font-size:9px;font-weight:600;color:var(--gray2);letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + lg + ' · <b style="color:' + (_mt5IsDemo(a) ? '#f5a524' : '#4d9fff') + '">' + (_mt5IsDemo(a) ? 'DEMO' : 'REAL') + '</b>' + balTxt + '</span></span>' +
         '<span style="margin-left:auto;font-size:9px;font-weight:700;color:' + (!ok ? '#f5a524' : (on ? '#22c55e' : 'var(--gray2)')) + '">' + (!ok ? 'CONFIGURAR' : (on ? 'EN VIVO' : 'SIN SEÑAL')) + '</span></button>';
     }).join('');
   }
