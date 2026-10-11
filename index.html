@@ -1549,6 +1549,7 @@ tr:hover td{background:rgba(14,18,41,.8)}
         </select>
         <div style="font-size:10.5px;color:var(--gray2);margin-top:6px;line-height:1.5;">Si no estás seguro, compara la hora de una operación en MT5 con tu hora real, o pregunta a tu broker.</div>
       </div>
+      <div id="imp-mt5-auto" style="display:none;margin-bottom:14px;font-size:11.5px;line-height:1.6;color:var(--text2);background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:10px 12px;">El horario del servidor se detecta solo, con la misma lógica de la conexión MT5 (hora de Nueva York).</div>
       <div id="imp-grp-wrap" style="display:none;margin-bottom:12px;">
         <div style="color:var(--text2);font-size:12.5px;line-height:1.7;margin-bottom:8px;">¿Cómo agrupar las operaciones?</div>
         <label style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--bdr);border-radius:8px;margin-bottom:8px;cursor:pointer;">
@@ -1563,6 +1564,18 @@ tr:hover td{background:rgba(14,18,41,.8)}
       <div id="imp-tz-wrap" style="display:none;margin-bottom:14px;">
         <div style="color:var(--text2);font-size:12px;line-height:1.6;margin-bottom:6px;">¿En qué zona horaria está configurado tu Tradovate?</div>
         <select id="imp-tz" style="width:100%;background:var(--bg);border:1px solid var(--bdr);border-radius:8px;color:var(--text);padding:10px;font-size:12.5px;"></select>
+      </div>
+      <div id="imp-range-wrap" style="margin-bottom:14px;">
+        <div style="color:var(--text2);font-size:12.5px;line-height:1.7;margin-bottom:8px;">¿Qué período quieres importar?</div>
+        <label style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--bdr);border-radius:8px;margin-bottom:8px;cursor:pointer;">
+          <input type="radio" name="imp-rng" value="all" checked onchange="updateImpStep2()" style="margin-top:3px">
+          <span><b style="font-size:12.5px;color:var(--text)">Todo el historial</b><br><span style="font-size:11px;color:var(--gray2)">Importa todas las operaciones del archivo.</span></span>
+        </label>
+        <label style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--bdr);border-radius:8px;cursor:pointer;">
+          <input type="radio" name="imp-rng" value="dates" onchange="updateImpStep2()" style="margin-top:3px">
+          <span><b style="font-size:12.5px;color:var(--text)">Por fechas</b><br><span style="font-size:11px;color:var(--gray2)">Importa solo el rango que elijas (según la hora de Nueva York).</span></span>
+        </label>
+        <div id="imp-rng-box" style="display:none;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0 0 28px;font-size:12px;color:var(--text2)">Desde <input type="date" id="imp-rng-from" style="background:var(--bg);border:1px solid var(--bdr);color:var(--text);border-radius:7px;padding:7px 9px;font-size:12px;font-family:inherit;color-scheme:dark"> hasta <input type="date" id="imp-rng-to" style="background:var(--bg);border:1px solid var(--bdr);color:var(--text);border-radius:7px;padding:7px 9px;font-size:12px;font-family:inherit;color-scheme:dark"><span style="font-size:10.5px;color:var(--gray2);width:100%">Sin fecha final = hasta hoy.</span></div>
       </div>
       <div style="display:flex;gap:10px;">
         <button class="btn" style="flex:1;justify-content:center;padding:11px;" onclick="importSourceBack()">Atrás</button>
@@ -6858,8 +6871,28 @@ window._openImportFile = function(src){
   inp.value = '';
   inp.click();
 };
+// Horario del servidor de una cuenta MT5 conectada: misma lógica que la sincronización automática
+window._impMt5Detect = async function(){
+  try{
+    var aid = getActiveId();
+    if(typeof _mt5 === 'undefined' || !_mt5.enabled || String(aid).indexOf('mt5_') !== 0) return;
+    var login = String(aid).slice(4);
+    var d = await _mt5Post({ action:'fetch', since:'1970-01-01T00:00:00Z' });
+    if(!d || !d.trades) return;
+    var s = d.trades.find(function(x){ return String(x.login) === login && x.srv_off !== null && x.srv_off !== undefined && !isNaN(Number(x.srv_off)) && !isNaN(Date.parse(x.updated_at)); });
+    if(!s || window._impPending !== 'mt5') return;
+    var h = Number(s.srv_off) / 3600;
+    var ny7 = Math.abs(h - _mt5NYoff(Date.parse(s.updated_at)) - 7) < 0.01;
+    window._impMt5Auto = ny7
+      ? { srv:'ny7', label:'Automático · cierre en Nueva York (igual que la conexión MT5)' }
+      : { srv:'fix:' + h, label:'Automático · GMT' + (h >= 0 ? '+' : '') + h + ' (igual que la conexión MT5)' };
+    if(typeof updateImpStep2 === 'function') updateImpStep2();
+  }catch(e){}
+};
 window.pickImportSource = function(src){
   window._impPending = src;
+  window._impMt5Auto = null;
+  if(src === 'mt5') window._impMt5Detect();
   // Preparar la lista de zonas (solo se usa con Tradovate en modo Nueva York)
   var saved = ''; try{ saved = localStorage.getItem('tt_tv_tz') || ''; }catch(e){}
   var browserTz = ''; try{ browserTz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; }catch(e){}
@@ -6887,9 +6920,23 @@ window.updateImpStep2 = function(){
   var wrap = document.getElementById('imp-tz-wrap');
   if(wrap) wrap.style.display = (window._impPending === 'tv' && r && r.value === 'ny') ? 'block' : 'none';
   var w2 = document.getElementById('imp-mt5-wrap');
-  if(w2) w2.style.display = (window._impPending === 'mt5' && r && r.value === 'ny') ? 'block' : 'none';
+  if(w2) w2.style.display = (window._impPending === 'mt5' && r && r.value === 'ny' && !window._impMt5Auto) ? 'block' : 'none';
+  var rr = document.querySelector('input[name="imp-rng"]:checked');
+  var rb = document.getElementById('imp-rng-box');
+  if(rb) rb.style.display = (rr && rr.value === 'dates') ? 'flex' : 'none';
+  var w3 = document.getElementById('imp-mt5-auto');
+  if(w3) w3.style.display = (window._impPending === 'mt5' && r && r.value === 'ny' && window._impMt5Auto) ? 'block' : 'none';
 };
 window.confirmImportTz = function(){
+  var rg = document.querySelector('input[name="imp-rng"]:checked');
+  window._impRange = null;
+  if(rg && rg.value === 'dates'){
+    var rf = (document.getElementById('imp-rng-from') || {}).value || '';
+    var rt = (document.getElementById('imp-rng-to') || {}).value || '';
+    if(!rf){ toast('Elige la fecha de inicio', 'var(--red)'); return; }
+    if(rt && rt < rf){ toast('La fecha final es anterior a la inicial', 'var(--red)'); return; }
+    window._impRange = { from: rf, to: rt };
+  }
   var gr = document.querySelector('input[name="imp-grp"]:checked');
   window._impGroup = (gr && gr.value === 'entry') ? 'entry' : 'pos';
   try{ localStorage.setItem('tt_imp_grp', window._impGroup); }catch(e){}
@@ -6902,7 +6949,10 @@ window.confirmImportTz = function(){
     window._impTz = tz;
     try{ localStorage.setItem('tt_tv_tz', tz); }catch(e){}
   }
-  if(window._impPending === 'mt5' && mode === 'ny'){
+  if(window._impPending === 'mt5' && mode === 'ny' && window._impMt5Auto){
+    window._impMt5Srv = window._impMt5Auto.srv;
+    window._impMt5Label = window._impMt5Auto.label;
+  } else if(window._impPending === 'mt5' && mode === 'ny'){
     var ss = document.getElementById('imp-mt5-srv');
     window._impMt5Srv = ss.value || 'ny7';
     window._impMt5Label = ss.options[ss.selectedIndex].text;
@@ -7116,6 +7166,9 @@ window.importCSV = function(input){
         mt5Rows.slice(0, 12).forEach(function(r){
           if(/cuenta|account/i.test(String(r[0]||''))){ var am = r.join(' ').match(/\d{5,}/); if(am) acct = am[0]; }
         });
+        var _aidImp = (typeof getActiveId === 'function') ? String(getActiveId()) : '';
+        var _mt5Conn = _aidImp.indexOf('mt5_') === 0;   // cuenta conectada por el EA: cada posición es una operación, igual que la sincronización
+        if(!acct && _mt5Conn) acct = _aidImp.slice(4);
         var start = -1;
         for(var mi=0; mi<mt5Rows.length; mi++){
           var h0 = String(mt5Rows[mi][0]||'').trim().toLowerCase();
@@ -7132,7 +7185,7 @@ window.importCSV = function(input){
             // Beneficio neto = beneficio + comisión + swap (igual que "Beneficio Neto" del reporte de MT5)
             var net = Math.round((mnum(r[12]) + mnum(r[10]) + mnum(r[11])) * 100) / 100;
             // Misma apertura (activo, tipo, hora y precio de entrada) = misma operación con cierres parciales
-            var gk5 = [String(r[2]).toUpperCase(), typ, String(r[0]), String(r[5])].join('|');
+            var gk5 = [String(r[2]).toUpperCase(), typ, String(r[0]), String(r[5])].concat(_mt5Conn ? [String(r[1])] : []).join('|');
             if(!mtG[gk5]){ mtG[gk5] = { grp: [], base: {
               date:      ot.day,
               time:      ot.time,
@@ -7170,10 +7223,18 @@ window.importCSV = function(input){
           notes:    cols[idx.notes] || ''
         });
       });
+      // Período elegido al importar (fechas ya en la hora guardada, normalmente Nueva York)
+      var _rng = window._impRange;
+      if(_rng){
+        var _all0 = parsed.length;
+        parsed = parsed.filter(function(x){ return x.date && x.date >= _rng.from && (!_rng.to || x.date <= _rng.to); });
+        if(_all0 && !parsed.length){ toast('No hay operaciones en ese rango de fechas','var(--red)'); input.value=''; return; }
+      }
       if(!parsed.length){ toast('<svg class="ic" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> No se encontraron operaciones','var(--red)'); return; }
       // Calcular preview: nuevas vs actualizadas
       var existingIds = new Set(S.trades.map(function(t){ return t.id; }));
-      var nuevas = parsed.filter(function(t){ return !existingIds.has(t.id) && !(t._merged||[]).some(function(o){ return existingIds.has(o); }); }).length;
+      var _legacyMt5 = function(t){ return isMT5 && existingIds.has('mt5-' + String(t.id).split('-').pop()); };
+      var nuevas = parsed.filter(function(t){ return !existingIds.has(t.id) && !_legacyMt5(t) && !(t._merged||[]).some(function(o){ return existingIds.has(o); }); }).length;
       var actualiza = parsed.length - nuevas;
       // Confirmación antes de importar
       // Resumen para el cuadro de confirmación
@@ -7215,6 +7276,12 @@ window.importCSV = function(input){
         });
         delete t._merged;
       });
+      if(isMT5){   // operaciones guardadas con el id antiguo (mt5-posición): se reconocen y no se duplican
+        parsed.forEach(function(t){
+          var lg = 'mt5-' + String(t.id).split('-').pop();
+          if(!tradeMap[t.id] && lg !== t.id && tradeMap[lg]){ tradeMap[lg].id = t.id; tradeMap[t.id] = tradeMap[lg]; delete tradeMap[lg]; }
+        });
+      }
       parsed.forEach(function(t){
         if(tradeMap[t.id]){
           if(isTV || isMT5){ var u = Object.assign({}, t); delete u.strategy; delete u.session; delete u.notes; Object.assign(tradeMap[t.id], u); }
@@ -9669,13 +9736,10 @@ function populateDayPanel(trades, dateStr) {
 
   // Cabecera del día — minimalista tipo Notion
   html += '<div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--bdr)">';
-  html += '<div style="font-size:11px;font-weight:400;color:var(--text2);font-family:\'DM Sans\',sans-serif;margin-bottom:6px;display:flex;align-items:center;gap:6px"><svg class="ic" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="4" x2="8" y2="9"/><line x1="16" y1="4" x2="16" y2="9"/></svg> '+fechaLbl+'</div>';
-  html += '<div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:7px">';
-  html += '<span style="font-size:11px;font-weight:400;color:var(--text2)">'+trades.length+' operaci'+(trades.length===1?'ón':'ones')+'</span>';
+  html += '<div style="font-size:11px;font-weight:400;color:var(--text2);font-family:\'DM Sans\',sans-serif;margin-bottom:7px;display:flex;align-items:center;gap:14px"><span style="display:flex;align-items:center;gap:6px"><svg class="ic" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="4" x2="8" y2="9"/><line x1="16" y1="4" x2="16" y2="9"/></svg> '+fechaLbl+'</span><span>'+trades.length+' operaci'+(trades.length===1?'ón':'ones')+'</span></div>';
+  html += '<div style="display:flex;align-items:baseline;justify-content:space-between">';
+  html += '<span style="font-size:11px;font-weight:400;color:var(--text2);font-family:\'DM Sans\',sans-serif"><span style="color:var(--text2)">'+tp+' TP</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span style="color:var(--text2)">'+sl+' SL</span>&nbsp;&nbsp;·&nbsp;&nbsp;'+wr+'% WR</span>';
   html += '<span style="font-size:11px;font-weight:400;font-family:\'DM Sans\',sans-serif;color:'+(dayPnl>=0?'var(--green)':'var(--red)')+'">'+(dayPnl>=0?'+$':'-$')+Math.abs(dayPnl).toFixed(2)+'</span>';
-  html += '</div>';
-  html += '<div style="font-size:11px;font-weight:400;color:var(--text2);font-family:\'DM Sans\',sans-serif">';
-  html += '<span style="color:var(--text2)">'+tp+' TP</span>&nbsp;&nbsp;·&nbsp;&nbsp;<span style="color:var(--text2)">'+sl+' SL</span>&nbsp;&nbsp;·&nbsp;&nbsp;'+wr+'% WR';
   html += '</div>';
   html += '</div>';
 
